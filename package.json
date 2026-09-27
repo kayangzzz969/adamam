@@ -1,0 +1,20 @@
+{
+  "name": "adamxavier-fanbase",
+  "version": "1.0.0",
+  "description": "Website Resmi Fanbase Aktor Cilik Adam Xavier (AdamUnited)",
+  "main": "index.html",
+  "scripts": {
+    "start": "powershell -ExecutionPolicy Bypass -File server.ps1"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  },
+  "keywords": [
+    "adamxavier",
+    "adamunited",
+    "transformers",
+    "fanbase"
+  ],
+  "author": "AdamUnited Fanbase",
+  "license": "MIT"
+}

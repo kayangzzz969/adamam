@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Jadwal & Pemenang Event — Adam Xavier Fanbase</title>
+  
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@600;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Cyber-Transformer Styling -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <div class="app-wrapper desktop-wrapper">
+    <!-- ============================================================
+         TOP NAVIGATION BAR
+         ============================================================ -->
+    <header class="cyber-nav" style="border-radius: 0 0 16px 16px;">
+      <a href="index.html" class="brand-badge">
+        <div class="brand-icon-box" style="padding:2px; overflow:hidden;">
+          <img src="assets/images/logo.png" alt="Logo AdamUnited" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+        </div>
+        <div class="brand-text-block">
+          <span class="brand-name" id="eventBrandName">ADAMUNITED</span>
+          <span class="brand-tagline">Event, Jadwal & Pemenang</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link-btn" title="Beranda">
+          <i class="fa-solid fa-house"></i> Home
+        </a>
+        <a href="tentang.html" class="nav-link-btn" title="Tentang Adam">
+          <i class="fa-solid fa-user-astronaut"></i> Tentang
+        </a>
+        <a href="film.html" class="nav-link-btn" title="Daftar Film">
+          <i class="fa-solid fa-film"></i> Film
+        </a>
+        <a href="event.html" class="nav-link-btn active" title="Jadwal & Pemenang Event">
+          <i class="fa-solid fa-calendar-check"></i> Event
+        </a>
+      </nav>
+    </header>
+
+    <!-- ============================================================
+         BANNER HEADER
+         ============================================================ -->
+    <div class="page-header-banner">
+      <div class="banner-badge" id="eventBannerHub">
+        <i class="fa-solid fa-trophy"></i> ADAMUNITED HUB EVENT
+      </div>
+      <h1 class="banner-title">Jadwal Event & <span style="color:var(--yellow-bright)">Pemenang Lomba</span></h1>
+      <p class="banner-desc">
+        Ikuti keseruan acara nobar, temu sapa (meet & greet), lomba fanart mecha, dan pengumuman pemenang resmi fanbase Adam Xavier.
+      </p>
+    </div>
+
+    <!-- ============================================================
+         MAIN CONTENT AREA
+         ============================================================ -->
+    <main class="content-body">
+      <!-- Filter Chips -->
+      <div class="filter-bar">
+        <button class="filter-chip active" onclick="filterEvents('all', this)">
+          <i class="fa-solid fa-list-check"></i> Semua Event
+        </button>
+        <button class="filter-chip" onclick="filterEvents('Upcoming', this)">
+          <i class="fa-solid fa-calendar-plus"></i> Akan Datang (Jadwal)
+        </button>
+        <button class="filter-chip" onclick="filterEvents('Completed', this)">
+          <i class="fa-solid fa-award"></i> Selesai (Daftar Pemenang)
+        </button>
+      </div>
+
+      <!-- Events List Container -->
+      <div id="eventsContainer">
+        <!-- Event cards rendered dynamically via JavaScript -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script>
+    let allEvents = [];
+    let currentFilter = 'all';
+
+    function renderEvents(filter = 'all') {
+      allEvents = FanbaseStore.getEvents();
+      const container = document.getElementById('eventsContainer');
+
+      let filtered = allEvents;
+      if (filter !== 'all') {
+        filtered = allEvents.filter(e => e.status.toLowerCase() === filter.toLowerCase());
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:50px 20px; background:#FFF; border-radius:16px; border:1px dashed #CBD5E1;">
+            <i class="fa-solid fa-calendar-xmark" style="font-size:40px; color:#FFC800; margin-bottom:12px;"></i>
+            <h3 style="font-family:'Orbitron',sans-serif; font-size:16px;">Tidak Ada Event untuk Kategori Ini</h3>
+            <p style="font-size:12px; color:#64748B; margin-top:6px;">Silakan cek kembali nanti atau pantau pengumuman di akun media sosial kami.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = '';
+      filtered.forEach(ev => {
+        const card = document.createElement('article');
+        card.className = 'event-card anim-fade-in';
+
+        const isUpcoming = ev.status === 'Upcoming';
+        const statusClass = isUpcoming ? 'status-upcoming' : 'status-completed';
+        const statusText = isUpcoming ? 'Jadwal Akan Datang' : 'Event Selesai';
+
+        // Winners HTML
+        let winnersHtml = '';
+        if (ev.winners && ev.winners.length > 0) {
+          winnersHtml = `
+            <div class="winners-section-box">
+              <div class="winners-head">
+                <i class="fa-solid fa-trophy"></i>
+                <span>DAFTAR PEMENANG RESMI</span>
+              </div>
+              <div class="winners-list">
+                ${ev.winners.map(w => `
+                  <div class="winner-row">
+                    <span class="winner-rank-badge">${w.rank}</span>
+                    <div class="winner-name-work">
+                      <div class="winner-user">${w.name}</div>
+                      <div class="winner-desc">${w.work}</div>
+                    </div>
+                    <div class="winner-prize"><i class="fa-solid fa-gift"></i> ${w.prize}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          <div class="event-header-row">
+            <div>
+              <span class="${statusClass}">${statusText}</span>
+              <h2 class="event-title" style="margin-top:8px;">${ev.title}</h2>
+            </div>
+          </div>
+
+          <div class="event-meta-grid">
+            <div class="meta-item">
+              <i class="fa-solid fa-calendar-day"></i>
+              <span>${ev.date}</span>
+            </div>
+            <div class="meta-item">
+              <i class="fa-solid fa-clock"></i>
+              <span>${ev.time}</span>
+            </div>
+            <div class="meta-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <span>${ev.location}</span>
+            </div>
+          </div>
+
+          <p class="event-desc-text">${ev.description}</p>
+
+          ${winnersHtml}
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    function filterEvents(status, btn) {
+      document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = status;
+      renderEvents(status);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const updateView = () => {
+        const bio = FanbaseStore.getBio();
+        if (bio && bio.fanbaseName) {
+          const brandEl = document.getElementById('eventBrandName');
+          if (brandEl) brandEl.textContent = bio.fanbaseName.toUpperCase();
+          const bannerHub = document.getElementById('eventBannerHub');
+          if (bannerHub) bannerHub.textContent = bio.fanbaseName.toUpperCase() + ' HUB EVENT';
+        }
+        renderEvents(currentFilter);
+      };
+
+      updateView();
+
+      // Cloud Sync dari Netlify / Cloud Storage
+      if (typeof FanbaseStore !== 'undefined' && FanbaseStore.initCloudSync) {
+        FanbaseStore.initCloudSync(updateView);
+      }
+    });
+  </script>
+</body>
+</html>

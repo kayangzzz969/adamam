@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Tentang Adam Xavier — Profil & Perjalanan Karier</title>
+  
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@600;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Cyber-Transformer Styling -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Styling khusus Halaman Tentang */
+    .about-hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 25px;
+      align-items: center;
+      margin-bottom: 35px;
+    }
+    @media (min-width: 768px) {
+      .about-hero-grid {
+        grid-template-columns: 320px 1fr;
+      }
+    }
+    .about-avatar-card {
+      background: linear-gradient(135deg, #FFFDF5, #FFF9E6);
+      border: 2px solid var(--yellow-primary);
+      border-radius: 20px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+    .about-avatar-img {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      background: #FFF;
+      border: 4px solid var(--yellow-primary);
+      padding: 6px;
+      box-shadow: 0 8px 20px rgba(255, 200, 0, 0.35);
+    }
+    .about-avatar-img img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    
+    .timeline-container {
+      position: relative;
+      margin: 25px 0 35px;
+      padding-left: 30px;
+      border-left: 3px solid var(--yellow-primary);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 24px;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -38px;
+      top: 3px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--yellow-bright);
+      border: 3px solid var(--cyber-dark);
+      box-shadow: 0 0 8px rgba(255, 200, 0, 0.6);
+    }
+    .timeline-year {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: #B45309;
+      background: var(--yellow-soft);
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 6px;
+      margin-bottom: 4px;
+      border: 1px solid var(--yellow-primary);
+    }
+    .timeline-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--cyber-dark);
+      margin-bottom: 4px;
+    }
+    .timeline-desc {
+      font-size: 13px;
+      color: #475569;
+      line-height: 1.55;
+    }
+
+    .fact-card {
+      background: var(--pure-white);
+      border: 1.5px solid var(--border-light);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      transition: all 0.25s;
+      box-shadow: var(--shadow-sm);
+    }
+    .fact-card:hover {
+      border-color: var(--yellow-primary);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+    .fact-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--yellow-soft);
+      border: 1px solid var(--yellow-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cyber-dark);
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-wrapper desktop-wrapper">
+    <!-- ============================================================
+         TOP NAVIGATION BAR
+         ============================================================ -->
+    <header class="cyber-nav" style="border-radius: 0 0 16px 16px;">
+      <a href="index.html" class="brand-badge">
+        <div class="brand-icon-box" style="padding:2px; overflow:hidden;">
+          <img src="assets/images/logo.png" alt="Logo AdamUnited" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+        </div>
+        <div class="brand-text-block">
+          <span class="brand-name" id="aboutBrandName">ADAMUNITED</span>
+          <span class="brand-tagline">Tentang Adam Xavier</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link-btn" title="Beranda">
+          <i class="fa-solid fa-house"></i> Home
+        </a>
+        <a href="tentang.html" class="nav-link-btn active" title="Tentang Adam">
+          <i class="fa-solid fa-user-astronaut"></i> Tentang
+        </a>
+        <a href="film.html" class="nav-link-btn" title="Daftar Film">
+          <i class="fa-solid fa-film"></i> Film
+        </a>
+        <a href="event.html" class="nav-link-btn" title="Jadwal & Pemenang Event">
+          <i class="fa-solid fa-calendar-check"></i> Event
+        </a>
+      </nav>
+    </header>
+
+    <!-- ============================================================
+         BANNER HEADER
+         ============================================================ -->
+    <div class="page-header-banner">
+      <div class="banner-badge">
+        <i class="fa-solid fa-sparkles"></i> BIOGRAFI RESMI
+      </div>
+      <h1 class="banner-title">Mengenal Lebih Dekat <span style="color:var(--yellow-bright)">Adam Xavier</span></h1>
+      <p class="banner-desc">
+        Kisah inspiratif aktor cilik pencinta robotika, perjalanan karier di layar kaca dan layar lebar, hingga fakta unik seputar kepribadiannya.
+      </p>
+    </div>
+
+    <!-- ============================================================
+         MAIN CONTENT AREA
+         ============================================================ -->
+    <main class="content-body">
+      
+      <!-- HERO BIO SECTION -->
+      <div class="about-hero-grid">
+        <!-- Avatar & Quick Info Card -->
+        <div class="about-avatar-card">
+          <div class="about-avatar-img">
+            <img id="aboutAvatarImg" src="assets/images/adam_avatar.jpeg" alt="Foto Adam Xavier">
+          </div>
+          <h2 id="aboutActorName" style="font-family:'Orbitron',sans-serif; font-size:20px; font-weight:900; color:var(--cyber-dark);">Adam Xavier</h2>
+          <div id="aboutActorTagline" style="font-size:12px; font-weight:700; color:#B45309; text-transform:uppercase; margin-top:2px;">"The Young Cyber Hero"</div>
+          <div id="aboutActorProfession" style="font-size:12px; color:#64748B; margin:8px 0 16px;">Aktor Cilik • Voice Actor • Robot Enthusiast</div>
+
+          <!-- Autobot Emblem Pill -->
+          <div style="background:var(--cyber-dark); color:var(--yellow-bright); padding:6px 12px; border-radius:8px; font-size:11px; font-weight:800; display:inline-flex; align-items:center; gap:6px; border:1px solid var(--yellow-primary);">
+            <i class="fa-solid fa-shield-halved"></i> AUTOBOT ALLIANCE
+          </div>
+
+          <div style="margin-top:18px; border-top:1px dashed #CBD5E1; padding-top:14px; text-align:left; font-size:12px; line-height:1.7;">
+            <div><strong>Nama Panggilan:</strong> <span id="aboutNickname">Adam / Xavi</span></div>
+            <div><strong>Tanggal Lahir:</strong> <span id="aboutBirthdate">15 Mei 2014</span></div>
+            <div><strong>Usia:</strong> <span id="aboutAge">12 Tahun</span></div>
+            <div><strong>Domisili:</strong> <span id="aboutDomicile">Jakarta, Indonesia</span></div>
+            <div><strong>Fanbase:</strong> <span id="aboutFanbaseName" style="font-weight:700; color:#D97706;">AdamUnited</span></div>
+          </div>
+        </div>
+
+        <!-- Bio Story & Persona -->
+        <div>
+          <div class="mecha-badge">
+            <i class="fa-solid fa-microchip"></i> FILOSOFI & PERJALANAN
+          </div>
+          <h2 style="font-family:'Orbitron',sans-serif; font-size:24px; font-weight:900; color:var(--cyber-dark); margin-bottom:12px;">
+            Energi Ceria, Semangat Baja Sehebat <span style="color:#D97706;">Transformers!</span>
+          </h2>
+          <p id="aboutDesc1" style="font-size:14px; line-height:1.7; color:#334155; margin-bottom:14px; text-align:justify;">
+            <strong>Adam Xavier</strong> lahir di Jakarta pada 15 Mei 2014. Sejak balita, Adam memiliki ketertarikan luar biasa terhadap figur robot, animasi sains fiksi, dan seni peran. Memulai langkah pertamanya di industri hiburan pada usia 7 tahun, kepribadian Adam yang santun, ekspresif, dan berjiwa petualang langsung memikat hati para sutradara serta penonton Indonesia.
+          </p>
+          <p id="aboutDesc2" style="font-size:14px; line-height:1.7; color:#334155; margin-bottom:18px; text-align:justify;">
+            Terinspirasi oleh karakter favoritnya, <strong>Bumblebee</strong> dan <strong>Optimus Prime</strong>, Adam selalu memegang teguh prinsip keberanian dan kerja keras. Di lokasi syuting film laga maupun drama anak, Adam dikenal sebagai aktor cilik yang penuh dedikasi, mampu melakukan adegan aksi dengan bimbingan pelatih, namun tetap ceria dan rajin belajar di sela waktu syuting.
+          </p>
+
+          <!-- Quote Card -->
+          <div class="autobot-quote-card" style="margin:0;">
+            <i class="fa-solid fa-quote-left"></i>
+            <div>
+              <div style="font-size:11px; font-weight:800; color:#B45309; text-transform:uppercase;">Kutipan Inspirasi Adam:</div>
+              <div class="quote-text" id="aboutQuoteText">"Transform and Rise Up! Di setiap peran baru, kita belajar memahami perasaan orang lain dan bertransformasi menjadi versi terbaik dari diri kita sendiri."</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIMELINE PERJALANAN KARIER -->
+      <section style="margin:40px 0;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:18px;">
+          <div style="width:5px; height:24px; background:var(--yellow-primary); border-radius:4px;"></div>
+          <h3 style="font-family:'Orbitron',sans-serif; font-size:20px; font-weight:800;">Perjalanan Karier & Prestasi</h3>
+        </div>
+
+        <div class="timeline-container">
+          <div class="timeline-item">
+            <span class="timeline-year">2021 (Usia 7 Tahun)</span>
+            <div class="timeline-title">Langkah Pertama di Depan Kamera</div>
+            <p class="timeline-desc">
+              Memulai karier sebagai model cilik untuk berbagai iklan komersial susu bernutrisi dan produk mainan mecha robotik. Kemampuan berekspresi secara alami membuatnya dilirik agensi akting.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <span class="timeline-year">2022 (Usia 8 Tahun)</span>
+            <div class="timeline-title">Debut FTV & Serial Drama Keluarga</div>
+            <p class="timeline-desc">
+              Mendapatkan peran pertamanya dalam serial drama keluarga akhir pekan. Karakter anak bungsu yang cerdik dan humoris membuatnya mulai memiliki basis penggemar setia.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <span class="timeline-year">2023 (Usia 9 Tahun)</span>
+            <div class="timeline-title">Terobosan "Detektif Cilik" & Penghargaan Perdana</div>
+            <p class="timeline-desc">
+              Berperan sebagai Reza, anak jenius pencipta jam robot dalam film <em>"Detektif Cilik: Misteri Jam Robot"</em>. Penampilannya meraih nominasi dan memenangkan penghargaan <strong>Pemeran Cilik Terfavorit</strong>.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <span class="timeline-year">2024 (Usia 10 Tahun)</span>
+            <div class="timeline-title">Merajai Genre Mecha & Superhero Anak</div>
+            <p class="timeline-desc">
+              Membintangi dua karya besar sekaligus: film layar lebar <em>"Satria Cilik & Mecha Titan"</em> dan serial laga TV populer <em>"Ksatria Surya"</em> (Season 1 & 2). Pada tahun ini fanbase resmi <strong id="aboutTimelineFanbase">AdamUnited</strong> resmi dideklarasikan.
+            </p>
+          </div>
+
+          <div class="timeline-item">
+            <span class="timeline-year">2025 - 2026 (Sekarang)</span>
+            <div class="timeline-title">Bintang Utama "Cyber Guardian" & Voice Actor Transformers</div>
+            <p class="timeline-desc">
+              Dipercaya menjadi pemeran utama Rafa dalam film layar lebar sci-fi berbiaya besar <em>"Cyber Guardian: Anak Bintang"</em>, serta menjadi pengisi suara resmi dubber karakter anak robotik di serial animasi Transformers Indonesia.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8 FAKTA UNIK TENTANG ADAM XAVIER -->
+      <section style="margin:40px 0;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:18px;">
+          <div style="width:5px; height:24px; background:var(--yellow-primary); border-radius:4px;"></div>
+          <h3 style="font-family:'Orbitron',sans-serif; font-size:20px; font-weight:800;">Fakta Unik Seputar Adam Xavier</h3>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:14px;">
+          <div class="fact-card">
+            <div class="fact-icon"><i class="fa-solid fa-robot"></i></div>
+            <div>
+              <div style="font-weight:800; font-size:13px; color:var(--cyber-dark);">Kolektor Transformers Sejati</div>
+              <div style="font-size:12px; color:#64748B; margin-top:2px;">Memiliki lebih dari 45 koleksi robot mecha Transformers, dengan koleksi favorit Bumblebee edisi terbatas.</div>
+            </div>
+          </div>
+
+          <div class="fact-card">
+            <div class="fact-icon"><i class="fa-solid fa-medal"></i></div>
+            <div>
+              <div style="font-weight:800; font-size:13px; color:var(--cyber-dark);">Mahir Bela Diri Wushu</div>
+              <div style="font-size:12px; color:#64748B; margin-top:2px;">Belajar wushu sejak usia 6 tahun, sehingga mampu melakukan gerakan akrobatik dan adegan laga sendiri dengan aman.</div>
+            </div>
+          </div>
+
+          <div class="fact-card">
+            <div class="fact-icon"><i class="fa-solid fa-music"></i></div>
+            <div>
+              <div style="font-weight:800; font-size:13px; color:var(--cyber-dark);">Pemain Drum & Piano Berbakat</div>
+              <div style="font-size:12px; color:#64748B; margin-top:2px;">Selain akting, Adam sering mengunggah cover permainan drum lagu-lagu tema Transformers di media sosial.</div>
+            </div>
+          </div>
+
+          <div class="fact-card">
+            <div class="fact-icon"><i class="fa-solid fa-laptop-code"></i></div>
+            <div>
+              <div style="font-weight:800; font-size:13px; color:var(--cyber-dark);">Hobi Belajar Coding Game</div>
+              <div style="font-size:12px; color:#64748B; margin-top:2px;">Suka membuat mini-game bertema robot menggunakan Scratch dan platform edukasi coding anak.</div>
+            </div>
+          </div>
+
+          <div class="fact-card">
+            <div class="fact-icon"><i class="fa-solid fa-book-open"></i></div>
+            <div>
+              <div style="font-weight:800; font-size:13px; color:var(--cyber-dark);">Tetap Juara di Sekolah</div>
+              <div style="font-size:12px; color:#64748B; margin-top:2px;">Meski sibuk syuting, Adam selalu menyelesaikan tugas sekolahnya dan berprestasi di mata pelajaran Sains & Bahasa Inggris.</div>
+            </div>
+          </div>
+
+          <div class="fact-card">
+            <div class="fact-icon"><i class="fa-solid fa-heart"></i></div>
+            <div>
+              <div style="font-weight:800; font-size:13px; color:var(--cyber-dark);">Sangat Sayang pada <span id="aboutFactFanbase">AdamUnited</span></div>
+              <div id="aboutFactDesc" style="font-size:12px; color:#64748B; margin-top:2px;">Selalu menyempatkan waktu membaca surat fans dan membalas pesan para sahabat kecilnya di sela waktu istirahat.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CALL TO ACTION LINKS -->
+      <div style="background:var(--cyber-dark); color:#FFF; border-radius:18px; padding:24px; text-align:center; border:2px solid var(--yellow-primary); margin-top:30px;">
+        <h3 style="font-family:'Orbitron',sans-serif; font-size:18px; color:var(--yellow-bright); margin-bottom:8px;">
+          Ingin Melihat Karya Lengkap Adam?
+        </h3>
+        <p style="font-size:13px; color:#94A3B8; max-width:500px; margin:0 auto 18px;">
+          Jelajahi seluruh film layar lebar, serial TV, dan jadwal acara meet & greet resmi bersama Adam Xavier.
+        </p>
+        <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+          <a href="film.html" class="btn-cyber-primary">
+            <i class="fa-solid fa-film"></i> Lihat Filmografi
+          </a>
+          <a href="event.html" class="btn-cyber-primary" style="background:var(--yellow-primary); color:var(--cyber-dark);">
+            <i class="fa-solid fa-calendar-check"></i> Jadwal & Pemenang Event
+          </a>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script>
+    function renderTentangData() {
+      if (typeof FanbaseStore === 'undefined') return;
+      const bio = FanbaseStore.getBio();
+      if (!bio) return;
+
+      const fb = bio.fanbaseName || 'AdamUnited';
+
+      // Update Fanbase Name across the page
+      const brandEl = document.getElementById('aboutBrandName');
+      if (brandEl) brandEl.textContent = fb.toUpperCase();
+
+      const fbEl = document.getElementById('aboutFanbaseName');
+      if (fbEl) fbEl.textContent = fb;
+
+      const tlFbEl = document.getElementById('aboutTimelineFanbase');
+      if (tlFbEl) tlFbEl.textContent = fb;
+
+      const factFbEl = document.getElementById('aboutFactFanbase');
+      if (factFbEl) factFbEl.textContent = fb;
+
+      // Update Bio Elements
+      if (bio.name) {
+        const nameEl = document.getElementById('aboutActorName');
+        if (nameEl) nameEl.textContent = bio.name;
+      }
+      if (bio.tagline) {
+        const tagEl = document.getElementById('aboutActorTagline');
+        if (tagEl) tagEl.textContent = `"${bio.tagline}"`;
+      }
+      if (bio.profession) {
+        const profEl = document.getElementById('aboutActorProfession');
+        if (profEl) profEl.textContent = bio.profession;
+      }
+      if (bio.nickname) {
+        const nickEl = document.getElementById('aboutNickname');
+        if (nickEl) nickEl.textContent = bio.nickname;
+      }
+      if (bio.birthdate) {
+        const birthEl = document.getElementById('aboutBirthdate');
+        if (birthEl) birthEl.textContent = bio.birthdate;
+      }
+      if (bio.age) {
+        const ageEl = document.getElementById('aboutAge');
+        if (ageEl) ageEl.textContent = bio.age + ' Tahun';
+      }
+      if (bio.domicile) {
+        const domEl = document.getElementById('aboutDomicile');
+        if (domEl) domEl.textContent = bio.domicile;
+      }
+      if (bio.about1) {
+        const d1 = document.getElementById('aboutDesc1');
+        if (d1) d1.textContent = bio.about1;
+      }
+      if (bio.about2) {
+        const d2 = document.getElementById('aboutDesc2');
+        if (d2) d2.textContent = bio.about2;
+      }
+      if (bio.quoteInspiration || bio.motto) {
+        const qEl = document.getElementById('aboutQuoteText');
+        if (qEl) qEl.textContent = `"${bio.quoteInspiration || bio.motto}"`;
+      }
+      if (bio.avatar) {
+        const imgEl = document.getElementById('aboutAvatarImg');
+        if (imgEl) imgEl.src = bio.avatar;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderTentangData();
+      if (typeof FanbaseStore !== 'undefined' && FanbaseStore.initCloudSync) {
+        FanbaseStore.initCloudSync(renderTentangData);
+      }
+    });
+  </script>
+</body>
+</html>

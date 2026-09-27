@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Admin Panel — Adam Xavier Fanbase</title>
+  
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@600;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Cyber-Transformer Styling -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <div class="app-wrapper desktop-wrapper">
+    <!-- ============================================================
+         TOP NAVIGATION BAR
+         ============================================================ -->
+    <header class="cyber-nav" style="border-radius: 0 0 16px 16px;">
+      <a href="index.html" class="brand-badge">
+        <div class="brand-icon-box" style="padding:2px; overflow:hidden;">
+          <img src="assets/images/logo.png" alt="Logo AdamUnited" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+        </div>
+        <div class="brand-text-block">
+          <span class="brand-name">ADMIN CONTROL</span>
+          <span class="brand-tagline">Cyber Command Center</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link-btn" title="Beranda">
+          <i class="fa-solid fa-house"></i> Home
+        </a>
+        <a href="tentang.html" class="nav-link-btn" title="Tentang Adam">
+          <i class="fa-solid fa-user-astronaut"></i> Tentang
+        </a>
+        <a href="film.html" class="nav-link-btn" title="Daftar Film">
+          <i class="fa-solid fa-film"></i> Film
+        </a>
+        <a href="event.html" class="nav-link-btn" title="Jadwal & Pemenang Event">
+          <i class="fa-solid fa-calendar-check"></i> Event
+        </a>
+        <button id="adminLogoutBtn" class="nav-link-btn" style="display:none; color:#EF4444;" onclick="logoutAdmin()">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar
+        </button>
+      </nav>
+    </header>
+
+    <!-- ============================================================
+         LOGIN VIEW (Shown when not authenticated)
+         ============================================================ -->
+    <div id="loginView" class="content-body">
+      <div class="admin-login-card">
+        <div class="admin-avatar">
+          <i class="fa-solid fa-user-shield"></i>
+        </div>
+        <h2 style="font-family:'Orbitron',sans-serif; font-size:18px; margin-bottom:6px;">Autobot Admin Gate</h2>
+        <p style="font-size:12px; color:#64748B; margin-bottom:20px;">Masukkan PIN / Password untuk mengelola konten fanbase.</p>
+
+        <form onsubmit="return handleAdminLogin(event)">
+          <div class="form-group">
+            <label class="form-label">Password Admin:</label>
+            <input type="password" id="adminPassword" class="form-control" placeholder="Ketik: admin123" required>
+            <div style="font-size:11px; color:#94A3B8; margin-top:4px;">Default Password: <strong>admin123</strong></div>
+          </div>
+
+          <button type="submit" class="btn-cyber-primary" style="width:100%; justify-content:center; margin-top:10px;">
+            <i class="fa-solid fa-unlock-keyhole"></i> MASUK PANEL
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         DASHBOARD VIEW (Shown after login)
+         ============================================================ -->
+    <div id="dashboardView" style="display:none;">
+      <!-- Banner -->
+      <div class="page-header-banner">
+        <div class="banner-badge">
+          <i class="fa-solid fa-terminal"></i> AUTOBOT COMMAND MATRIX
+        </div>
+        <h1 class="banner-title">Panel Pengelola <span style="color:var(--yellow-bright)">AdamUnited</span></h1>
+        <p class="banner-desc">
+          Kelola data film yang dibintangi Adam Xavier, jadwal event, daftar pemenang lomba, dan profil aktor secara langsung.
+        </p>
+      </div>
+
+      <main class="content-body">
+        <!-- Stats Summary -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:12px; margin-bottom:24px;">
+          <div style="background:#FFF; padding:16px; border-radius:12px; border-left:4px solid #FFC800; box-shadow:var(--shadow-sm);">
+            <div style="font-size:11px; font-weight:700; color:#64748B;">TOTAL FILM</div>
+            <div style="font-family:'Orbitron',sans-serif; font-size:24px; font-weight:900; color:#0F172A;" id="statTotalFilms">0</div>
+          </div>
+          <div style="background:#FFF; padding:16px; border-radius:12px; border-left:4px solid #3B82F6; box-shadow:var(--shadow-sm);">
+            <div style="font-size:11px; font-weight:700; color:#64748B;">TOTAL EVENT</div>
+            <div style="font-family:'Orbitron',sans-serif; font-size:24px; font-weight:900; color:#0F172A;" id="statTotalEvents">0</div>
+          </div>
+          <div style="background:#FFF; padding:16px; border-radius:12px; border-left:4px solid #10B981; box-shadow:var(--shadow-sm);">
+            <div style="font-size:11px; font-weight:700; color:#64748B;">TOTAL PEMENANG</div>
+            <div style="font-family:'Orbitron',sans-serif; font-size:24px; font-weight:900; color:#0F172A;" id="statTotalWinners">0</div>
+          </div>
+          <div style="background:#FFF; padding:16px; border-radius:12px; border-left:4px solid #F59E0B; box-shadow:var(--shadow-sm);">
+            <div style="font-size:11px; font-weight:700; color:#64748B;">HALAMAN TENTANG</div>
+            <div style="font-family:'Orbitron',sans-serif; font-size:16px; font-weight:800; color:#10B981; display:flex; align-items:center; gap:6px;">
+              <i class="fa-solid fa-circle-check"></i> Aktif & Terhubung
+            </div>
+            <div style="font-size:11px; color:#64748B; margin-top:2px;">Fanbase: <strong id="statFanbaseName" style="color:#D97706;">AdamUnited</strong></div>
+          </div>
+        </div>
+
+        <!-- CYBER STORAGE & DIRECT FILE SAVE BAR -->
+        <div style="background:#FFF; border:2px solid var(--yellow-primary); border-radius:14px; padding:16px 20px; margin-bottom:24px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:14px; box-shadow:var(--shadow-sm);">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:42px; height:42px; border-radius:10px; background:var(--yellow-soft); border:1.5px solid var(--yellow-primary); display:flex; align-items:center; justify-content:center; font-size:20px; color:#B45309;">
+              <i class="fa-solid fa-hard-drive"></i>
+            </div>
+            <div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:var(--cyber-dark);">STATUS PENYIMPANAN:</span>
+                <span id="storageModeBadge" class="status-upcoming" style="font-size:11px; padding:3px 10px; border-radius:12px; font-weight:800; background:#FEF3C7; color:#B45309; border:1px solid #F59E0B;">
+                  <i class="fa-solid fa-circle-notch fa-spin"></i> Memeriksa Status...
+                </span>
+              </div>
+              <div id="storageStatusText" style="font-size:12px; color:#64748B; margin-top:3px;">
+                Perubahan langsung aktif di browser. Anda juga bisa menghubungkan folder proyek agar otomatis mengedit file fisik!
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button id="btnConnectFolder" class="btn-cyber-primary" style="font-size:12px; padding:9px 16px;" onclick="connectProjectFolder()">
+              <i class="fa-solid fa-folder-open"></i> Hubungkan Folder (Auto-Save ke File)
+            </button>
+            <button class="btn-cyber-primary" style="background:#FFF; color:var(--cyber-dark); border-color:var(--yellow-primary); font-size:12px; padding:9px 16px;" onclick="manualSaveToFile()">
+              <i class="fa-solid fa-floppy-disk"></i> Simpan ke File data.js
+            </button>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="admin-tabs">
+          <button class="admin-tab-btn active" onclick="switchAdminTab('filmsTab', this)">
+            <i class="fa-solid fa-clapperboard"></i> Kelola Film
+          </button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('eventsTab', this)">
+            <i class="fa-solid fa-trophy"></i> Kelola Event & Pemenang
+          </button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('bioTab', this)">
+            <i class="fa-solid fa-user-astronaut"></i> Kelola Halaman Tentang (tentang.html)
+          </button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('cloudTab', this)">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Penyimpanan Cloud & Netlify
+          </button>
+        </div>
+
+        <!-- ==========================================
+             TAB 1: KELOLA FILM
+             ========================================== -->
+        <div id="filmsTab" class="tab-pane">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+            <h3 style="font-family:'Orbitron',sans-serif; font-size:16px;">Daftar Film & Serial</h3>
+            <button class="btn-cyber-primary" onclick="openAddFilmModal()">
+              <i class="fa-solid fa-plus"></i> Tambah Film Baru
+            </button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Poster</th>
+                  <th>Judul Film</th>
+                  <th>Tahun</th>
+                  <th>Peran Adam</th>
+                  <th>Genre</th>
+                  <th>Status/Badge</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="adminFilmTableBody">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             TAB 2: KELOLA EVENT & PEMENANG
+             ========================================== -->
+        <div id="eventsTab" class="tab-pane" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+            <h3 style="font-family:'Orbitron',sans-serif; font-size:16px;">Daftar Event & Lomba</h3>
+            <button class="btn-cyber-primary" onclick="openAddEventModal()">
+              <i class="fa-solid fa-plus"></i> Tambah Event Baru
+            </button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Judul Event</th>
+                  <th>Tanggal</th>
+                  <th>Lokasi</th>
+                  <th>Status</th>
+                  <th>Jumlah Pemenang</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="adminEventTableBody">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             TAB 3: KELOLA HALAMAN TENTANG (tentang.html)
+             ========================================== -->
+        <div id="bioTab" class="tab-pane" style="display:none;">
+          <div style="background:#FFF; padding:24px; border-radius:16px; border:1px solid var(--border-light); max-width:780px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:18px; flex-wrap:wrap; gap:12px;">
+              <div>
+                <h3 style="font-family:'Orbitron',sans-serif; font-size:17px; color:var(--cyber-dark);">
+                  <i class="fa-solid fa-user-astronaut" style="color:var(--yellow-accent);"></i> Kelola Halaman Tentang (tentang.html)
+                </h3>
+                <p style="font-size:12px; color:#64748B; margin-top:4px;">
+                  Perubahan pada form ini otomatis memperbarui seluruh konten di <strong>tentang.html</strong> dan Slide 2 di <strong>index.html</strong>.
+                </p>
+              </div>
+              <a href="tentang.html" target="_blank" class="btn-cyber-primary" style="font-size:12px; padding:8px 14px; text-decoration:none;">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka tentang.html
+              </a>
+            </div>
+            
+            <form onsubmit="handleSaveBio(event)">
+              <!-- IDENTITAS FANBASE & BRAND -->
+              <div style="background:#FFFDF5; border:1.5px solid var(--yellow-primary); border-radius:12px; padding:16px; margin-bottom:18px;">
+                <div style="font-size:12px; font-weight:800; color:#B45309; text-transform:uppercase; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+                  <i class="fa-solid fa-shield-halved"></i> Identitas Fanbase & Komunitas
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+                  <div class="form-group" style="margin-bottom:0;">
+                    <label class="form-label">Nama Fanbase Resmi:</label>
+                    <input type="text" id="editBioFanbase" class="form-control" placeholder="Contoh: AdamUnited" required>
+                    <div style="font-size:11px; color:#64748B; margin-top:3px;">Tampil di navbar, hero sambutan, biodata, dan kartu trivia.</div>
+                  </div>
+                  <div class="form-group" style="margin-bottom:0;">
+                    <label class="form-label">Domisili / Kota:</label>
+                    <input type="text" id="editBioDomicile" class="form-control" placeholder="Contoh: Jakarta, Indonesia" required>
+                    <div style="font-size:11px; color:#64748B; margin-top:3px;">Lokasi domisili aktor pada kartu profil.</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- BIODATA UTAMA AKTOR -->
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+                <div class="form-group">
+                  <label class="form-label">Nama Lengkap Aktor:</label>
+                  <input type="text" id="editBioName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Nama Panggilan:</label>
+                  <input type="text" id="editBioNickname" class="form-control" required>
+                </div>
+              </div>
+
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+                <div class="form-group">
+                  <label class="form-label">Tagline / Gelar Aktor:</label>
+                  <input type="text" id="editBioTagline" class="form-control" placeholder='Contoh: "The Young Cyber Hero"' required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Profesi / Keterangan:</label>
+                  <input type="text" id="editBioProfession" class="form-control" placeholder="Contoh: Aktor Cilik • Voice Actor • Robot Enthusiast" required>
+                </div>
+              </div>
+
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+                <div class="form-group">
+                  <label class="form-label">Tanggal Lahir:</label>
+                  <input type="text" id="editBioBirthdate" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Usia (Tahun):</label>
+                  <input type="number" id="editBioAge" class="form-control" required>
+                </div>
+              </div>
+
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+                <div class="form-group">
+                  <label class="form-label">Robot Transformers Favorit:</label>
+                  <input type="text" id="editBioFavRobot" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Foto Avatar (URL / Path File):</label>
+                  <input type="text" id="editBioAvatar" class="form-control" placeholder="assets/images/adam_avatar.jpeg" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Motto Utama Aktor:</label>
+                <input type="text" id="editBioMotto" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Kutipan Inspirasi Cerita (Quote Card tentang.html):</label>
+                <input type="text" id="editBioQuote" class="form-control" placeholder="Kutipan filosofi Adam..." required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Deskripsi Paragraf 1 (Kisah Perjalanan & Awal Karier):</label>
+                <textarea id="editBioAbout1" class="form-control" rows="3" required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Deskripsi Paragraf 2 (Semangat & Nilai Transformers):</label>
+                <textarea id="editBioAbout2" class="form-control" rows="3" required></textarea>
+              </div>
+
+              <button type="submit" class="btn-cyber-primary" style="padding:12px 24px;">
+                <i class="fa-solid fa-floppy-disk"></i> Simpan Perubahan Halaman Tentang & Profil
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             TAB 4: PENYIMPANAN CLOUD & NETLIFY
+             ========================================== -->
+        <div id="cloudTab" class="tab-pane" style="display:none;">
+          <div style="background:#FFF; padding:24px; border-radius:16px; border:1px solid var(--border-light); max-width:850px;">
+            <div style="margin-bottom:20px;">
+              <h3 style="font-family:'Orbitron',sans-serif; font-size:18px; color:var(--cyber-dark);">
+                <i class="fa-solid fa-cloud-arrow-up" style="color:var(--yellow-accent);"></i> Penyimpanan Cloud & Netlify
+              </h3>
+              <p style="font-size:12px; color:#64748B; margin-top:4px;">
+                Hubungkan website ke cloud agar setiap film, event, dan bio yang Anda edit tersimpan di internet dan langsung tampil ke semua pengunjung!
+              </p>
+            </div>
+
+            <!-- CARD 1: NETLIFY BLOBS (OTOMATIS) -->
+            <div style="background:#F0FDFA; border:2px solid #14B8A6; border-radius:14px; padding:18px; margin-bottom:20px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:10px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="background:#14B8A6; color:#FFF; width:28px; height:28px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; font-size:14px;">
+                    <i class="fa-solid fa-cloud"></i>
+                  </span>
+                  <strong style="font-family:'Orbitron',sans-serif; font-size:14px; color:#0F766E;">Opsi 1: Netlify Blobs Cloud Storage (Bawaan)</strong>
+                </div>
+                <span id="netlifyStatusBadge" style="font-size:11px; padding:3px 10px; border-radius:12px; font-weight:800; background:#CCFBF1; color:#0F766E; border:1px solid #14B8A6;">
+                  <i class="fa-solid fa-circle-notch fa-spin"></i> Mendeteksi Netlify...
+                </span>
+              </div>
+              <p style="font-size:12px; color:#334155; line-height:1.6; margin-bottom:12px;">
+                Website ini sudah dipasangi serverless function di <code>netlify/functions/data.js</code> dan konfigurasi <code>netlify.toml</code>. Begitu Anda mengunggah folder ini ke Netlify, Netlify Blobs akan <strong>langsung aktif otomatis</strong> untuk menyimpan perubahan data secara global!
+              </p>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button type="button" class="btn-cyber-primary" style="font-size:12px; padding:7px 14px; background:#0D9488; border-color:#0D9488;" onclick="testNetlifyEndpoint()">
+                  <i class="fa-solid fa-satellite-dish"></i> Tes Endpoint Netlify (/api/data)
+                </button>
+              </div>
+            </div>
+
+            <!-- CARD 2: JSONBIN.IO (OPSI CLOUD REST API CADANGAN) -->
+            <div style="background:#F8FAFC; border:1.5px solid #CBD5E1; border-radius:14px; padding:18px; margin-bottom:20px;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                <span style="background:#3B82F6; color:#FFF; width:28px; height:28px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; font-size:14px;">
+                  <i class="fa-solid fa-database"></i>
+                </span>
+                <strong style="font-family:'Orbitron',sans-serif; font-size:14px; color:#1E293B;">Opsi 2: Cloud REST API Mandiri (JSONBin.io)</strong>
+              </div>
+              <p style="font-size:12px; color:#64748B; line-height:1.6; margin-bottom:14px;">
+                Sangat berguna jika Anda mengunggah via Netlify Drop (drag-and-drop file gratis), GitHub Pages, atau Vercel. Cukup buat Bin gratis di <a href="https://jsonbin.io" target="_blank" style="color:#2563EB; font-weight:700;">jsonbin.io</a>, lalu masukkan Bin ID & Master Key di bawah ini:
+              </p>
+              
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="form-label">Bin ID:</label>
+                  <input type="text" id="cfgCloudBinId" class="form-control" placeholder="Contoh: 66f0a123bcde456...">
+                </div>
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="form-label">Master Key (X-Master-Key):</label>
+                  <input type="password" id="cfgCloudApiKey" class="form-control" placeholder="Contoh: $2a$10$abcdef...">
+                </div>
+              </div>
+
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button type="button" class="btn-cyber-primary" style="font-size:12px; padding:8px 16px;" onclick="saveCloudConfig()">
+                  <i class="fa-solid fa-floppy-disk"></i> Simpan Pengaturan Cloud
+                </button>
+                <button type="button" class="btn-cyber-primary" style="background:#FFF; color:#1E293B; border-color:#CBD5E1; font-size:12px; padding:8px 16px;" onclick="testCloudConnection()">
+                  <i class="fa-solid fa-vial"></i> Tes Koneksi Cloud
+                </button>
+                <button type="button" class="btn-cyber-primary" style="background:#FFF; color:#B45309; border-color:#F59E0B; font-size:12px; padding:8px 16px;" onclick="pushCurrentDataToCloud()">
+                  <i class="fa-solid fa-cloud-arrow-up"></i> Kirim Semua Data Saat Ini ke Cloud
+                </button>
+              </div>
+            </div>
+
+            <!-- CARD 3: PANDUAN DEPLOY KE NETLIFY -->
+            <div style="background:#FFFDF5; border:1.5px solid var(--yellow-primary); border-radius:14px; padding:18px;">
+              <div style="font-size:13px; font-weight:800; color:#B45309; text-transform:uppercase; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
+                <i class="fa-solid fa-circle-question"></i> Cara Deploy Website Ini ke Netlify (Gratis):
+              </div>
+              <ol style="font-size:12px; color:#334155; line-height:1.8; margin-left:18px;">
+                <li>Buka website <a href="https://app.netlify.com/drop" target="_blank" style="color:#D97706; font-weight:700;">app.netlify.com/drop</a> di browser Anda.</li>
+                <li>Tarik (drag & drop) seluruh folder <code>adamxavier-fanbase</code> ini ke kotak unggahan Netlify.</li>
+                <li>Netlify akan memberikan URL online gratis (misal: <code>adamunited.netlify.app</code>).</li>
+                <li>Buka <code>namasitus.netlify.app/admin.html</code> untuk mengelola film, event, dan bio langsung secara online!</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ekspor File Data Permanen -->
+        <div style="margin-top:35px; padding:18px; background:#FFF; border:2px solid var(--yellow-primary); border-radius:14px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; box-shadow:var(--shadow-sm);">
+          <div>
+            <div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:var(--cyber-dark);">
+              <i class="fa-solid fa-floppy-disk" style="color:var(--yellow-accent);"></i> Simpan Permanen ke File (Ekspor data.js)
+            </div>
+            <div style="font-size:12px; color:#64748B; margin-top:3px; max-width:650px;">
+              Data yang Anda ubah di Admin <strong>sudah otomatis tersimpan</strong> di browser (localStorage) dan langsung tampil di film.html & event.html. Jika ingin menyimpan perubahan ke file fisik agar bisa diupload ke hosting atau komputer lain, unduh file <code>data.js</code> baru di sini.
+            </div>
+          </div>
+          <button class="btn-cyber-primary" onclick="exportDataJs()">
+            <i class="fa-solid fa-download"></i> Unduh File data.js Baru
+          </button>
+        </div>
+
+        <!-- Reset Button -->
+        <div style="margin-top:16px; padding:16px; background:#FFFBEB; border:1px dashed #F59E0B; border-radius:12px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="font-weight:700; font-size:13px; color:#B45309;">Kembalikan Data Bawaan (Demo Reset)</div>
+            <div style="font-size:11px; color:#64748B;">Klik jika ingin mengembalikan seluruh data film dan event ke contoh awal.</div>
+          </div>
+          <button class="btn-cyber-primary" style="background:#FFF; color:#B45309; border-color:#F59E0B; font-size:12px; padding:8px 14px;" onclick="resetAllDemoData()">
+            <i class="fa-solid fa-rotate-left"></i> Reset Data
+          </button>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL TAMBAH/EDIT FILM
+       ============================================================ -->
+  <div class="modal-overlay" id="filmModal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 class="modal-title" id="filmModalTitle">Tambah Film Baru</h3>
+        <button class="btn-close-modal" onclick="closeFilmModal()">&times;</button>
+      </div>
+
+      <form onsubmit="handleSaveFilm(event)">
+        <input type="hidden" id="formFilmId" value="">
+
+        <div class="form-group">
+          <label class="form-label">Judul Film:</label>
+          <input type="text" id="formFilmTitle" class="form-control" placeholder="Contoh: Cyber Guardian" required>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div class="form-group">
+            <label class="form-label">Tahun Rilis:</label>
+            <input type="text" id="formFilmYear" class="form-control" placeholder="2025" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Badge Status:</label>
+            <input type="text" id="formFilmBadge" class="form-control" placeholder="Film Layar Lebar">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Peran Adam Xavier:</label>
+          <input type="text" id="formFilmRole" class="form-control" placeholder="Rafa (Pemeran Utama)" required>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div class="form-group">
+            <label class="form-label">Genre:</label>
+            <input type="text" id="formFilmGenre" class="form-control" placeholder="Sci-Fi, Aksi" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Rating:</label>
+            <input type="text" id="formFilmRating" class="form-control" placeholder="4.9 / 5.0">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">URL Gambar Poster:</label>
+          <input type="url" id="formFilmImage" class="form-control" placeholder="https://..." required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">URL Trailer / Video:</label>
+          <input type="url" id="formFilmTrailer" class="form-control" placeholder="https://youtube.com/...">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Sinopsis Cerita:</label>
+          <textarea id="formFilmSynopsis" class="form-control" rows="3" required></textarea>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:16px;">
+          <button type="button" class="btn-cyber-primary" style="background:#E2E8F0; color:#475569; border-color:#CBD5E1;" onclick="closeFilmModal()">Batal</button>
+          <button type="submit" class="btn-cyber-primary"><i class="fa-solid fa-check"></i> Simpan Film</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL TAMBAH/EDIT EVENT & PEMENANG
+       ============================================================ -->
+  <div class="modal-overlay" id="eventModal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 class="modal-title" id="eventModalTitle">Kelola Event & Pemenang</h3>
+        <button class="btn-close-modal" onclick="closeEventModal()">&times;</button>
+      </div>
+
+      <form onsubmit="handleSaveEvent(event)">
+        <input type="hidden" id="formEventId" value="">
+
+        <div class="form-group">
+          <label class="form-label">Judul Event:</label>
+          <input type="text" id="formEventTitle" class="form-control" required>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div class="form-group">
+            <label class="form-label">Tanggal:</label>
+            <input type="text" id="formEventDate" class="form-control" placeholder="18 Oktober 2026" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Waktu:</label>
+            <input type="text" id="formEventTime" class="form-control" placeholder="14:00 - 17:00 WIB" required>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div class="form-group">
+            <label class="form-label">Lokasi / Tempat:</label>
+            <input type="text" id="formEventLocation" class="form-control" placeholder="Grand Mall / Zoom" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Status Event:</label>
+            <select id="formEventStatus" class="form-control">
+              <option value="Upcoming">Akan Datang (Upcoming)</option>
+              <option value="Completed">Selesai (Completed)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Deskripsi Event:</label>
+          <textarea id="formEventDesc" class="form-control" rows="2" required></textarea>
+        </div>
+
+        <!-- Bagian Pengaturan Pemenang Lomba -->
+        <div style="background:#FFFBEB; border:1px solid #F59E0B; border-radius:12px; padding:12px; margin-top:14px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <div style="font-size:12px; font-weight:800; color:#B45309;">
+              <i class="fa-solid fa-trophy"></i> Daftar Pemenang (Untuk Event Lomba/Giveaway)
+            </div>
+            <button type="button" class="btn-view-all" onclick="addWinnerRow()">+ Tambah Baris</button>
+          </div>
+          
+          <div id="winnersInputContainer">
+            <!-- Row inputs inserted dynamically -->
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:16px;">
+          <button type="button" class="btn-cyber-primary" style="background:#E2E8F0; color:#475569; border-color:#CBD5E1;" onclick="closeEventModal()">Batal</button>
+          <button type="submit" class="btn-cyber-primary"><i class="fa-solid fa-check"></i> Simpan Event</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Shared Scripts & Admin Logic -->
+  <script src="assets/js/data.js"></script>
+  <script>
+    /* ============================================================
+       ADMIN AUTHENTICATION LOGIC
+       ============================================================ */
+    function checkAuth() {
+      const isAuth = sessionStorage.getItem('ax_admin_auth');
+      const loginView = document.getElementById('loginView');
+      const dashboardView = document.getElementById('dashboardView');
+      const logoutBtn = document.getElementById('adminLogoutBtn');
+
+      if (isAuth === 'true') {
+        if (loginView) loginView.style.display = 'none';
+        if (dashboardView) dashboardView.style.display = 'block';
+        if (logoutBtn) logoutBtn.style.display = 'inline-flex';
+        try {
+          loadAdminDashboard();
+        } catch (err) {
+          console.error('Error loading admin dashboard:', err);
+        }
+      } else {
+        if (loginView) loginView.style.display = 'block';
+        if (dashboardView) dashboardView.style.display = 'none';
+        if (logoutBtn) logoutBtn.style.display = 'none';
+      }
+    }
+
+    function handleAdminLogin(e) {
+      if (e) e.preventDefault();
+      const pwInput = document.getElementById('adminPassword');
+      const pw = pwInput ? pwInput.value.trim() : '';
+      if (pw === 'admin123' || pw === '1234') {
+        sessionStorage.setItem('ax_admin_auth', 'true');
+        checkAuth();
+      } else {
+        alert('Password salah! Silakan gunakan: admin123');
+      }
+      return false;
+    }
+
+    function logoutAdmin() {
+      sessionStorage.removeItem('ax_admin_auth');
+      checkAuth();
+    }
+
+    /* ============================================================
+       TAB SWITCHING
+       ============================================================ */
+    function switchAdminTab(tabId, btn) {
+      document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.tab-pane').forEach(p => p.style.display = 'none');
+      document.getElementById(tabId).style.display = 'block';
+    }
+
+    /* ============================================================
+       LOAD & RENDER DASHBOARD
+       ============================================================ */
+    function loadAdminDashboard() {
+      renderAdminFilms();
+      renderAdminEvents();
+      renderAdminBio();
+      loadCloudConfig();
+    }
+
+    // 1. Film CRUD
+    function renderAdminFilms() {
+      const films = FanbaseStore.getFilms();
+      document.getElementById('statTotalFilms').textContent = films.length;
+      const tbody = document.getElementById('adminFilmTableBody');
+      tbody.innerHTML = '';
+
+      films.forEach((film, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><img src="${film.image}" style="width:45px; height:45px; object-fit:cover; border-radius:6px;" onerror="this.src='assets/images/adam_avatar.jpeg'"></td>
+          <td><strong>${film.title}</strong></td>
+          <td>${film.year}</td>
+          <td><span style="color:#B45309; font-weight:700;">${film.role}</span></td>
+          <td>${film.genre}</td>
+          <td><span style="background:#FFF9E6; border:1px solid #FFC800; padding:2px 6px; border-radius:4px; font-size:11px; font-weight:700;">${film.badge || '-'}</span></td>
+          <td>
+            <button class="btn-action-icon btn-edit" title="Edit Film" onclick="openEditFilmModal('${film.id}')"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button class="btn-action-icon btn-delete" title="Hapus Film" onclick="deleteFilm('${film.id}')"><i class="fa-solid fa-trash"></i></button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function openAddFilmModal() {
+      document.getElementById('filmModalTitle').textContent = 'Tambah Film Baru';
+      document.getElementById('formFilmId').value = '';
+      document.getElementById('formFilmTitle').value = '';
+      document.getElementById('formFilmYear').value = new Date().getFullYear();
+      document.getElementById('formFilmBadge').value = 'Film Layar Lebar';
+      document.getElementById('formFilmRole').value = '';
+      document.getElementById('formFilmGenre').value = 'Sci-Fi, Aksi';
+      document.getElementById('formFilmRating').value = '4.9 / 5.0';
+      document.getElementById('formFilmImage').value = 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&auto=format&fit=crop&q=80';
+      document.getElementById('formFilmTrailer').value = 'https://www.youtube.com';
+      document.getElementById('formFilmSynopsis').value = '';
+      document.getElementById('filmModal').classList.add('open');
+    }
+
+    function openEditFilmModal(id) {
+      const films = FanbaseStore.getFilms();
+      const film = films.find(f => f.id === id);
+      if (!film) return;
+
+      document.getElementById('filmModalTitle').textContent = 'Edit Film';
+      document.getElementById('formFilmId').value = film.id;
+      document.getElementById('formFilmTitle').value = film.title;
+      document.getElementById('formFilmYear').value = film.year;
+      document.getElementById('formFilmBadge').value = film.badge || '';
+      document.getElementById('formFilmRole').value = film.role;
+      document.getElementById('formFilmGenre').value = film.genre;
+      document.getElementById('formFilmRating').value = film.rating || '4.9 / 5.0';
+      document.getElementById('formFilmImage').value = film.image;
+      document.getElementById('formFilmTrailer').value = film.trailerUrl || '';
+      document.getElementById('formFilmSynopsis').value = film.synopsis;
+      document.getElementById('filmModal').classList.add('open');
+    }
+
+    function closeFilmModal() {
+      document.getElementById('filmModal').classList.remove('open');
+    }
+
+    async function handleSaveFilm(e) {
+      e.preventDefault();
+      const id = document.getElementById('formFilmId').value;
+      const films = FanbaseStore.getFilms();
+
+      const filmData = {
+        id: id || ("film-" + Date.now()),
+        title: document.getElementById('formFilmTitle').value,
+        year: document.getElementById('formFilmYear').value,
+        badge: document.getElementById('formFilmBadge').value,
+        role: document.getElementById('formFilmRole').value,
+        genre: document.getElementById('formFilmGenre').value,
+        rating: document.getElementById('formFilmRating').value,
+        image: document.getElementById('formFilmImage').value,
+        trailerUrl: document.getElementById('formFilmTrailer').value,
+        synopsis: document.getElementById('formFilmSynopsis').value
+      };
+
+      if (id) {
+        const idx = films.findIndex(f => f.id === id);
+        if (idx !== -1) films[idx] = filmData;
+      } else {
+        films.unshift(filmData);
+      }
+
+      FanbaseStore.saveFilms(films);
+      closeFilmModal();
+      renderAdminFilms();
+      await syncToDisk('Data film berhasil disimpan!');
+    }
+
+    async function deleteFilm(id) {
+      if (!confirm('Yakin ingin menghapus film ini?')) return;
+      let films = FanbaseStore.getFilms();
+      films = films.filter(f => f.id !== id);
+      FanbaseStore.saveFilms(films);
+      renderAdminFilms();
+      await syncToDisk('Film berhasil dihapus!');
+    }
+
+    // 2. Event & Pemenang CRUD
+    function renderAdminEvents() {
+      const events = FanbaseStore.getEvents();
+      document.getElementById('statTotalEvents').textContent = events.length;
+      
+      let totalWinnersCount = 0;
+      events.forEach(ev => {
+        if (ev.winners) totalWinnersCount += ev.winners.length;
+      });
+      const statWinnersEl = document.getElementById('statTotalWinners');
+      if (statWinnersEl) statWinnersEl.textContent = totalWinnersCount;
+
+      const tbody = document.getElementById('adminEventTableBody');
+      tbody.innerHTML = '';
+
+      events.forEach(ev => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${ev.title}</strong></td>
+          <td>${ev.date} (${ev.time})</td>
+          <td>${ev.location}</td>
+          <td><span style="padding:2px 8px; border-radius:4px; font-size:11px; font-weight:700; ${ev.status === 'Upcoming' ? 'background:#DCFCE7; color:#166534;' : 'background:#F1F5F9; color:#475569;'}">${ev.status}</span></td>
+          <td><strong>${(ev.winners && ev.winners.length) || 0}</strong> Pemenang</td>
+          <td>
+            <button class="btn-action-icon btn-edit" title="Edit Event & Pemenang" onclick="openEditEventModal('${ev.id}')"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button class="btn-action-icon btn-delete" title="Hapus Event" onclick="deleteEvent('${ev.id}')"><i class="fa-solid fa-trash"></i></button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function addWinnerRow(rank = '', name = '', work = '', prize = '') {
+      const container = document.getElementById('winnersInputContainer');
+      const div = document.createElement('div');
+      div.className = 'winner-input-row';
+      div.style.cssText = "display:grid; grid-template-columns:1fr 1fr 1fr 1fr 30px; gap:6px; margin-bottom:6px; align-items:center;";
+      div.innerHTML = `
+        <input type="text" placeholder="Juara 1 / Doorprize" value="${rank}" class="form-control winner-rank" style="padding:6px; font-size:11px;" required>
+        <input type="text" placeholder="Nama Pemenang" value="${name}" class="form-control winner-name" style="padding:6px; font-size:11px;" required>
+        <input type="text" placeholder="Karya / Kategori" value="${work}" class="form-control winner-work" style="padding:6px; font-size:11px;">
+        <input type="text" placeholder="Hadiah" value="${prize}" class="form-control winner-prize" style="padding:6px; font-size:11px;" required>
+        <button type="button" onclick="this.parentElement.remove()" style="color:#EF4444; background:none; border:none; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+      `;
+      container.appendChild(div);
+    }
+
+    function openAddEventModal() {
+      document.getElementById('eventModalTitle').textContent = 'Tambah Event Baru';
+      document.getElementById('formEventId').value = '';
+      document.getElementById('formEventTitle').value = '';
+      document.getElementById('formEventDate').value = '';
+      document.getElementById('formEventTime').value = '14:00 - 17:00 WIB';
+      document.getElementById('formEventLocation').value = '';
+      document.getElementById('formEventStatus').value = 'Upcoming';
+      document.getElementById('formEventDesc').value = '';
+      document.getElementById('winnersInputContainer').innerHTML = '';
+      document.getElementById('eventModal').classList.add('open');
+    }
+
+    function openEditEventModal(id) {
+      const events = FanbaseStore.getEvents();
+      const ev = events.find(e => e.id === id);
+      if (!ev) return;
+
+      document.getElementById('eventModalTitle').textContent = 'Edit Event & Pemenang';
+      document.getElementById('formEventId').value = ev.id;
+      document.getElementById('formEventTitle').value = ev.title;
+      document.getElementById('formEventDate').value = ev.date;
+      document.getElementById('formEventTime').value = ev.time;
+      document.getElementById('formEventLocation').value = ev.location;
+      document.getElementById('formEventStatus').value = ev.status;
+      document.getElementById('formEventDesc').value = ev.description;
+
+      const container = document.getElementById('winnersInputContainer');
+      container.innerHTML = '';
+      if (ev.winners && ev.winners.length > 0) {
+        ev.winners.forEach(w => addWinnerRow(w.rank, w.name, w.work, w.prize));
+      }
+      document.getElementById('eventModal').classList.add('open');
+    }
+
+    function closeEventModal() {
+      document.getElementById('eventModal').classList.remove('open');
+    }
+
+    async function handleSaveEvent(e) {
+      e.preventDefault();
+      const id = document.getElementById('formEventId').value;
+      const events = FanbaseStore.getEvents();
+
+      // Collect winners from dynamic rows
+      const winnerRows = document.querySelectorAll('.winner-input-row');
+      const winnersList = [];
+      winnerRows.forEach(row => {
+        const rank = row.querySelector('.winner-rank').value;
+        const name = row.querySelector('.winner-name').value;
+        const work = row.querySelector('.winner-work').value;
+        const prize = row.querySelector('.winner-prize').value;
+        if (rank && name) {
+          winnersList.push({ rank, name, work, prize });
+        }
+      });
+
+      const eventData = {
+        id: id || ("event-" + Date.now()),
+        title: document.getElementById('formEventTitle').value,
+        date: document.getElementById('formEventDate').value,
+        time: document.getElementById('formEventTime').value,
+        location: document.getElementById('formEventLocation').value,
+        status: document.getElementById('formEventStatus').value,
+        description: document.getElementById('formEventDesc').value,
+        registrationOpen: document.getElementById('formEventStatus').value === 'Upcoming',
+        quota: "Tersedia",
+        winners: winnersList
+      };
+
+      if (id) {
+        const idx = events.findIndex(ev => ev.id === id);
+        if (idx !== -1) events[idx] = eventData;
+      } else {
+        events.unshift(eventData);
+      }
+
+      FanbaseStore.saveEvents(events);
+      closeEventModal();
+      renderAdminEvents();
+      await syncToDisk('Event & daftar pemenang berhasil disimpan!');
+    }
+
+    async function deleteEvent(id) {
+      if (!confirm('Yakin ingin menghapus event ini?')) return;
+      let events = FanbaseStore.getEvents();
+      events = events.filter(e => e.id !== id);
+      FanbaseStore.saveEvents(events);
+      renderAdminEvents();
+      await syncToDisk('Event berhasil dihapus!');
+    }
+
+    // 3. Bio & Halaman Tentang Form
+    function renderAdminBio() {
+      const bio = FanbaseStore.getBio();
+      
+      const statFanbase = document.getElementById('statFanbaseName');
+      if (statFanbase) statFanbase.textContent = bio.fanbaseName || 'AdamUnited';
+
+      const fbInput = document.getElementById('editBioFanbase');
+      if (fbInput) fbInput.value = bio.fanbaseName || 'AdamUnited';
+
+      const domInput = document.getElementById('editBioDomicile');
+      if (domInput) domInput.value = bio.domicile || 'Jakarta, Indonesia';
+
+      const tagInput = document.getElementById('editBioTagline');
+      if (tagInput) tagInput.value = bio.tagline || 'The Young Cyber Hero';
+
+      const profInput = document.getElementById('editBioProfession');
+      if (profInput) profInput.value = bio.profession || 'Aktor Cilik • Voice Actor • Robot Enthusiast';
+
+      document.getElementById('editBioName').value = bio.name || '';
+      document.getElementById('editBioNickname').value = bio.nickname || '';
+      document.getElementById('editBioBirthdate').value = bio.birthdate || '';
+      document.getElementById('editBioAge').value = bio.age || 12;
+      document.getElementById('editBioFavRobot').value = bio.favoriteRobot || '';
+      
+      const avatarInput = document.getElementById('editBioAvatar');
+      if (avatarInput) avatarInput.value = bio.avatar || 'assets/images/adam_avatar.jpeg';
+
+      document.getElementById('editBioMotto').value = bio.motto || '';
+
+      const quoteInput = document.getElementById('editBioQuote');
+      if (quoteInput) quoteInput.value = bio.quoteInspiration || bio.motto || '';
+
+      document.getElementById('editBioAbout1').value = bio.about1 || '';
+      document.getElementById('editBioAbout2').value = bio.about2 || '';
+    }
+
+    async function handleSaveBio(e) {
+      e.preventDefault();
+      const bio = FanbaseStore.getBio();
+
+      bio.fanbaseName = document.getElementById('editBioFanbase').value.trim();
+      bio.domicile = document.getElementById('editBioDomicile').value.trim();
+      bio.tagline = document.getElementById('editBioTagline').value.trim();
+      bio.profession = document.getElementById('editBioProfession').value.trim();
+      bio.name = document.getElementById('editBioName').value.trim();
+      bio.nickname = document.getElementById('editBioNickname').value.trim();
+      bio.birthdate = document.getElementById('editBioBirthdate').value.trim();
+      bio.age = parseInt(document.getElementById('editBioAge').value, 10);
+      bio.favoriteRobot = document.getElementById('editBioFavRobot').value.trim();
+      bio.avatar = document.getElementById('editBioAvatar').value.trim();
+      bio.motto = document.getElementById('editBioMotto').value.trim();
+      bio.quoteInspiration = document.getElementById('editBioQuote').value.trim();
+      bio.about1 = document.getElementById('editBioAbout1').value.trim();
+      bio.about2 = document.getElementById('editBioAbout2').value.trim();
+
+      FanbaseStore.saveBio(bio);
+      
+      const statFanbase = document.getElementById('statFanbaseName');
+      if (statFanbase) statFanbase.textContent = bio.fanbaseName;
+
+      await syncToDisk('Konten Halaman Tentang & Profil Aktor berhasil disimpan!');
+    }
+
+    function resetAllDemoData() {
+      if (!confirm('Ini akan mengembalikan seluruh data film dan event ke bawaan pabrik. Lanjutkan?')) return;
+      FanbaseStore.resetToDefault();
+      loadAdminDashboard();
+      alert('Data berhasil di-reset ke default!');
+    }
+
+    /* ============================================================
+       STORAGE & CLOUD / DISK SYNCHRONIZATION SYSTEM
+       ============================================================ */
+    let projectDirHandle = null;
+    let isServerConnected = false;
+    let isNetlifyConnected = false;
+
+    async function checkStorageStatus() {
+      const badge = document.getElementById('storageModeBadge');
+      const text = document.getElementById('storageStatusText');
+      const netlifyBadge = document.getElementById('netlifyStatusBadge');
+      
+      // 1. Cek apakah Netlify Blobs / Serverless Function (/api/data) tersedia
+      isNetlifyConnected = false;
+      try {
+        const res = await fetch('/api/data', { method: 'GET' });
+        if (res.ok) {
+          isNetlifyConnected = true;
+        }
+      } catch (e) {}
+
+      if (netlifyBadge) {
+        if (isNetlifyConnected) {
+          netlifyBadge.style.background = '#DCFCE7';
+          netlifyBadge.style.color = '#166534';
+          netlifyBadge.style.border = '1px solid #86EFAC';
+          netlifyBadge.innerHTML = '<i class="fa-solid fa-cloud-check"></i> Netlify Storage Aktif & Terhubung';
+        } else {
+          netlifyBadge.style.background = '#FEF3C7';
+          netlifyBadge.style.color = '#B45309';
+          netlifyBadge.style.border = '1px solid #F59E0B';
+          netlifyBadge.innerHTML = '<i class="fa-solid fa-info-circle"></i> Berjalan di Local / Belum di-deploy ke Netlify';
+        }
+      }
+
+      // 2. Cek apakah berjalan melalui local sync server (http://localhost:8080)
+      isServerConnected = false;
+      try {
+        const res = await fetch('/api/status', { method: 'GET' });
+        if (res.ok) {
+          isServerConnected = true;
+        }
+      } catch (e) {}
+
+      // 3. Cek apakah Cloud REST API (JSONBin) dikonfigurasi
+      let isJsonBinConfigured = false;
+      try {
+        const rawCfg = localStorage.getItem('ax_cloud_config');
+        if (rawCfg) {
+          const cfg = JSON.parse(rawCfg);
+          if (cfg.binId) isJsonBinConfigured = true;
+        }
+      } catch (e) {}
+
+      // Perbarui tampilan badge & teks status bar atas
+      if (isNetlifyConnected) {
+        if (badge) {
+          badge.style.background = '#CCFBF1';
+          badge.style.color = '#0F766E';
+          badge.style.border = '1px solid #14B8A6';
+          badge.innerHTML = '<i class="fa-solid fa-cloud"></i> Netlify Cloud Storage Aktif';
+        }
+        if (text) {
+          text.innerHTML = '🟢 <strong>Mode Netlify Storage Aktif!</strong> Setiap perubahan otomatis tersimpan ke Cloud Netlify dan langsung tampil ke seluruh pengunjung situs.';
+        }
+      } else if (isServerConnected) {
+        if (badge) {
+          badge.style.background = '#DCFCE7';
+          badge.style.color = '#166534';
+          badge.style.border = '1px solid #86EFAC';
+          badge.innerHTML = '<i class="fa-solid fa-server"></i> Local Server Terhubung';
+        }
+        if (text) {
+          text.innerHTML = '🟢 <strong>Mode Auto-Save Hard Disk Aktif!</strong> Setiap perubahan yang Anda buat langsung ditulis ke file fisik proyek di komputer Anda.';
+        }
+      } else if (projectDirHandle) {
+        if (badge) {
+          badge.style.background = '#DCFCE7';
+          badge.style.color = '#166534';
+          badge.style.border = '1px solid #86EFAC';
+          badge.innerHTML = '<i class="fa-solid fa-folder-check"></i> Folder Proyek Terhubung';
+        }
+        if (text) {
+          text.innerHTML = `🟢 <strong>Folder Terhubung:</strong> "${projectDirHandle.name}". Setiap perubahan langsung otomatis mengedit file di hard disk!`;
+        }
+      } else if (isJsonBinConfigured) {
+        if (badge) {
+          badge.style.background = '#EFF6FF';
+          badge.style.color = '#1D4ED8';
+          badge.style.border = '1px solid #93C5FD';
+          badge.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Cloud REST API Terhubung';
+        }
+        if (text) {
+          text.innerHTML = '🟢 <strong>Mode Cloud REST API Aktif!</strong> Perubahan disimpan ke Cloud JSONBin untuk dibagikan secara global ke seluruh pengunjung.';
+        }
+      } else {
+        if (badge) {
+          badge.style.background = '#FEF3C7';
+          badge.style.color = '#B45309';
+          badge.style.border = '1px solid #F59E0B';
+          badge.innerHTML = '<i class="fa-solid fa-hard-drive"></i> Mode Browser (LocalStorage)';
+        }
+        if (text) {
+          text.innerHTML = 'Data tersimpan di browser. Untuk menyimpan otomatis ke internet agar pengunjung lain bisa melihatnya, buka tab <strong>"Penyimpanan Cloud & Netlify"</strong>, atau hubungkan folder proyek.';
+        }
+      }
+    }
+
+    /* ------------------------------------------------------------
+       CLOUD CONFIG & TESTING METHODS
+       ------------------------------------------------------------ */
+    function loadCloudConfig() {
+      try {
+        const raw = localStorage.getItem('ax_cloud_config');
+        if (raw) {
+          const cfg = JSON.parse(raw);
+          if (document.getElementById('cfgCloudBinId')) {
+            document.getElementById('cfgCloudBinId').value = cfg.binId || '';
+          }
+          if (document.getElementById('cfgCloudApiKey')) {
+            document.getElementById('cfgCloudApiKey').value = cfg.apiKey || '';
+          }
+        }
+      } catch (e) {}
+      checkStorageStatus();
+    }
+
+    function saveCloudConfig() {
+      const binId = (document.getElementById('cfgCloudBinId')?.value || '').trim();
+      const apiKey = (document.getElementById('cfgCloudApiKey')?.value || '').trim();
+
+      const cfg = { binId, apiKey };
+      localStorage.setItem('ax_cloud_config', JSON.stringify(cfg));
+      alert('✅ Pengaturan Cloud REST API berhasil disimpan di browser!');
+      checkStorageStatus();
+    }
+
+    async function testCloudConnection() {
+      const binId = (document.getElementById('cfgCloudBinId')?.value || '').trim();
+      const apiKey = (document.getElementById('cfgCloudApiKey')?.value || '').trim();
+
+      if (!binId) {
+        alert('⚠️ Harap masukkan Bin ID terlebih dahulu!');
+        return;
+      }
+
+      const headers = {};
+      if (apiKey) headers['X-Master-Key'] = apiKey;
+
+      try {
+        const resp = await fetch(`https://api.jsonbin.io/v3/b/${binId}/latest`, { headers });
+        if (resp.ok) {
+          const resJson = await resp.json();
+          alert('✅ Koneksi ke Cloud JSONBin berhasil!\nData saat ini di bin:\n' + JSON.stringify(resJson.record ? Object.keys(resJson.record) : resJson, null, 2));
+        } else {
+          alert(`❌ Gagal terhubung ke Cloud JSONBin (Status: ${resp.status} ${resp.statusText}).\nPastikan Bin ID dan Master Key sudah benar.`);
+        }
+      } catch (err) {
+        alert('❌ Error koneksi ke JSONBin: ' + err.message);
+      }
+    }
+
+    async function pushCurrentDataToCloud() {
+      const bio = FanbaseStore.getBio();
+      const films = FanbaseStore.getFilms();
+      const events = FanbaseStore.getEvents();
+      const payload = { bio, films, events, lastUpdated: new Date().toISOString() };
+
+      const binId = (document.getElementById('cfgCloudBinId')?.value || '').trim();
+      const apiKey = (document.getElementById('cfgCloudApiKey')?.value || '').trim();
+
+      if (!binId) {
+        alert('⚠️ Harap masukkan Bin ID pada pengaturan Cloud di bawah terlebih dahulu!');
+        return;
+      }
+
+      const headers = { 'Content-Type': 'application/json' };
+      if (apiKey) headers['X-Master-Key'] = apiKey;
+
+      try {
+        const resp = await fetch(`https://api.jsonbin.io/v3/b/${binId}`, {
+          method: 'PUT',
+          headers,
+          body: JSON.stringify(payload)
+        });
+        if (resp.ok) {
+          alert(`✅ Seluruh data (Bio, ${films.length} Film, ${events.length} Event) berhasil diunggah ke Cloud JSONBin!\nSekarang seluruh pengunjung website dapat melihat update terbaru.`);
+        } else {
+          alert(`❌ Gagal mengunggah ke Cloud JSONBin (Status: ${resp.status}). Cek kembali Master Key Anda.`);
+        }
+      } catch (err) {
+        alert('❌ Terjadi kesalahan saat mengunggah: ' + err.message);
+      }
+    }
+
+    async function testNetlifyEndpoint() {
+      try {
+        const res = await fetch('/api/data', { method: 'GET' });
+        if (res.ok) {
+          const data = await res.json();
+          alert(`✅ Endpoint Netlify /api/data TERHUBUNG dan BERFUNGSI!\n\nStatus: 200 OK\nData tersimpan di Netlify Blobs:\n• Film: ${data.films ? data.films.length : 0}\n• Event: ${data.events ? data.events.length : 0}`);
+        } else {
+          alert(`ℹ️ Endpoint Netlify merespons dengan status ${res.status}.\nJika website belum diunggah ke Netlify, endpoint serverless ini akan aktif otomatis begitu folder di-deploy ke Netlify (misalnya melalui app.netlify.com/drop).`);
+        }
+      } catch (err) {
+        alert('ℹ️ Endpoint /api/data belum aktif di lingkungan saat ini.\nBegitu folder dideploy ke Netlify, fungsi serverless di netlify/functions/data.js akan langsung berjalan dan menyimpan data secara otomatis.');
+      }
+      checkStorageStatus();
+    }
+
+    async function connectProjectFolder() {
+      if (!('showDirectoryPicker' in window)) {
+        alert('Browser ini belum mendukung pemilihan folder langsung secara native. Disarankan menggunakan Google Chrome atau Microsoft Edge, atau cukup jalankan file "start_server.bat" di folder proyek.');
+        return;
+      }
+      try {
+        projectDirHandle = await window.showDirectoryPicker({ mode: 'readwrite' });
+        await checkStorageStatus();
+        const targets = await writeDataToDisk();
+        if (targets && targets.length > 0) {
+          alert(`Folder "${projectDirHandle.name}" sukses terhubung!\n\nFile assets/js/data.js di hard disk Anda berhasil diperbarui secara otomatis.`);
+        }
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          alert('Pemberitahuan: ' + err.message);
+        }
+      }
+    }
+
+    function generateDataJsCode(bio, films, events) {
+      return `/**
+ * DATA STORE FOR ADAM XAVIER FANBASE
+ * Terakhir diperbarui melalui Panel Admin pada: ${new Date().toLocaleString('id-ID')}
+ */
+
+const DEFAULT_BIO = ${JSON.stringify(bio, null, 2)};
+
+const DEFAULT_FILMS = ${JSON.stringify(films, null, 2)};
+
+const DEFAULT_EVENTS = ${JSON.stringify(events, null, 2)};
+
+// Helper Functions
+const FanbaseStore = {
+  getBio: function() {
+    const raw = localStorage.getItem("ax_bio");
+    if (!raw) {
+      localStorage.setItem("ax_bio", JSON.stringify(DEFAULT_BIO));
+      return DEFAULT_BIO;
+    }
+    try {
+      const parsed = JSON.parse(raw);
+      const merged = Object.assign({}, DEFAULT_BIO, parsed);
+      if (!merged.fanbaseName || merged.fanbaseName === "XavierBots") {
+        merged.fanbaseName = "AdamUnited";
+        localStorage.setItem("ax_bio", JSON.stringify(merged));
+      }
+      return merged;
+    } catch (e) {
+      return DEFAULT_BIO;
+    }
+  },
+  saveBio: function(bio) {
+    localStorage.setItem("ax_bio", JSON.stringify(bio));
+  },
+  getFilms: function() {
+    const raw = localStorage.getItem("ax_films");
+    if (!raw) {
+      localStorage.setItem("ax_films", JSON.stringify(DEFAULT_FILMS));
+      return DEFAULT_FILMS;
+    }
+    try {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      return DEFAULT_FILMS;
+    } catch (e) {
+      return DEFAULT_FILMS;
+    }
+  },
+  saveFilms: function(films) {
+    localStorage.setItem("ax_films", JSON.stringify(films));
+  },
+  getEvents: function() {
+    const raw = localStorage.getItem("ax_events");
+    if (!raw) {
+      localStorage.setItem("ax_events", JSON.stringify(DEFAULT_EVENTS));
+      return DEFAULT_EVENTS;
+    }
+    try {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      return DEFAULT_EVENTS;
+    } catch (e) {
+      return DEFAULT_EVENTS;
+    }
+  },
+  saveEvents: function(events) {
+    localStorage.setItem("ax_events", JSON.stringify(events));
+  },
+  resetToDefault: function() {
+    localStorage.setItem("ax_bio", JSON.stringify(DEFAULT_BIO));
+    localStorage.setItem("ax_films", JSON.stringify(DEFAULT_FILMS));
+    localStorage.setItem("ax_events", JSON.stringify(DEFAULT_EVENTS));
+  },
+  initCloudSync: async function(onUpdatedCallback) {
+    let cloudData = null;
+    try {
+      const resp = await fetch('/api/data', { method: 'GET' });
+      if (resp.ok) {
+        const json = await resp.json();
+        if (json && (json.bio || json.films || json.events)) cloudData = json;
+      }
+    } catch (e) {}
+
+    if (!cloudData) {
+      try {
+        const rawCfg = localStorage.getItem('ax_cloud_config');
+        if (rawCfg) {
+          const cfg = JSON.parse(rawCfg);
+          if (cfg.binId) {
+            const headers = {};
+            if (cfg.apiKey) headers['X-Master-Key'] = cfg.apiKey;
+            const resp = await fetch('https://api.jsonbin.io/v3/b/' + cfg.binId + '/latest', { headers });
+            if (resp.ok) {
+              const resJson = await resp.json();
+              if (resJson && resJson.record) cloudData = resJson.record;
+            }
+          }
+        }
+      } catch (e) {}
+    }
+
+    if (cloudData) {
+      let updated = false;
+      if (cloudData.bio) { localStorage.setItem("ax_bio", JSON.stringify(cloudData.bio)); updated = true; }
+      if (cloudData.films && Array.isArray(cloudData.films)) { localStorage.setItem("ax_films", JSON.stringify(cloudData.films)); updated = true; }
+      if (cloudData.events && Array.isArray(cloudData.events)) { localStorage.setItem("ax_events", JSON.stringify(cloudData.events)); updated = true; }
+      if (updated && typeof onUpdatedCallback === 'function') onUpdatedCallback(cloudData);
+      return cloudData;
+    }
+    return null;
+  }
+};
+`;
+    }
+
+    async function writeDataToDisk() {
+      const bio = FanbaseStore.getBio();
+      const films = FanbaseStore.getFilms();
+      const events = FanbaseStore.getEvents();
+      const payload = { bio, films, events, lastUpdated: new Date().toISOString() };
+      const savedTargets = [];
+
+      // 1. Simpan ke Netlify Blobs / Cloud Endpoint (/api/data)
+      try {
+        const resp = await fetch('/api/data', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (resp.ok) {
+          savedTargets.push('Netlify Cloud Storage (/api/data)');
+        }
+      } catch (e) {}
+
+      // 2. Simpan ke Local Server (server.ps1 via /api/save)
+      if (isServerConnected) {
+        try {
+          const resp = await fetch('/api/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (resp.ok && !savedTargets.some(t => t.includes('/api/data'))) {
+            savedTargets.push('Local Server (server.ps1)');
+          }
+        } catch (e) {}
+      }
+
+      // 3. Simpan ke Cloud REST API (JSONBin.io jika dikonfigurasi)
+      try {
+        const rawCfg = localStorage.getItem('ax_cloud_config');
+        if (rawCfg) {
+          const cfg = JSON.parse(rawCfg);
+          if (cfg.binId) {
+            const headers = { 'Content-Type': 'application/json' };
+            if (cfg.apiKey) headers['X-Master-Key'] = cfg.apiKey;
+            const resp = await fetch(`https://api.jsonbin.io/v3/b/${cfg.binId}`, {
+              method: 'PUT',
+              headers,
+              body: JSON.stringify(payload)
+            });
+            if (resp.ok) {
+              savedTargets.push('Cloud REST API (JSONBin.io)');
+            }
+          }
+        }
+      } catch (e) {}
+
+      // 4. Simpan ke Hard Disk via Browser File System Access API
+      if (projectDirHandle) {
+        try {
+          const code = generateDataJsCode(bio, films, events);
+          const assetsHandle = await projectDirHandle.getDirectoryHandle('assets', { create: true });
+          const jsHandle = await assetsHandle.getDirectoryHandle('js', { create: true });
+          const fileHandle = await jsHandle.getFileHandle('data.js', { create: true });
+          const writable = await fileHandle.createWritable();
+          await writable.write(code);
+          await writable.close();
+          savedTargets.push('Hard Disk Proyek (assets/js/data.js)');
+        } catch (e) {
+          console.error('File System write error:', e);
+        }
+      }
+
+      return savedTargets;
+    }
+
+    async function syncToDisk(customMsg) {
+      const targets = await writeDataToDisk();
+      if (targets && targets.length > 0) {
+        alert(customMsg + "\n\n✅ Berhasil tersimpan ke:\n• " + targets.join("\n• "));
+      } else {
+        alert(customMsg + "\n\n💾 Tersimpan di browser (LocalStorage).\nUntuk menyimpan otomatis ke internet agar pengunjung lain bisa melihatnya, buka tab 'Penyimpanan Cloud & Netlify'.");
+      }
+    }
+
+    async function manualSaveToFile() {
+      const targets = await writeDataToDisk();
+      if (targets && targets.length > 0) {
+        alert("✅ Data berhasil disimpan ke:\n• " + targets.join("\n• "));
+      } else {
+        exportDataJs();
+      }
+    }
+
+    function exportDataJs() {
+      const bio = FanbaseStore.getBio();
+      const films = FanbaseStore.getFilms();
+      const events = FanbaseStore.getEvents();
+
+      const fileContent = generateDataJsCode(bio, films, events);
+      const blob = new Blob([fileContent], { type: 'text/javascript' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'data.js';
+      a.click();
+      URL.revokeObjectURL(a.href);
+      alert('File data.js berhasil diunduh! Cukup pindahkan file ini ke folder assets/js/data.js.');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      checkAuth();
+      checkStorageStatus();
+    });
+  </script>
+</body>
+</html>

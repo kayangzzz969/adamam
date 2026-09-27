@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Filmografi — Adam Xavier Fanbase</title>
+  
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@600;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Cyber-Transformer Styling -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <div class="app-wrapper desktop-wrapper">
+    <!-- ============================================================
+         TOP NAVIGATION BAR
+         ============================================================ -->
+    <header class="cyber-nav" style="border-radius: 0 0 16px 16px;">
+      <a href="index.html" class="brand-badge">
+        <div class="brand-icon-box" style="padding:2px; overflow:hidden;">
+          <img src="assets/images/logo.png" alt="Logo AdamUnited" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+        </div>
+        <div class="brand-text-block">
+          <span class="brand-name" id="filmBrandName">ADAMUNITED</span>
+          <span class="brand-tagline">Film & Serial Adam Xavier</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link-btn" title="Beranda">
+          <i class="fa-solid fa-house"></i> Home
+        </a>
+        <a href="tentang.html" class="nav-link-btn" title="Tentang Adam">
+          <i class="fa-solid fa-user-astronaut"></i> Tentang
+        </a>
+        <a href="film.html" class="nav-link-btn active" title="Daftar Film">
+          <i class="fa-solid fa-film"></i> Film
+        </a>
+        <a href="event.html" class="nav-link-btn" title="Jadwal & Pemenang Event">
+          <i class="fa-solid fa-calendar-check"></i> Event
+        </a>
+      </nav>
+    </header>
+
+    <!-- ============================================================
+         BANNER HEADER (WITH ADAM XAVIER AVATAR JPEG)
+         ============================================================ -->
+    <div class="page-header-banner" style="display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;">
+      <div style="flex:1; min-width:260px;">
+        <div class="banner-badge">
+          <i class="fa-solid fa-clapperboard"></i> FILMOGRAFI LENGKAP
+        </div>
+        <h1 class="banner-title">Karya & Peran <span style="color:var(--yellow-bright)">Adam Xavier</span></h1>
+        <p class="banner-desc">
+          Kumpulan film layar lebar, serial drama aksi anak, dan proyek pengisi suara animasi resmi yang dibintangi oleh Adam Xavier.
+        </p>
+      </div>
+
+      <!-- AVATAR JPEG ADAM XAVIER -->
+      <div class="actor-header-avatar" style="width:80px; height:80px; border-radius:50%; border:3px solid var(--yellow-primary); overflow:hidden; box-shadow:0 4px 15px rgba(255,200,0,0.45); flex-shrink:0; background:#FFF;">
+        <img src="assets/images/adam_avatar.jpeg" alt="Avatar Adam Xavier" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+    </div>
+
+    <!-- ============================================================
+         MAIN CONTENT AREA
+         ============================================================ -->
+    <main class="content-body">
+      <!-- Filter Chips -->
+      <div class="filter-bar">
+        <button class="filter-chip active" onclick="filterGenre('all', this)">
+          <i class="fa-solid fa-layer-group"></i> Semua Film (<span id="countAll">0</span>)
+        </button>
+        <button class="filter-chip" onclick="filterGenre('Sci-Fi', this)">
+          <i class="fa-solid fa-robot"></i> Sci-Fi & Mecha
+        </button>
+        <button class="filter-chip" onclick="filterGenre('Petualangan', this)">
+          <i class="fa-solid fa-compass"></i> Petualangan
+        </button>
+        <button class="filter-chip" onclick="filterGenre('Serial', this)">
+          <i class="fa-solid fa-tv"></i> Serial TV
+        </button>
+        <button class="filter-chip" onclick="filterGenre('Sulih Suara', this)">
+          <i class="fa-solid fa-microphone-lines"></i> Voice Actor
+        </button>
+      </div>
+
+      <!-- Film Cards Container -->
+      <div id="filmsContainer">
+        <!-- Film cards rendered dynamically via JavaScript -->
+      </div>
+    </main>
+  </div>
+
+  <!-- ============================================================
+       TRAILER MODAL
+       ============================================================ -->
+  <div class="modal-overlay" id="trailerModal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalFilmTitle">Cuplikan Trailer</h3>
+        <button class="btn-close-modal" onclick="closeTrailerModal()">&times;</button>
+      </div>
+      <div style="aspect-ratio:16/9; background:#0F172A; border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#FFC800; border:1px solid #FFC800; padding:20px; text-align:center;">
+        <i class="fa-solid fa-circle-play" style="font-size:48px; margin-bottom:12px;"></i>
+        <div style="font-family:'Orbitron',sans-serif; font-size:15px; font-weight:700; color:#FFF;" id="modalFilmSub">Teaser Film</div>
+        <p style="font-size:12px; color:#94A3B8; margin-top:8px;">Menghubungkan ke server media trailer streaming resmi...</p>
+        <a id="modalExternalLink" href="#" target="_blank" class="btn-cyber-primary" style="margin-top:15px; font-size:12px; padding:8px 16px;">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka di Tab Baru
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script>
+    let allFilms = [];
+    let currentFilter = 'all';
+
+    function renderFilms(filter = 'all') {
+      allFilms = FanbaseStore.getFilms();
+      const container = document.getElementById('filmsContainer');
+      const countEl = document.getElementById('countAll');
+      if (countEl) countEl.textContent = allFilms.length;
+
+      let filtered = allFilms;
+      if (filter !== 'all') {
+        filtered = allFilms.filter(f => 
+          (f.genre && f.genre.toLowerCase().includes(filter.toLowerCase())) ||
+          (f.badge && f.badge.toLowerCase().includes(filter.toLowerCase()))
+        );
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:50px 20px; background:#FFF; border-radius:16px; border:1px dashed #CBD5E1;">
+            <i class="fa-solid fa-film" style="font-size:40px; color:#FFC800; margin-bottom:12px;"></i>
+            <h3 style="font-family:'Orbitron',sans-serif; font-size:16px;">Belum Ada Film untuk Kategori Ini</h3>
+            <p style="font-size:12px; color:#64748B; margin-top:6px;">Silakan pilih filter lain atau tambahkan film baru dari Panel Admin.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = '';
+      filtered.forEach(film => {
+        const card = document.createElement('article');
+        card.className = 'film-card anim-fade-in';
+        card.innerHTML = `
+          <div class="film-img-container">
+            <img src="${film.image}" alt="${film.title}" class="film-img" onerror="this.src='https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&auto=format&fit=crop&q=80'">
+            <span class="film-badge-overlay"><i class="fa-solid fa-star" style="color:#FFE500"></i> ${film.badge || 'Film Resmi'}</span>
+          </div>
+
+          <div class="film-content">
+            <div>
+              <div class="film-header">
+                <h2 class="film-title">${film.title}</h2>
+                <span class="film-year">${film.year}</span>
+              </div>
+
+              <div class="film-role-badge">
+                <i class="fa-solid fa-mask"></i> Peran: <strong>${film.role}</strong>
+              </div>
+
+              <p class="film-synopsis">${film.synopsis}</p>
+            </div>
+
+            <div class="film-meta-row">
+              <div class="film-genre-tag">
+                <i class="fa-solid fa-tags" style="color:var(--yellow-accent)"></i> ${film.genre} • Rating: <strong style="color:#0F172A">${film.rating || '4.9/5.0'}</strong>
+              </div>
+
+              <button class="btn-watch-trailer" onclick="openTrailerModal('${encodeURIComponent(film.title)}', '${encodeURIComponent(film.trailerUrl || '#')}')">
+                <i class="fa-solid fa-play"></i> Trailer
+              </button>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterGenre(genre, btn) {
+      document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = genre;
+      renderFilms(genre);
+    }
+
+    function openTrailerModal(title, url) {
+      document.getElementById('modalFilmTitle').textContent = decodeURIComponent(title);
+      document.getElementById('modalFilmSub').textContent = "Official Teaser: " + decodeURIComponent(title);
+      const link = document.getElementById('modalExternalLink');
+      link.href = decodeURIComponent(url);
+      document.getElementById('trailerModal').classList.add('open');
+    }
+
+    function closeTrailerModal() {
+      document.getElementById('trailerModal').classList.remove('open');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const updateView = () => {
+        const bio = FanbaseStore.getBio();
+        if (bio && bio.fanbaseName) {
+          const brandEl = document.getElementById('filmBrandName');
+          if (brandEl) brandEl.textContent = bio.fanbaseName.toUpperCase();
+        }
+        renderFilms(currentFilter);
+      };
+
+      updateView();
+
+      // Cloud Sync dari Netlify / Cloud Storage
+      if (typeof FanbaseStore !== 'undefined' && FanbaseStore.initCloudSync) {
+        FanbaseStore.initCloudSync(updateView);
+      }
+    });
+  </script>
+</body>
+</html>

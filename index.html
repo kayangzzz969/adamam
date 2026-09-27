@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Adam Xavier — Official Fanbase AdamUnited</title>
+  
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@600;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Cyber-Transformer Styling -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       TOP HIGH-TECH NAVIGATION
+       ============================================================ -->
+  <div class="app-wrapper">
+    <header class="cyber-nav">
+      <a href="index.html" class="brand-badge">
+        <div class="brand-icon-box" style="padding:2px; overflow:hidden;">
+          <img src="assets/images/logo.png" alt="Logo AdamUnited" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+        </div>
+        <div class="brand-text-block">
+          <span class="brand-name" id="indexBrandName">ADAMUNITED</span>
+          <span class="brand-tagline">Adam Xavier Fanbase</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link-btn active" title="Beranda">
+          <i class="fa-solid fa-house"></i> Home
+        </a>
+        <a href="tentang.html" class="nav-link-btn" title="Tentang Adam">
+          <i class="fa-solid fa-user-astronaut"></i> Tentang
+        </a>
+        <a href="film.html" class="nav-link-btn" title="Daftar Film">
+          <i class="fa-solid fa-film"></i> Film
+        </a>
+        <a href="event.html" class="nav-link-btn" title="Jadwal & Pemenang Event">
+          <i class="fa-solid fa-calendar-check"></i> Event
+        </a>
+      </nav>
+    </header>
+
+    <!-- ============================================================
+         SLIDE VIEWPORT (SLIDE 1 & SLIDE 2 - ALA ITSJORDANIANS)
+         ============================================================ -->
+    <main class="slide-viewport">
+
+      <!-- ==========================================
+            SLIDE 1: SAMBUTAN + BUMBLEBEE MUSIC PLAYER
+            ========================================== -->
+      <section id="slide1" class="slide-page active">
+        <div class="slide-1-content">
+          <!-- Autobot Badge -->
+          <div class="mecha-badge">
+            <i class="fa-solid fa-bolt"></i> AUTOBOT ALLIANCE • OFFICIAL FANBASE
+          </div>
+
+          <!-- Actor Avatar -->
+          <div class="actor-logo-circle" title="Adam Xavier - Aktor Cilik" style="overflow:hidden; padding:2px;">
+            <img src="assets/images/logo.png" alt="Avatar Logo AdamUnited" style="width:100%; height:100%; object-fit:cover; border-radius:20px;">
+          </div>
+
+          <!-- Hero Headline -->
+          <h1 class="hero-headline">Halo <span id="indexHeroFanbase">AdamUnited!</span></h1>
+          <p class="hero-subline">
+            Selamat datang di fanbase resmi<br>
+            aktor cilik berbakat <u>Adam Xavier!</u>
+          </p>
+
+          <!-- BUMBLEBEE YELLOW THEMED MUSIC CARD -->
+          <div class="mecha-music-card" id="mechaMusicCard">
+            <!-- Optional Real Audio Stream (Synthesized Cyber Beat) -->
+            <audio id="realAudioPlayer" preload="none" src="https://actions.google.com/sounds/v1/science_fiction/scifi_hum_loop.ogg"></audio>
+
+            <div class="music-top-row">
+              <div class="music-disc">
+                <i class="fa-solid fa-robot"></i>
+              </div>
+              <div class="music-info">
+                <div class="music-title">Transformers: Cyber Spark of Courage</div>
+                <div class="music-artist">Adam Xavier Official Fanbase Anthem</div>
+              </div>
+              <button class="music-play-btn" id="musicPlayBtn" onclick="toggleMusic()" aria-label="Putar Musik">
+                <i class="fa-solid fa-play" id="playIcon"></i>
+              </button>
+            </div>
+
+            <div class="music-progress-wrap" id="musicProgressWrap" onclick="seekMusic(event)">
+              <div class="music-progress-bar" id="musicProgressBar"></div>
+            </div>
+
+            <div class="music-timestamps">
+              <span id="curTimeText">0:00</span>
+              <span id="durTimeText">2:55</span>
+            </div>
+          </div>
+
+         <div style="height: 220px;"></div>
+
+          <!-- PRIMARY ACTION BUTTON TO SLIDE 2 -->
+          <button class="btn-cyber-primary" onclick="goToPage(2)">
+            <i class="fa-solid fa-bolt"></i> KENALAN YUK!
+          </button>
+        </div>
+
+       <div style="height: 35px;"></div>
+
+        <!-- BOTTOM CYBER STRIP -->
+        <div class="bottom-cyber-bar">
+          <span><i class="fa-solid fa-shield-halved"></i> AUTOBOT CORE</span>
+          <span>TRANSFORM & RISE UP</span>
+          <span><i class="fa-solid fa-star"></i> EST. 2026</span>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 2: BIOGRAFI + METEORS + POSTER FILM
+           ========================================== -->
+      <section id="slide2" class="slide-page">
+        <!-- Floating Meteors Effect (Kuning / Cyber) -->
+        <div id="meteor-container"></div>
+
+        <!-- Back Button to Slide 1 -->
+        <button class="btn-back-circle" onclick="goBack()" aria-label="Kembali ke slide 1">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div class="profile-top-section">
+          <!-- Actor Name Title -->
+          <h1 class="cyber-title-gradient" id="bioActorName">Adam Xavier</h1>
+
+          <!-- Bio Paragraphs -->
+          <p class="bio-paragraph" id="bioAbout1">
+            Adam Xavier adalah aktor cilik berbakat yang dikenal dengan energi ceria, ekspresi emosional yang memikat, dan ketertarikan tingginya pada dunia robotika dan sains fiksi.
+          </p>
+
+          <p class="bio-paragraph" id="bioAbout2">
+            Terinspirasi oleh ketangguhan karakter Transformers, Adam selalu membawa semangat pantang menyerah ke setiap set syuting dan terus mengasah bakat aktingnya untuk membanggakan Indonesia.
+          </p>
+
+          <!-- Specifications / Bio Matrix Grid -->
+          <div class="bio-specs-grid">
+            <div class="spec-box">
+              <div class="spec-label">Tanggal Lahir</div>
+              <div class="spec-value" id="specBirth">15 Mei 2014</div>
+            </div>
+            <div class="spec-box">
+              <div class="spec-label">Usia</div>
+              <div class="spec-value" id="specAge">12 Tahun</div>
+            </div>
+            <div class="spec-box">
+              <div class="spec-label">Hobi Utama</div>
+              <div class="spec-value" id="specHobby">Robotics & LEGO</div>
+            </div>
+            <div class="spec-box">
+              <div class="spec-label">Robot Favorit</div>
+              <div class="spec-value" id="specFavRobot">Bumblebee & Optimus</div>
+            </div>
+          </div>
+
+          <!-- Transformer Motto Card -->
+          <div class="autobot-quote-card">
+            <i class="fa-solid fa-robot"></i>
+            <div>
+              <div style="font-size:11px; font-weight:800; color:#B45309; text-transform:uppercase;">Motto Adam:</div>
+              <div class="quote-text" id="bioMotto">"Transform and Rise Up! Setiap peran adalah petualangan baru."</div>
+            </div>
+          </div>
+
+          <!-- Scroll down indicator -->
+          <button class="scroll-posters-indicator" onclick="scrollToPosters()">
+            <span>Karya & Film Adam</span>
+            <i class="fa-solid fa-arrow-down"></i>
+          </button>
+        </div>
+
+        <!-- POSTERS SECTION (FILM TEASER ON SLIDE 2) -->
+        <div class="profile-posters-section" id="postersSection">
+          <div class="posters-header">
+            <h3><i class="fa-solid fa-film" style="color:var(--yellow-primary)"></i> FILMOGRAFI</h3>
+            <a href="film.html" class="btn-view-all">Lihat Semua &rarr;</a>
+          </div>
+
+          <div class="posters-grid-2col" id="teaserPostersGrid">
+            <!-- Mini posters will be dynamically inserted here via data.js & app.js -->
+          </div>
+        </div>
+
+        <!-- FOOTER CTA (NAVIGASI KE TENTANG, FILM & EVENT) -->
+        <div class="slide-footer-cta">
+          <a href="tentang.html" class="btn-cyber-primary" style="justify-content:center; width:100%; background:linear-gradient(135deg, #FFC800, #FFE500); color:var(--cyber-dark);">
+            <i class="fa-solid fa-user-astronaut"></i> BACA PROFIL LENGKAP ADAM XAVIER
+          </a>
+          <a href="film.html" class="btn-cyber-primary" style="justify-content:center; width:100%;">
+            <i class="fa-solid fa-clapperboard"></i> JELAJAHI SEMUA FILM ADAM
+          </a>
+          <a href="event.html" class="btn-cyber-primary" style="justify-content:center; width:100%; background:#FFF; color:var(--cyber-dark); border-color:var(--yellow-primary);">
+            <i class="fa-solid fa-trophy"></i> JADWAL & PEMENANG EVENT
+          </a>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Shared Scripts -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
