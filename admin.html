@@ -155,7 +155,7 @@
             <i class="fa-solid fa-user-astronaut"></i> Kelola Halaman Tentang (tentang.html)
           </button>
           <button class="admin-tab-btn" onclick="switchAdminTab('cloudTab', this)">
-            <i class="fa-solid fa-cloud-arrow-up"></i> Penyimpanan Cloud & Netlify
+            <i class="fa-solid fa-cloud-arrow-up"></i> Cloud Storage (Vercel & Netlify)
           </button>
         </div>
 
@@ -332,34 +332,62 @@
         </div>
 
         <!-- ==========================================
-             TAB 4: PENYIMPANAN CLOUD & NETLIFY
+             TAB 4: PENYIMPANAN CLOUD (VERCEL & NETLIFY)
              ========================================== -->
         <div id="cloudTab" class="tab-pane" style="display:none;">
           <div style="background:#FFF; padding:24px; border-radius:16px; border:1px solid var(--border-light); max-width:850px;">
             <div style="margin-bottom:20px;">
               <h3 style="font-family:'Orbitron',sans-serif; font-size:18px; color:var(--cyber-dark);">
-                <i class="fa-solid fa-cloud-arrow-up" style="color:var(--yellow-accent);"></i> Penyimpanan Cloud & Netlify
+                <i class="fa-solid fa-cloud-arrow-up" style="color:var(--yellow-accent);"></i> Penyimpanan Cloud (Vercel & Netlify)
               </h3>
               <p style="font-size:12px; color:#64748B; margin-top:4px;">
                 Hubungkan website ke cloud agar setiap film, event, dan bio yang Anda edit tersimpan di internet dan langsung tampil ke semua pengunjung!
               </p>
             </div>
 
-            <!-- CARD 1: NETLIFY BLOBS (OTOMATIS) -->
+            <!-- CARD 1: VERCEL KV & BLOB STORAGE (BARU) -->
+            <div style="background:#000; color:#FFF; border-radius:14px; padding:18px; margin-bottom:20px; box-shadow:0 4px 14px rgba(0,0,0,0.15);">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:10px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="background:#FFF; color:#000; width:28px; height:28px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; font-size:14px; font-weight:900;">
+                    ▲
+                  </span>
+                  <strong style="font-family:'Orbitron',sans-serif; font-size:14px; color:#FFF;">Opsi 1: Vercel Cloud Storage (KV & Blob)</strong>
+                </div>
+                <span id="vercelStatusBadge" style="font-size:11px; padding:3px 10px; border-radius:12px; font-weight:800; background:#1E293B; color:#94A3B8; border:1px solid #334155;">
+                  <i class="fa-solid fa-circle-notch fa-spin"></i> Mendeteksi Vercel...
+                </span>
+              </div>
+              <p style="font-size:12px; color:#CBD5E1; line-height:1.6; margin-bottom:12px;">
+                Website ini sudah dilengkapi fungsi serverless di <code>api/data.js</code> dan konfigurasi <code>vercel.json</code>. Begitu dideploy ke Vercel dan dihubungkan ke <strong>Vercel KV</strong> (Redis) atau <strong>Vercel Blob</strong>, data yang Anda ubah di Admin langsung tersimpan otomatis ke cloud storage Vercel!
+              </p>
+              <div style="background:rgba(255,255,255,0.08); border-radius:8px; padding:10px 14px; margin-bottom:12px; font-size:11px; color:#E2E8F0; line-height:1.6;">
+                <strong>Cara Aktifkan Vercel KV (2 Klik):</strong><br>
+                1. Di Vercel Dashboard project Anda, klik tab <strong>Storage</strong>.<br>
+                2. Klik <strong>Create Database</strong> &rarr; pilih <strong>KV</strong> (atau Blob) &rarr; klik <strong>Connect to Project</strong>. Selesai!
+              </div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button type="button" class="btn-cyber-primary" style="font-size:12px; padding:7px 14px; background:#FFF; color:#000; border-color:#FFF;" onclick="testVercelEndpoint()">
+                  <i class="fa-solid fa-satellite-dish"></i> Tes Endpoint Vercel (/api/data)
+                </button>
+              </div>
+            </div>
+
+            <!-- CARD 2: NETLIFY BLOBS (OTOMATIS) -->
             <div style="background:#F0FDFA; border:2px solid #14B8A6; border-radius:14px; padding:18px; margin-bottom:20px;">
               <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:10px;">
                 <div style="display:flex; align-items:center; gap:8px;">
                   <span style="background:#14B8A6; color:#FFF; width:28px; height:28px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; font-size:14px;">
                     <i class="fa-solid fa-cloud"></i>
                   </span>
-                  <strong style="font-family:'Orbitron',sans-serif; font-size:14px; color:#0F766E;">Opsi 1: Netlify Blobs Cloud Storage (Bawaan)</strong>
+                  <strong style="font-family:'Orbitron',sans-serif; font-size:14px; color:#0F766E;">Opsi 2: Netlify Blobs Cloud Storage</strong>
                 </div>
                 <span id="netlifyStatusBadge" style="font-size:11px; padding:3px 10px; border-radius:12px; font-weight:800; background:#CCFBF1; color:#0F766E; border:1px solid #14B8A6;">
                   <i class="fa-solid fa-circle-notch fa-spin"></i> Mendeteksi Netlify...
                 </span>
               </div>
               <p style="font-size:12px; color:#334155; line-height:1.6; margin-bottom:12px;">
-                Website ini sudah dipasangi serverless function di <code>netlify/functions/data.js</code> dan konfigurasi <code>netlify.toml</code>. Begitu Anda mengunggah folder ini ke Netlify, Netlify Blobs akan <strong>langsung aktif otomatis</strong> untuk menyimpan perubahan data secara global!
+                Sudah dipasangi serverless function di <code>netlify/functions/data.js</code> dan konfigurasi <code>netlify.toml</code>. Begitu diunggah ke Netlify, Netlify Blobs akan <strong>langsung aktif otomatis</strong> untuk menyimpan perubahan data secara global!
               </p>
               <div style="display:flex; gap:10px; flex-wrap:wrap;">
                 <button type="button" class="btn-cyber-primary" style="font-size:12px; padding:7px 14px; background:#0D9488; border-color:#0D9488;" onclick="testNetlifyEndpoint()">
@@ -368,16 +396,16 @@
               </div>
             </div>
 
-            <!-- CARD 2: JSONBIN.IO (OPSI CLOUD REST API CADANGAN) -->
+            <!-- CARD 3: JSONBIN.IO (OPSI CLOUD REST API CADANGAN) -->
             <div style="background:#F8FAFC; border:1.5px solid #CBD5E1; border-radius:14px; padding:18px; margin-bottom:20px;">
               <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
                 <span style="background:#3B82F6; color:#FFF; width:28px; height:28px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; font-size:14px;">
                   <i class="fa-solid fa-database"></i>
                 </span>
-                <strong style="font-family:'Orbitron',sans-serif; font-size:14px; color:#1E293B;">Opsi 2: Cloud REST API Mandiri (JSONBin.io)</strong>
+                <strong style="font-family:'Orbitron',sans-serif; font-size:14px; color:#1E293B;">Opsi 3: Cloud REST API Mandiri (JSONBin.io)</strong>
               </div>
               <p style="font-size:12px; color:#64748B; line-height:1.6; margin-bottom:14px;">
-                Sangat berguna jika Anda mengunggah via Netlify Drop (drag-and-drop file gratis), GitHub Pages, atau Vercel. Cukup buat Bin gratis di <a href="https://jsonbin.io" target="_blank" style="color:#2563EB; font-weight:700;">jsonbin.io</a>, lalu masukkan Bin ID & Master Key di bawah ini:
+                Bisa digunakan di mana saja (GitHub Pages, Netlify Drop, Vercel). Cukup buat Bin gratis di <a href="https://jsonbin.io" target="_blank" style="color:#2563EB; font-weight:700;">jsonbin.io</a>, lalu masukkan Bin ID & Master Key di bawah ini:
               </p>
               
               <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;">
@@ -404,17 +432,15 @@
               </div>
             </div>
 
-            <!-- CARD 3: PANDUAN DEPLOY KE NETLIFY -->
+            <!-- CARD 4: PANDUAN DEPLOY -->
             <div style="background:#FFFDF5; border:1.5px solid var(--yellow-primary); border-radius:14px; padding:18px;">
               <div style="font-size:13px; font-weight:800; color:#B45309; text-transform:uppercase; margin-bottom:10px; display:flex; align-items:center; gap:6px;">
-                <i class="fa-solid fa-circle-question"></i> Cara Deploy Website Ini ke Netlify (Gratis):
+                <i class="fa-solid fa-circle-question"></i> Panduan Deploy Website ke Vercel atau Netlify:
               </div>
-              <ol style="font-size:12px; color:#334155; line-height:1.8; margin-left:18px;">
-                <li>Buka website <a href="https://app.netlify.com/drop" target="_blank" style="color:#D97706; font-weight:700;">app.netlify.com/drop</a> di browser Anda.</li>
-                <li>Tarik (drag & drop) seluruh folder <code>adamxavier-fanbase</code> ini ke kotak unggahan Netlify.</li>
-                <li>Netlify akan memberikan URL online gratis (misal: <code>adamunited.netlify.app</code>).</li>
-                <li>Buka <code>namasitus.netlify.app/admin.html</code> untuk mengelola film, event, dan bio langsung secara online!</li>
-              </ol>
+              <div style="font-size:12px; color:#334155; line-height:1.8;">
+                <p><strong>Deploy ke Vercel:</strong> Hubungkan repositori GitHub Anda ke <a href="https://vercel.com/new" target="_blank" style="color:#000; font-weight:800;">vercel.com/new</a>, lalu buat <strong>KV Database</strong> di menu Storage. Perubahan di admin langsung tersimpan di Vercel KV!</p>
+                <p style="margin-top:6px;"><strong>Deploy ke Netlify:</strong> Cukup drag-and-drop folder ini ke <a href="https://app.netlify.com/drop" target="_blank" style="color:#D97706; font-weight:700;">app.netlify.com/drop</a> atau hubungkan via Git. Netlify Blobs akan aktif otomatis.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -971,20 +997,49 @@
     let projectDirHandle = null;
     let isServerConnected = false;
     let isNetlifyConnected = false;
+    let isVercelConnected = false;
 
     async function checkStorageStatus() {
       const badge = document.getElementById('storageModeBadge');
       const text = document.getElementById('storageStatusText');
+      const vercelBadge = document.getElementById('vercelStatusBadge');
       const netlifyBadge = document.getElementById('netlifyStatusBadge');
       
-      // 1. Cek apakah Netlify Blobs / Serverless Function (/api/data) tersedia
-      isNetlifyConnected = false;
+      const host = window.location.hostname;
+      const isVercelHost = host.includes('vercel.app');
+      const isNetlifyHost = host.includes('netlify.app');
+
+      // 1. Cek endpoint serverless /api/data (Mendukung Vercel & Netlify)
+      let apiData = null;
       try {
         const res = await fetch('/api/data', { method: 'GET' });
         if (res.ok) {
-          isNetlifyConnected = true;
+          apiData = await res.json();
         }
       } catch (e) {}
+
+      // Evaluasi status Vercel & Netlify
+      isVercelConnected = isVercelHost || Boolean(apiData && (apiData.storageConfigured || apiData.status === 'ready'));
+      isNetlifyConnected = isNetlifyHost || Boolean(apiData && (apiData.bio || apiData.films || apiData.events) && !isVercelHost);
+
+      if (vercelBadge) {
+        if (isVercelHost || (apiData && apiData.storageConfigured)) {
+          vercelBadge.style.background = '#052E16';
+          vercelBadge.style.color = '#4ADE80';
+          vercelBadge.style.border = '1px solid #16A34A';
+          vercelBadge.innerHTML = '<i class="fa-solid fa-triangle"></i> Vercel KV Terhubung & Aktif';
+        } else if (apiData && apiData.status === 'ready') {
+          vercelBadge.style.background = '#451A03';
+          vercelBadge.style.color = '#FCD34D';
+          vercelBadge.style.border = '1px solid #B45309';
+          vercelBadge.innerHTML = '<i class="fa-solid fa-triangle"></i> Vercel Aktif (Belum Sambung KV)';
+        } else {
+          vercelBadge.style.background = '#1E293B';
+          vercelBadge.style.color = '#94A3B8';
+          vercelBadge.style.border = '1px solid #334155';
+          vercelBadge.innerHTML = '<i class="fa-solid fa-circle-notch"></i> Standby (Aktif saat deploy di Vercel)';
+        }
+      }
 
       if (netlifyBadge) {
         if (isNetlifyConnected) {
@@ -993,10 +1048,10 @@
           netlifyBadge.style.border = '1px solid #86EFAC';
           netlifyBadge.innerHTML = '<i class="fa-solid fa-cloud-check"></i> Netlify Storage Aktif & Terhubung';
         } else {
-          netlifyBadge.style.background = '#FEF3C7';
-          netlifyBadge.style.color = '#B45309';
-          netlifyBadge.style.border = '1px solid #F59E0B';
-          netlifyBadge.innerHTML = '<i class="fa-solid fa-info-circle"></i> Berjalan di Local / Belum di-deploy ke Netlify';
+          netlifyBadge.style.background = '#F1F5F9';
+          netlifyBadge.style.color = '#475569';
+          netlifyBadge.style.border = '1px solid #CBD5E1';
+          netlifyBadge.innerHTML = '<i class="fa-solid fa-circle-notch"></i> Standby (Aktif saat deploy di Netlify)';
         }
       }
 
@@ -1020,7 +1075,17 @@
       } catch (e) {}
 
       // Perbarui tampilan badge & teks status bar atas
-      if (isNetlifyConnected) {
+      if (isVercelHost || (apiData && apiData.storageConfigured)) {
+        if (badge) {
+          badge.style.background = '#000';
+          badge.style.color = '#FFF';
+          badge.style.border = '1px solid #333';
+          badge.innerHTML = '▲ Vercel Cloud Storage Aktif';
+        }
+        if (text) {
+          text.innerHTML = '🟢 <strong>Mode Vercel Storage Aktif!</strong> Setiap perubahan tersimpan ke Vercel KV / Blob dan langsung aktif ke seluruh dunia.';
+        }
+      } else if (isNetlifyConnected) {
         if (badge) {
           badge.style.background = '#CCFBF1';
           badge.style.color = '#0F766E';
@@ -1068,7 +1133,7 @@
           badge.innerHTML = '<i class="fa-solid fa-hard-drive"></i> Mode Browser (LocalStorage)';
         }
         if (text) {
-          text.innerHTML = 'Data tersimpan di browser. Untuk menyimpan otomatis ke internet agar pengunjung lain bisa melihatnya, buka tab <strong>"Penyimpanan Cloud & Netlify"</strong>, atau hubungkan folder proyek.';
+          text.innerHTML = 'Data tersimpan di browser. Untuk menyimpan otomatis ke internet agar pengunjung lain bisa melihatnya, buka tab <strong>"Cloud Storage (Vercel & Netlify)"</strong>, atau hubungkan folder proyek.';
         }
       }
     }
@@ -1171,6 +1236,27 @@
         }
       } catch (err) {
         alert('ℹ️ Endpoint /api/data belum aktif di lingkungan saat ini.\nBegitu folder dideploy ke Netlify, fungsi serverless di netlify/functions/data.js akan langsung berjalan dan menyimpan data secara otomatis.');
+      }
+      checkStorageStatus();
+    }
+
+    async function testVercelEndpoint() {
+      try {
+        const res = await fetch('/api/data', { method: 'GET' });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && (data.storageConfigured || data.bio || data.films)) {
+            alert('✅ Endpoint Vercel /api/data TERHUBUNG & STORAGE AKTIF!\n\nStatus: 200 OK\nDatabase: Vercel KV / Blob terhubung.\nPerubahan data di admin akan otomatis disimpan ke cloud Vercel!');
+          } else if (data && data.status === 'ready') {
+            alert(`ℹ️ Endpoint Vercel /api/data BERFUNGSI (200 OK)!\n\n${data.message}\n\nLangkah menghubungkan database:\n1. Buka Vercel Dashboard project ini\n2. Klik tab 'Storage'\n3. Klik 'Create Database' -> pilih 'KV'\n4. Klik 'Connect to Project'`);
+          } else {
+            alert('✅ Endpoint Vercel /api/data merespons dengan status 200 OK.');
+          }
+        } else {
+          alert(`ℹ️ Endpoint /api/data merespons status: ${res.status}.\nFungsi ini aktif otomatis saat website di-deploy ke Vercel.`);
+        }
+      } catch (err) {
+        alert('ℹ️ Endpoint Vercel belum aktif di localhost.\nBegitu Anda deploy folder ini ke Vercel (misalnya via vercel.com atau GitHub), file api/data.js akan langsung menangani penyimpanan otomatis.');
       }
       checkStorageStatus();
     }
@@ -1317,7 +1403,7 @@ const FanbaseStore = {
       const payload = { bio, films, events, lastUpdated: new Date().toISOString() };
       const savedTargets = [];
 
-      // 1. Simpan ke Netlify Blobs / Cloud Endpoint (/api/data)
+      // 1. Simpan ke Cloud Endpoint (/api/data) -> Mendukung Vercel & Netlify!
       try {
         const resp = await fetch('/api/data', {
           method: 'POST',
@@ -1325,7 +1411,14 @@ const FanbaseStore = {
           body: JSON.stringify(payload)
         });
         if (resp.ok) {
-          savedTargets.push('Netlify Cloud Storage (/api/data)');
+          const resJson = await resp.json().catch(() => ({}));
+          if (resJson && resJson.engines && resJson.engines.length > 0) {
+            savedTargets.push(`Vercel Cloud (${resJson.engines.join(', ')})`);
+          } else if (resJson && resJson.requiresStorage) {
+            savedTargets.push('Vercel API (Belum tersambung KV database)');
+          } else {
+            savedTargets.push('Cloud Storage (/api/data)');
+          }
         }
       } catch (e) {}
 
