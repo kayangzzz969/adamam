@@ -1,6 +1,6 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
- * Terakhir diperbarui melalui Panel Admin pada: 28/9/2026, 21.59.00
+ * Terakhir diperbarui melalui Panel Admin pada: 28/9/2026, 21.59.10
  */
 
 const DEFAULT_BIO = {
@@ -44,19 +44,6 @@ const DEFAULT_FILMS = [
     "synopsis": "Ketika monster besi menyerang pesisir Nusantara, Danu terpilih secara tak sengaja menjadi pilot robot Mecha Titan generasi terbaru berkat refleks kilat dan keberaniannya.",
     "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&auto=format&fit=crop&q=80",
     "badge": "Box Office Hit",
-    "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-  },
-  {
-    "id": "film-3",
-    "title": "Petualangan Rahasia Musim Panas",
-    "year": "2024",
-    "role": "Bima (Penyelidik Cerdik)",
-    "genre": "Komedi, Petualangan, Sahabat",
-    "status": "Streaming Exclusive",
-    "rating": "4.7 / 5.0",
-    "synopsis": "Liburan sekolah berubah menjadi perburuan teka-teki harta karun berteknologi tinggi ketika Bima dan teman-temannya menemukan peta peninggalan sang kakek di loteng tua.",
-    "image": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&auto=format&fit=crop&q=80",
-    "badge": "Festival Film Anak",
     "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
   },
   {
