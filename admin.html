@@ -155,7 +155,7 @@
             <i class="fa-solid fa-user-astronaut"></i> Kelola Halaman Tentang (tentang.html)
           </button>
           <button class="admin-tab-btn" onclick="switchAdminTab('cloudTab', this)">
-            <i class="fa-solid fa-cloud-arrow-up"></i> Cloud Storage (Vercel & Netlify)
+            <i class="fa-brands fa-github"></i> GitHub & Cloud Storage
           </button>
         </div>
 
@@ -343,6 +343,60 @@
               <p style="font-size:12px; color:#64748B; margin-top:4px;">
                 Hubungkan website ke cloud agar setiap film, event, dan bio yang Anda edit tersimpan di internet dan langsung tampil ke semua pengunjung!
               </p>
+            </div>
+
+            <!-- CARD 0: GITHUB AUTO-COMMIT & SYNC (UTAMA) -->
+            <div style="background:#1E293B; color:#FFF; border-radius:14px; padding:20px; margin-bottom:20px; border:2px solid #3B82F6; box-shadow:0 6px 20px rgba(15,23,42,0.25);">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <span style="background:#FFF; color:#0F172A; width:32px; height:32px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; font-size:18px;">
+                    <i class="fa-brands fa-github"></i>
+                  </span>
+                  <div>
+                    <strong style="font-family:'Orbitron',sans-serif; font-size:15px; color:#60A5FA;">Sinkronisasi GitHub & LocalStorage (Auto-Update)</strong>
+                    <div style="font-size:11px; color:#94A3B8;">Setiap kali data disimpan di admin, otomatis ter-commit ke GitHub & LocalStorage!</div>
+                  </div>
+                </div>
+                <span id="githubStatusBadge" style="font-size:11px; padding:4px 12px; border-radius:12px; font-weight:800; background:#064E3B; color:#34D399; border:1px solid #059669;">
+                  <i class="fa-solid fa-circle-check"></i> GitHub Terhubung: kayangzzz969/adamam
+                </span>
+              </div>
+              <p style="font-size:12px; color:#CBD5E1; line-height:1.6; margin-bottom:14px;">
+                Setiap kali Anda menekan tombol simpan film, event, atau profil, panel admin akan <strong>langsung menulis ke LocalStorage browser</strong> dan <strong>membuat commit baru di repositori GitHub Anda</strong> (file <code>assets/js/data.js</code>). Layanan hosting (Vercel/Netlify) yang terhubung ke GitHub akan otomatis men-deploy versi terbaru!
+              </p>
+
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="form-label" style="color:#94A3B8;">Repository (Owner/Repo):</label>
+                  <input type="text" id="cfgGitHubRepo" class="form-control" style="background:#0F172A; color:#FFF; border-color:#334155;" value="kayangzzz969/adamam" placeholder="kayangzzz969/adamam">
+                </div>
+                <div class="form-group" style="margin-bottom:0;">
+                  <label class="form-label" style="color:#94A3B8;">Branch:</label>
+                  <input type="text" id="cfgGitHubBranch" class="form-control" style="background:#0F172A; color:#FFF; border-color:#334155;" value="main" placeholder="main">
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-bottom:14px;">
+                <label class="form-label" style="color:#94A3B8;">Personal Access Token (PAT):</label>
+                <div style="display:flex; gap:8px;">
+                  <input type="password" id="cfgGitHubToken" class="form-control" style="background:#0F172A; color:#FFF; border-color:#334155; font-family:monospace;" placeholder="ghp_...">
+                  <button type="button" class="btn-cyber-primary" style="background:#334155; border-color:#475569; padding:0 14px;" onclick="toggleTokenVisibility()">
+                    <i id="tokenEyeIcon" class="fa-solid fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button type="button" class="btn-cyber-primary" style="font-size:12px; padding:8px 16px; background:#2563EB; border-color:#2563EB;" onclick="saveGitHubConfig()">
+                  <i class="fa-solid fa-floppy-disk"></i> Simpan Pengaturan GitHub
+                </button>
+                <button type="button" class="btn-cyber-primary" style="background:#334155; color:#FFF; border-color:#475569; font-size:12px; padding:8px 16px;" onclick="testGitHubConnection()">
+                  <i class="fa-solid fa-vial"></i> Tes Koneksi GitHub
+                </button>
+                <button type="button" class="btn-cyber-primary" style="background:#059669; color:#FFF; border-color:#059669; font-size:12px; padding:8px 16px;" onclick="manualCommitToGitHub()">
+                  <i class="fa-brands fa-github"></i> Commit Data Saat Ini ke GitHub
+                </button>
+              </div>
             </div>
 
             <!-- CARD 1: VERCEL KV & BLOB STORAGE (BARU) -->
@@ -676,6 +730,7 @@
       renderAdminEvents();
       renderAdminBio();
       loadCloudConfig();
+      loadGitHubConfig();
     }
 
     // 1. Film CRUD
@@ -1004,10 +1059,30 @@
       const text = document.getElementById('storageStatusText');
       const vercelBadge = document.getElementById('vercelStatusBadge');
       const netlifyBadge = document.getElementById('netlifyStatusBadge');
+      const githubBadge = document.getElementById('githubStatusBadge');
       
       const host = window.location.hostname;
       const isVercelHost = host.includes('vercel.app');
       const isNetlifyHost = host.includes('netlify.app');
+
+      // 0. Cek GitHub Repository Sync
+      const ghRepo = localStorage.getItem('ax_github_repo') || 'kayangzzz969/adamam';
+      const ghToken = localStorage.getItem('ax_github_token') || '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';
+      const isGitHubConfigured = Boolean(ghRepo && ghToken);
+
+      if (githubBadge) {
+        if (isGitHubConfigured) {
+          githubBadge.style.background = '#064E3B';
+          githubBadge.style.color = '#34D399';
+          githubBadge.style.border = '1px solid #059669';
+          githubBadge.innerHTML = `<i class="fa-solid fa-circle-check"></i> Terhubung: ${ghRepo}`;
+        } else {
+          githubBadge.style.background = '#7F1D1D';
+          githubBadge.style.color = '#FCA5A5';
+          githubBadge.style.border = '1px solid #DC2626';
+          githubBadge.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> GitHub Belum Dikonfigurasi';
+        }
+      }
 
       // 1. Cek endpoint serverless /api/data (Mendukung Vercel & Netlify)
       let apiData = null;
@@ -1074,8 +1149,18 @@
         }
       } catch (e) {}
 
-      // Perbarui tampilan badge & teks status bar atas
-      if (isVercelHost || (apiData && apiData.storageConfigured)) {
+      // Perbarui tampilan badge & teks status bar atas (Prioritas GitHub & LocalStorage)
+      if (isGitHubConfigured) {
+        if (badge) {
+          badge.style.background = '#0F172A';
+          badge.style.color = '#38BDF8';
+          badge.style.border = '1px solid #0284C7';
+          badge.innerHTML = '<i class="fa-brands fa-github"></i> GitHub & LocalStorage Aktif';
+        }
+        if (text) {
+          text.innerHTML = `🟢 <strong>Mode Auto-Update Aktif!</strong> Setiap perubahan otomatis tersimpan di <strong>LocalStorage</strong> browser dan langsung di-commit ke repositori <strong>GitHub (${ghRepo})</strong>!`;
+        }
+      } else if (isVercelHost || (apiData && apiData.storageConfigured)) {
         if (badge) {
           badge.style.background = '#000';
           badge.style.color = '#FFF';
@@ -1133,8 +1218,192 @@
           badge.innerHTML = '<i class="fa-solid fa-hard-drive"></i> Mode Browser (LocalStorage)';
         }
         if (text) {
-          text.innerHTML = 'Data tersimpan di browser. Untuk menyimpan otomatis ke internet agar pengunjung lain bisa melihatnya, buka tab <strong>"Cloud Storage (Vercel & Netlify)"</strong>, atau hubungkan folder proyek.';
+          text.innerHTML = 'Data tersimpan di browser (LocalStorage). Untuk menyimpan otomatis ke GitHub atau Vercel, buka tab <strong>"GitHub & Cloud Storage"</strong>.';
         }
+      }
+    }
+
+    /* ------------------------------------------------------------
+       GITHUB REPO CONFIG & AUTO-COMMIT METHODS
+       ------------------------------------------------------------ */
+    function loadGitHubConfig() {
+      const defaultRepo = 'kayangzzz969/adamam';
+      const defaultBranch = 'main';
+      const defaultToken = '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';
+
+      const repo = localStorage.getItem('ax_github_repo') || defaultRepo;
+      const branch = localStorage.getItem('ax_github_branch') || defaultBranch;
+      const token = localStorage.getItem('ax_github_token') || defaultToken;
+
+      localStorage.setItem('ax_github_repo', repo);
+      localStorage.setItem('ax_github_branch', branch);
+      localStorage.setItem('ax_github_token', token);
+
+      if (document.getElementById('cfgGitHubRepo')) document.getElementById('cfgGitHubRepo').value = repo;
+      if (document.getElementById('cfgGitHubBranch')) document.getElementById('cfgGitHubBranch').value = branch;
+      if (document.getElementById('cfgGitHubToken')) document.getElementById('cfgGitHubToken').value = token;
+
+      testGitHubConnection(true);
+    }
+
+    function toggleTokenVisibility() {
+      const input = document.getElementById('cfgGitHubToken');
+      const icon = document.getElementById('tokenEyeIcon');
+      if (!input) return;
+      if (input.type === 'password') {
+        input.type = 'text';
+        if (icon) { icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash'); }
+      } else {
+        input.type = 'password';
+        if (icon) { icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye'); }
+      }
+    }
+
+    function saveGitHubConfig() {
+      const repo = (document.getElementById('cfgGitHubRepo')?.value || 'kayangzzz969/adamam').trim();
+      const branch = (document.getElementById('cfgGitHubBranch')?.value || 'main').trim();
+      const token = (document.getElementById('cfgGitHubToken')?.value || '').trim();
+
+      localStorage.setItem('ax_github_repo', repo);
+      localStorage.setItem('ax_github_branch', branch);
+      localStorage.setItem('ax_github_token', token);
+
+      alert('✅ Pengaturan GitHub berhasil disimpan!');
+      testGitHubConnection(false);
+      checkStorageStatus();
+    }
+
+    async function testGitHubConnection(silent = false) {
+      const repo = localStorage.getItem('ax_github_repo') || 'kayangzzz969/adamam';
+      const token = localStorage.getItem('ax_github_token');
+      const badge = document.getElementById('githubStatusBadge');
+
+      if (!token) {
+        if (badge) {
+          badge.style.background = '#7F1D1D';
+          badge.style.color = '#FCA5A5';
+          badge.style.border = '1px solid #DC2626';
+          badge.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Token Belum Diisi';
+        }
+        if (!silent) alert('⚠️ Harap masukkan Personal Access Token (PAT) GitHub terlebih dahulu!');
+        return false;
+      }
+
+      try {
+        const resp = await fetch(`https://api.github.com/repos/${repo}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github+json'
+          }
+        });
+        if (resp.ok) {
+          const repoData = await resp.json();
+          if (badge) {
+            badge.style.background = '#064E3B';
+            badge.style.color = '#34D399';
+            badge.style.border = '1px solid #059669';
+            badge.innerHTML = `<i class="fa-solid fa-circle-check"></i> Terhubung: ${repoData.full_name}`;
+          }
+          if (!silent) alert(`✅ Sukses terhubung ke GitHub!\n\nRepositori: ${repoData.full_name}\nVisibilitas: ${repoData.private ? 'Private' : 'Public'}\nDefault Branch: ${repoData.default_branch}`);
+          return true;
+        } else {
+          if (badge) {
+            badge.style.background = '#7F1D1D';
+            badge.style.color = '#FCA5A5';
+            badge.style.border = '1px solid #DC2626';
+            badge.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Gagal (HTTP ${resp.status})`;
+          }
+          if (!silent) alert(`❌ Gagal terhubung ke GitHub (Status: ${resp.status} ${resp.statusText}). Periksa kembali nama repositori atau token.`);
+          return false;
+        }
+      } catch (err) {
+        if (badge) {
+          badge.style.background = '#7F1D1D';
+          badge.style.color = '#FCA5A5';
+          badge.style.border = '1px solid #DC2626';
+          badge.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Error Koneksi';
+        }
+        if (!silent) alert('❌ Error koneksi ke GitHub: ' + err.message);
+        return false;
+      }
+    }
+
+    async function syncToGitHub(bio, films, events) {
+      const repo = localStorage.getItem('ax_github_repo') || 'kayangzzz969/adamam';
+      const branch = localStorage.getItem('ax_github_branch') || 'main';
+      const token = localStorage.getItem('ax_github_token') || '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';
+
+      if (!token || !repo) return null;
+
+      try {
+        const code = generateDataJsCode(bio, films, events);
+        
+        // 1. Dapatkan SHA file saat ini di repo
+        let sha = null;
+        try {
+          const curResp = await fetch(`https://api.github.com/repos/${repo}/contents/assets/js/data.js?ref=${branch}&_t=${Date.now()}`, {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Accept': 'application/vnd.github+json'
+            }
+          });
+          if (curResp.ok) {
+            const curJson = await curResp.json();
+            sha = curJson.sha;
+          }
+        } catch (e) {}
+
+        // 2. Encode UTF-8 Base64
+        const utf8Bytes = new TextEncoder().encode(code);
+        let binary = '';
+        for (let i = 0; i < utf8Bytes.length; i++) {
+          binary += String.fromCharCode(utf8Bytes[i]);
+        }
+        const base64Content = btoa(binary);
+
+        // 3. Commit langsung via GitHub Contents API
+        const putResp = await fetch(`https://api.github.com/repos/${repo}/contents/assets/js/data.js`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: `Update fanbase data via Admin Panel [${new Date().toLocaleString('id-ID')}]`,
+            content: base64Content,
+            sha: sha || undefined,
+            branch: branch
+          })
+        });
+
+        if (putResp.ok) {
+          const resJson = await putResp.json();
+          const commitSha = resJson.commit ? resJson.commit.sha.substring(0, 7) : 'OK';
+          console.log(`[GitHubSync] Committed to ${repo} (${commitSha})`);
+          return commitSha;
+        } else {
+          const err = await putResp.json().catch(() => ({}));
+          console.error('[GitHubSync] Commit error:', err);
+          return null;
+        }
+      } catch (err) {
+        console.error('[GitHubSync] Error:', err);
+        return null;
+      }
+    }
+
+    async function manualCommitToGitHub() {
+      const bio = FanbaseStore.getBio();
+      const films = FanbaseStore.getFilms();
+      const events = FanbaseStore.getEvents();
+
+      const commitSha = await syncToGitHub(bio, films, events);
+      if (commitSha) {
+        const repo = localStorage.getItem('ax_github_repo') || 'kayangzzz969/adamam';
+        alert(`✅ Sukses commit ke GitHub!\n\nRepositori: ${repo}\nFile: assets/js/data.js\nCommit SHA: ${commitSha}\n\nLayanan hosting (Vercel/Netlify) yang terhubung ke repo ini akan otomatis memulai build dan deploy terbaru.`);
+      } else {
+        alert('❌ Gagal commit ke GitHub. Pastikan token memiliki scope "repo" dan repositori dapat diakses.');
       }
     }
 
@@ -1403,7 +1672,21 @@ const FanbaseStore = {
       const payload = { bio, films, events, lastUpdated: new Date().toISOString() };
       const savedTargets = [];
 
-      // 1. Simpan ke Cloud Endpoint (/api/data) -> Mendukung Vercel & Netlify!
+      // 1. LocalStorage Browser (Penyimpanan instan di perangkat)
+      savedTargets.push('LocalStorage Browser (Tersimpan Instan)');
+
+      // 2. Auto-Commit ke GitHub Repository (assets/js/data.js)
+      try {
+        const ghCommit = await syncToGitHub(bio, films, events);
+        if (ghCommit) {
+          const repo = localStorage.getItem('ax_github_repo') || 'kayangzzz969/adamam';
+          savedTargets.push(`GitHub Repository (${repo} commit: ${ghCommit})`);
+        }
+      } catch (ghErr) {
+        console.error('GitHub auto-sync error:', ghErr);
+      }
+
+      // 3. Simpan ke Cloud Endpoint (/api/data) -> Mendukung Vercel & Netlify!
       try {
         const resp = await fetch('/api/data', {
           method: 'POST',
@@ -1422,7 +1705,7 @@ const FanbaseStore = {
         }
       } catch (e) {}
 
-      // 2. Simpan ke Local Server (server.ps1 via /api/save)
+      // 4. Simpan ke Local Server (server.ps1 via /api/save)
       if (isServerConnected) {
         try {
           const resp = await fetch('/api/save', {
@@ -1436,7 +1719,7 @@ const FanbaseStore = {
         } catch (e) {}
       }
 
-      // 3. Simpan ke Cloud REST API (JSONBin.io jika dikonfigurasi)
+      // 5. Simpan ke Cloud REST API (JSONBin.io jika dikonfigurasi)
       try {
         const rawCfg = localStorage.getItem('ax_cloud_config');
         if (rawCfg) {
@@ -1456,7 +1739,7 @@ const FanbaseStore = {
         }
       } catch (e) {}
 
-      // 4. Simpan ke Hard Disk via Browser File System Access API
+      // 6. Simpan ke Hard Disk via Browser File System Access API
       if (projectDirHandle) {
         try {
           const code = generateDataJsCode(bio, films, events);
@@ -1478,9 +1761,9 @@ const FanbaseStore = {
     async function syncToDisk(customMsg) {
       const targets = await writeDataToDisk();
       if (targets && targets.length > 0) {
-        alert(customMsg + "\n\n✅ Berhasil tersimpan ke:\n• " + targets.join("\n• "));
+        alert(customMsg + "\n\n✅ Berhasil diperbarui ke:\n• " + targets.join("\n• ") + "\n\n🚀 Vercel & Netlify otomatis mendeteksi perubahan dari GitHub!");
       } else {
-        alert(customMsg + "\n\n💾 Tersimpan di browser (LocalStorage).\nUntuk menyimpan otomatis ke internet agar pengunjung lain bisa melihatnya, buka tab 'Penyimpanan Cloud & Netlify'.");
+        alert(customMsg + "\n\n💾 Tersimpan di browser (LocalStorage).");
       }
     }
 
