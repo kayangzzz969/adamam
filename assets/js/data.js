@@ -1,6 +1,6 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
- * Terakhir diperbarui melalui Panel Admin pada: 28/9/2026, 21.59.19
+ * Terakhir diperbarui melalui Panel Admin pada: 28/9/2026, 22.02.00
  */
 
 const DEFAULT_BIO = {
@@ -35,16 +35,15 @@ const DEFAULT_BIO = {
 const DEFAULT_FILMS = [
   {
     "id": "film-4",
-    "title": "Detektif Cilik: Misteri Jam Robot",
-    "year": "2023",
-    "role": "Reza (Jenius Gadget)",
-    "genre": "Misteri, Detektif",
-    "status": "Rilis Resmi",
-    "rating": "4.6 / 5.0",
-    "synopsis": "Reza menggunakan jam tangan robot buatannya untuk mengumpulkan petunjuk dan mengungkap misteri hilangnya prototipe sains di museum nasional.",
-    "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
-    "badge": "Pemenang Penghargaan",
-    "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    "title": "Kado Untuk Ibu",
+    "year": "2026",
+    "badge": "Film Layar Lebar",
+    "role": "Bumi",
+    "genre": "Drama Dan Keluarga",
+    "rating": "8.9 / 10.0",
+    "image": "https://nos.jkt-1.neo.id/media.cinema21.co.id/movie-images/16KUIU.jpg",
+    "trailerUrl": "https://youtu.be/fKY3_e8eF50?si=9TdWP86skmQ4SHEJ",
+    "synopsis": "FARIS (Emir Mahira), seorang damkar yang menanti kelahiran anak pertamanya, batal ke RS untuk damping istrinya karena harus membantu ARA (Luisa Adreena) mencari kado ulang tahun untuk ibunya. Perjalanan mereka menjadi petualangan seru yang mengajarkan banyak kebaikan juga memaknai kehilangan tak terduga."
   },
   {
     "id": "film-5",
