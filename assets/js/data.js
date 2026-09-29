@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 29/9/2026, 21.37.15
+ * Terakhir diperbarui melalui Panel Admin pada: 29/9/2026, 21.38.29
  */
 
 // Hash SHA-256 untuk password admin
@@ -40,14 +40,14 @@ const DEFAULT_FILMS = [
   {
     "id": "film-1",
     "title": "KADO UNTUK IBU",
-    "year": "2026",
+    "year": "2025",
     "badge": "Film Layar Lebar",
-    "role": "Bumi",
-    "genre": "Drama Dan Keluarga",
-    "rating": "8.5 / 10.0",
-    "image": "https://nos.jkt-1.neo.id/media.cinema21.co.id/movie-images/16KUIU.jpg",
+    "role": "Rafa (Pemeran Utama)",
+    "genre": "Sci-Fi, Petualangan, Keluarga",
+    "rating": "4.9 / 5.0",
+    "image": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&auto=format&fit=crop&q=80",
     "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "synopsis": "FARIS (Emir Mahira), seorang damkar yang menanti kelahiran anak pertamanya, batal ke RS untuk damping istrinya karena harus membantu ARA (Luisa Adreena) mencari kado ulang tahun untuk ibunya. Perjalanan mereka menjadi petualangan seru yang mengajarkan banyak kebaikan juga memaknai kehilangan tak terduga."
+    "synopsis": "Rafa menemukan komponen robot luar angkasa purba yang jatuh di dekat rumahnya. Bersama sang robot pelindung bernama Zephyr, Rafa harus menyelamatkan kotanya dari ancaman kecerdasan buatan nakal."
   },
   {
     "id": "film-2",
