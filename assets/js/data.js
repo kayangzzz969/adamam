@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 29/9/2026, 20.56.58
+ * Terakhir diperbarui melalui Panel Admin pada: 29/9/2026, 21.00.56
  */
 
 const DEFAULT_BIO = {
@@ -36,16 +36,15 @@ const DEFAULT_BIO = {
 const DEFAULT_FILMS = [
   {
     "id": "film-4",
-    "title": "Detektif Cilik: Misteri Jam Robot",
-    "year": "2023",
+    "title": "Kado Untuk Ibu",
+    "year": "2026",
+    "badge": "Film Layar Lebar",
     "role": "Reza (Jenius Gadget)",
-    "genre": "Misteri, Detektif",
-    "status": "Rilis Resmi",
-    "rating": "4.6 / 5.0",
-    "synopsis": "Reza menggunakan jam tangan robot buatannya untuk mengumpulkan petunjuk dan mengungkap misteri hilangnya prototipe sains di museum nasional.",
-    "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
-    "badge": "Pemenang Penghargaan",
-    "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    "genre": "Drama Dan Keluarga",
+    "rating": "8.9 / 10.0",
+    "image": "https://nos.jkt-1.neo.id/media.cinema21.co.id/movie-images/16KUIU.jpg",
+    "trailerUrl": "https://youtu.be/fKY3_e8eF50?si=9TdWP86skmQ4SHEJ",
+    "synopsis": ","
   },
   {
     "id": "film-5",
