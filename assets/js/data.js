@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 29/9/2026, 21.40.11
+ * Terakhir diperbarui melalui Panel Admin pada: 29/9/2026, 21.40.43
  */
 
 // Hash SHA-256 untuk password admin
@@ -42,8 +42,8 @@ const DEFAULT_FILMS = [
     "title": "KADO UNTUK IBU",
     "year": "2025",
     "badge": "Film Layar Lebar",
-    "role": "Rafa (Pemeran Utama)",
-    "genre": "Sci-Fi, Petualangan, Keluarga",
+    "role": "Bumi",
+    "genre": "Drama Dan Keluarga",
     "rating": "4.9 / 5.0",
     "image": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&auto=format&fit=crop&q=80",
     "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
