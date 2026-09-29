@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 29/9/2026, 21.48.10
+ * Terakhir diperbarui melalui Panel Admin pada: 29/9/2026, 21.56.11
  */
 
 // Hash SHA-256 untuk password admin
@@ -73,19 +73,6 @@ const DEFAULT_FILMS = [
     "synopsis": "Serial aksi penuh visual efek memukau yang menceritakan Bayu, anak laki-laki yang meminjam kekuatan cahaya matahari untuk melindungi kawan-kawannya dari kegelapan.",
     "image": "https://images.unsplash.com/photo-1563089145-599997674d42?w=800&auto=format&fit=crop&q=80",
     "badge": "Serial TV No.1",
-    "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-  },
-  {
-    "id": "film-6",
-    "title": "Transformers: Next Sparks (Indonesian Dub)",
-    "year": "2025",
-    "role": "Suara Karakter Sparks & Toby",
-    "genre": "Animasi Sulih Suara",
-    "status": "Official Dubbing",
-    "rating": "5.0 / 5.0",
-    "synopsis": "Adam Xavier dipercaya mengisi suara karakter anak robotik di versi resmi bahasa Indonesia, membawa nuansa ceria dan energik yang dicintai seluruh fans Transformers cilik!",
-    "image": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=800&auto=format&fit=crop&q=80",
-    "badge": "Official Voice Actor",
     "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
   }
 ];
