@@ -76,11 +76,30 @@ module.exports = async (req, res) => {
         }
       }
 
+      // 3. Fallback: Ambil data live langsung dari GitHub Raw (Cloud Database Utama)
+      try {
+        const ghResp = await fetch("https://raw.githubusercontent.com/kayangzzz969/adamam/main/assets/js/data.js?_t=" + Date.now());
+        if (ghResp.ok) {
+          const text = await ghResp.text();
+          const bioMatch = text.match(/const\s+DEFAULT_BIO\s*=\s*([\s\S]*?);\s*const\s+DEFAULT_FILMS/);
+          const filmsMatch = text.match(/const\s+DEFAULT_FILMS\s*=\s*([\s\S]*?);\s*const\s+DEFAULT_EVENTS/);
+          const eventsMatch = text.match(/const\s+DEFAULT_EVENTS\s*=\s*([\s\S]*?);\s*(?:\/\/|\/\*|const\s+FanbaseStore|$)/);
+          if (bioMatch || filmsMatch || eventsMatch) {
+            return res.status(200).json({
+              bio: bioMatch ? JSON.parse(bioMatch[1].trim()) : null,
+              films: filmsMatch ? JSON.parse(filmsMatch[1].trim()) : [],
+              events: eventsMatch ? JSON.parse(eventsMatch[1].trim()) : [],
+              source: "GitHub Cloud Database (kayangzzz969/adamam)"
+            });
+          }
+        }
+      } catch (ghErr) {}
+
       // Jika Vercel Storage belum dihubungkan di dashboard
       return res.status(200).json({
         status: "ready",
         storageConfigured: Boolean((kvUrl && kvToken) || blobToken),
-        message: "Endpoint Vercel /api/data aktif. Hubungkan Vercel KV atau Blob di dashboard Vercel untuk mengaktifkan database online."
+        message: "Endpoint Vercel /api/data aktif. Terhubung otomatis ke GitHub Cloud Database."
       });
     }
 
