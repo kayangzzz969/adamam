@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 29/9/2026, 21.36.00
+ * Terakhir diperbarui melalui Panel Admin pada: 29/9/2026, 21.37.15
  */
 
 // Hash SHA-256 untuk password admin
@@ -43,11 +43,11 @@ const DEFAULT_FILMS = [
     "year": "2026",
     "badge": "Film Layar Lebar",
     "role": "Bumi",
-    "genre": ", Keluarga",
-    "rating": "4.9 / 5.0",
-    "image": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&auto=format&fit=crop&q=80",
+    "genre": "Drama Dan Keluarga",
+    "rating": "8.5 / 10.0",
+    "image": "https://nos.jkt-1.neo.id/media.cinema21.co.id/movie-images/16KUIU.jpg",
     "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "synopsis": "Rafa menemukan komponen robot luar angkasa purba yang jatuh di dekat rumahnya. Bersama sang robot pelindung bernama Zephyr, Rafa harus menyelamatkan kotanya dari ancaman kecerdasan buatan nakal."
+    "synopsis": "FARIS (Emir Mahira), seorang damkar yang menanti kelahiran anak pertamanya, batal ke RS untuk damping istrinya karena harus membantu ARA (Luisa Adreena) mencari kado ulang tahun untuk ibunya. Perjalanan mereka menjadi petualangan seru yang mengajarkan banyak kebaikan juga memaknai kehilangan tak terduga."
   },
   {
     "id": "film-2",
