@@ -68,7 +68,7 @@
             <div style="font-size:11px; color:#94A3B8; margin-top:4px;">Default Password: <strong>admin123</strong></div>
           </div>
 
-          <button type="submit" class="btn-cyber-primary" style="width:100%; justify-content:center; margin-top:10px;">
+          <button type="submit" class="btn-cyber btn-cyber-gold" style="width:100%; justify-content:center; margin-top:10px;">
             <i class="fa-solid fa-unlock-keyhole"></i> MASUK PANEL
           </button>
         </form>
@@ -134,10 +134,10 @@
           </div>
 
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <a href="https://github.com/kayangzzz969/adamam" target="_blank" class="btn-cyber-primary" style="background:#0F172A; color:#FFF; border-color:#334155; font-size:12px; padding:9px 16px; text-decoration:none;">
+            <a href="https://github.com/kayangzzz969/adamam" target="_blank" class="btn-cyber btn-cyber-dark btn-cyber-sm">
               <i class="fa-brands fa-github"></i> Buka Repo GitHub
             </a>
-            <button class="btn-cyber-primary" style="background:var(--yellow-primary); color:var(--cyber-dark); border-color:var(--yellow-accent); font-size:12px; padding:9px 16px;" onclick="syncFromGitHub(false)">
+            <button class="btn-cyber btn-cyber-gold btn-cyber-sm" onclick="syncFromGitHub(false)">
               <i class="fa-solid fa-rotate"></i> Sinkronkan dari GitHub
             </button>
           </div>
@@ -165,7 +165,7 @@
         <div id="filmsTab" class="tab-pane">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
             <h3 style="font-family:'Orbitron',sans-serif; font-size:16px;">Daftar Film & Serial</h3>
-            <button class="btn-cyber-primary" onclick="openAddFilmModal()">
+            <button class="btn-cyber btn-cyber-gold btn-cyber-sm" onclick="openAddFilmModal()">
               <i class="fa-solid fa-plus"></i> Tambah Film Baru
             </button>
           </div>
@@ -196,7 +196,7 @@
         <div id="eventsTab" class="tab-pane" style="display:none;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
             <h3 style="font-family:'Orbitron',sans-serif; font-size:16px;">Daftar Event & Lomba</h3>
-            <button class="btn-cyber-primary" onclick="openAddEventModal()">
+            <button class="btn-cyber btn-cyber-gold btn-cyber-sm" onclick="openAddEventModal()">
               <i class="fa-solid fa-plus"></i> Tambah Event Baru
             </button>
           </div>
@@ -234,7 +234,7 @@
                   Perubahan pada form ini otomatis memperbarui seluruh konten di <strong>tentang.html</strong> dan Slide 2 di <strong>index.html</strong>.
                 </p>
               </div>
-              <a href="tentang.html" target="_blank" class="btn-cyber-primary" style="font-size:12px; padding:8px 14px; text-decoration:none;">
+              <a href="tentang.html" target="_blank" class="btn-cyber btn-cyber-outline btn-cyber-sm">
                 <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka tentang.html
               </a>
             </div>
@@ -324,7 +324,7 @@
                 <textarea id="editBioAbout2" class="form-control" rows="3" required></textarea>
               </div>
 
-              <button type="submit" class="btn-cyber-primary" style="padding:12px 24px;">
+              <button type="submit" class="btn-cyber btn-cyber-gold" style="padding:12px 24px;">
                 <i class="fa-solid fa-floppy-disk"></i> Simpan Perubahan Halaman Tentang & Profil
               </button>
             </form>
@@ -387,13 +387,13 @@
               </div>
 
               <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                <button type="button" class="btn-cyber-primary" style="font-size:12px; padding:8px 16px; background:#2563EB; border-color:#2563EB;" onclick="saveGitHubConfig()">
+                <button type="button" class="btn-cyber btn-cyber-blue btn-cyber-sm" onclick="saveGitHubConfig()">
                   <i class="fa-solid fa-floppy-disk"></i> Simpan Pengaturan GitHub
                 </button>
-                <button type="button" class="btn-cyber-primary" style="background:#334155; color:#FFF; border-color:#475569; font-size:12px; padding:8px 16px;" onclick="testGitHubConnection()">
+                <button type="button" class="btn-cyber btn-cyber-dark btn-cyber-sm" onclick="testGitHubConnection()">
                   <i class="fa-solid fa-vial"></i> Tes Koneksi GitHub
                 </button>
-                <button type="button" class="btn-cyber-primary" style="background:#059669; color:#FFF; border-color:#059669; font-size:12px; padding:8px 16px;" onclick="manualCommitToGitHub()">
+                <button type="button" class="btn-cyber btn-cyber-emerald btn-cyber-sm" onclick="manualCommitToGitHub()">
                   <i class="fa-brands fa-github"></i> Commit Data Saat Ini ke GitHub
                 </button>
               </div>
@@ -421,7 +421,7 @@
                 2. Klik <strong>Create Database</strong> &rarr; pilih <strong>KV</strong> (atau Blob) &rarr; klik <strong>Connect to Project</strong>. Selesai!
               </div>
               <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                <button type="button" class="btn-cyber-primary" style="font-size:12px; padding:7px 14px; background:#FFF; color:#000; border-color:#FFF;" onclick="testVercelEndpoint()">
+                <button type="button" class="btn-cyber btn-cyber-outline btn-cyber-sm" onclick="testVercelEndpoint()">
                   <i class="fa-solid fa-satellite-dish"></i> Tes Endpoint Vercel (/api/data)
                 </button>
               </div>
@@ -444,7 +444,7 @@
                 Sudah dipasangi serverless function di <code>netlify/functions/data.js</code> dan konfigurasi <code>netlify.toml</code>. Begitu diunggah ke Netlify, Netlify Blobs akan <strong>langsung aktif otomatis</strong> untuk menyimpan perubahan data secara global!
               </p>
               <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                <button type="button" class="btn-cyber-primary" style="font-size:12px; padding:7px 14px; background:#0D9488; border-color:#0D9488;" onclick="testNetlifyEndpoint()">
+                <button type="button" class="btn-cyber btn-cyber-emerald btn-cyber-sm" onclick="testNetlifyEndpoint()">
                   <i class="fa-solid fa-satellite-dish"></i> Tes Endpoint Netlify (/api/data)
                 </button>
               </div>
@@ -474,13 +474,13 @@
               </div>
 
               <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                <button type="button" class="btn-cyber-primary" style="font-size:12px; padding:8px 16px;" onclick="saveCloudConfig()">
+                <button type="button" class="btn-cyber btn-cyber-blue btn-cyber-sm" onclick="saveCloudConfig()">
                   <i class="fa-solid fa-floppy-disk"></i> Simpan Pengaturan Cloud
                 </button>
-                <button type="button" class="btn-cyber-primary" style="background:#FFF; color:#1E293B; border-color:#CBD5E1; font-size:12px; padding:8px 16px;" onclick="testCloudConnection()">
+                <button type="button" class="btn-cyber btn-cyber-outline btn-cyber-sm" onclick="testCloudConnection()">
                   <i class="fa-solid fa-vial"></i> Tes Koneksi Cloud
                 </button>
-                <button type="button" class="btn-cyber-primary" style="background:#FFF; color:#B45309; border-color:#F59E0B; font-size:12px; padding:8px 16px;" onclick="pushCurrentDataToCloud()">
+                <button type="button" class="btn-cyber btn-cyber-gold btn-cyber-sm" onclick="pushCurrentDataToCloud()">
                   <i class="fa-solid fa-cloud-arrow-up"></i> Kirim Semua Data Saat Ini ke Cloud
                 </button>
               </div>
@@ -510,10 +510,10 @@
             </div>
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <button class="btn-cyber-primary" style="background:#059669; color:#FFF; border-color:#059669; font-size:12px; padding:9px 16px;" onclick="manualCommitToGitHub()">
+            <button class="btn-cyber btn-cyber-emerald" onclick="manualCommitToGitHub()">
               <i class="fa-brands fa-github"></i> Commit Data Sekarang
             </button>
-            <button class="btn-cyber-primary" style="background:#FFF; color:var(--cyber-dark); border-color:var(--yellow-primary); font-size:12px; padding:9px 16px;" onclick="syncFromGitHub(false)">
+            <button class="btn-cyber btn-cyber-outline" onclick="syncFromGitHub(false)">
               <i class="fa-solid fa-rotate"></i> Tarik Data dari GitHub
             </button>
           </div>
@@ -525,7 +525,7 @@
             <div style="font-weight:700; font-size:13px; color:#B45309;">Kembalikan Data Bawaan (Demo Reset)</div>
             <div style="font-size:11px; color:#64748B;">Klik jika ingin mengembalikan seluruh data film dan event ke contoh awal.</div>
           </div>
-          <button class="btn-cyber-primary" style="background:#FFF; color:#B45309; border-color:#F59E0B; font-size:12px; padding:8px 14px;" onclick="resetAllDemoData()">
+          <button class="btn-cyber btn-cyber-danger btn-cyber-sm" onclick="resetAllDemoData()">
             <i class="fa-solid fa-rotate-left"></i> Reset Data
           </button>
         </div>
@@ -594,8 +594,8 @@
         </div>
 
         <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:16px;">
-          <button type="button" class="btn-cyber-primary" style="background:#E2E8F0; color:#475569; border-color:#CBD5E1;" onclick="closeFilmModal()">Batal</button>
-          <button type="submit" class="btn-cyber-primary"><i class="fa-solid fa-check"></i> Simpan Film</button>
+          <button type="button" class="btn-cyber btn-cyber-outline btn-cyber-sm" onclick="closeFilmModal()">Batal</button>
+          <button type="submit" class="btn-cyber btn-cyber-gold btn-cyber-sm"><i class="fa-solid fa-check"></i> Simpan Film</button>
         </div>
       </form>
     </div>
@@ -655,7 +655,7 @@
             <div style="font-size:12px; font-weight:800; color:#B45309;">
               <i class="fa-solid fa-trophy"></i> Daftar Pemenang (Untuk Event Lomba/Giveaway)
             </div>
-            <button type="button" class="btn-view-all" onclick="addWinnerRow()">+ Tambah Baris</button>
+            <button type="button" class="btn-cyber btn-cyber-gold btn-cyber-sm" style="font-size:10px; padding:4px 10px;" onclick="addWinnerRow()">+ Tambah Baris</button>
           </div>
           
           <div id="winnersInputContainer">
@@ -664,8 +664,8 @@
         </div>
 
         <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:16px;">
-          <button type="button" class="btn-cyber-primary" style="background:#E2E8F0; color:#475569; border-color:#CBD5E1;" onclick="closeEventModal()">Batal</button>
-          <button type="submit" class="btn-cyber-primary"><i class="fa-solid fa-check"></i> Simpan Event</button>
+          <button type="button" class="btn-cyber btn-cyber-outline btn-cyber-sm" onclick="closeEventModal()">Batal</button>
+          <button type="submit" class="btn-cyber btn-cyber-gold btn-cyber-sm"><i class="fa-solid fa-check"></i> Simpan Event</button>
         </div>
       </form>
     </div>
