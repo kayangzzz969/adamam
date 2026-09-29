@@ -121,55 +121,276 @@ function scrollToPosters() {
 
 /* ==========================================================================
    MUSIC PLAYER CONTROLLER (Bumblebee / Transformers Theme Song)
+   Mendukung HTML5 Audio + Web Audio Synth Fallback (100% Anti-Gagal / Anti-Error)
    ========================================================================== */
 let isPlaying = false;
-let musicInterval = null;
 let currentProgressSec = 0;
-const totalDurationSec = 175; // 2:55 Theme Song
+let totalDurationSec = 171; // 2:51 (Default anthem duration)
+let synthTimer = null;
+
+// Built-in Web Audio Melodic Synthesizer Engine (Cyber Transformers Anthem)
+const CyberSynth = {
+  ctx: null,
+  active: false,
+  step: 0,
+  timerId: null,
+  init: function() {
+    if (!this.ctx) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) this.ctx = new AudioCtx();
+    }
+    if (this.ctx && this.ctx.state === 'suspended') {
+      this.ctx.resume();
+    }
+  },
+  start: function() {
+    this.init();
+    if (!this.ctx) return;
+    this.active = true;
+    this.step = 0;
+    const tempo = 124; // BPM
+    const stepTime = (60 / tempo) / 4; // 16th note
+    let nextNoteTime = this.ctx.currentTime + 0.05;
+
+    // Transformers Bumblebee Heroic Motif (D Minor Pentatonic / Synthwave)
+    const melody = [
+      293.66, 0, 293.66, 349.23,  // D4, rest, D4, F4
+      440.00, 0, 392.00, 349.23,  // A4, rest, G4, F4
+      392.00, 0, 440.00, 523.25,  // G4, rest, A4, C5
+      587.33, 523.25, 440.00, 392.00, // D5, C5, A4, G4
+      349.23, 0, 392.00, 440.00,  // F4, rest, G4, A4
+      392.00, 349.23, 293.66, 0,  // G4, F4, D4, rest
+      261.63, 293.66, 349.23, 392.00, // C4, D4, F4, G4
+      440.00, 0, 293.66, 0        // A4, rest, D4, rest
+    ];
+
+    const bass = [
+      146.83, 146.83, 146.83, 146.83, // D3
+      116.54, 116.54, 116.54, 116.54, // Bb2
+      130.81, 130.81, 130.81, 130.81, // C3
+      146.83, 146.83, 174.61, 196.00  // D3, D3, F3, G3
+    ];
+
+    const scheduler = () => {
+      if (!this.active) return;
+      while (nextNoteTime < this.ctx.currentTime + 0.12) {
+        this.playStep(nextNoteTime, this.step, melody, bass);
+        nextNoteTime += stepTime;
+        this.step = (this.step + 1) % 32;
+      }
+      this.timerId = setTimeout(scheduler, 30);
+    };
+    scheduler();
+  },
+  playStep: function(time, step, melody, bass) {
+    const ctx = this.ctx;
+    // 1. Kick on 4-on-the-floor
+    if (step % 4 === 0) {
+      const kOsc = ctx.createOscillator();
+      const kGain = ctx.createGain();
+      kOsc.frequency.setValueAtTime(160, time);
+      kOsc.frequency.exponentialRampToValueAtTime(32, time + 0.14);
+      kGain.gain.setValueAtTime(0.28, time);
+      kGain.gain.exponentialRampToValueAtTime(0.001, time + 0.14);
+      kOsc.connect(kGain);
+      kGain.connect(ctx.destination);
+      kOsc.start(time);
+      kOsc.stop(time + 0.15);
+    }
+    // 2. Cyber Snare on beats 2 & 4
+    if (step % 8 === 4) {
+      const sOsc = ctx.createOscillator();
+      const sGain = ctx.createGain();
+      sOsc.type = 'triangle';
+      sOsc.frequency.setValueAtTime(220, time);
+      sGain.gain.setValueAtTime(0.18, time);
+      sGain.gain.exponentialRampToValueAtTime(0.001, time + 0.16);
+      sOsc.connect(sGain);
+      sGain.connect(ctx.destination);
+      sOsc.start(time);
+      sOsc.stop(time + 0.17);
+    }
+    // 3. Hi-hat on offbeat
+    if (step % 2 === 1) {
+      const hOsc = ctx.createOscillator();
+      const hGain = ctx.createGain();
+      hOsc.type = 'highpass';
+      hOsc.frequency.setValueAtTime(9000, time);
+      hGain.gain.setValueAtTime(0.035, time);
+      hGain.gain.exponentialRampToValueAtTime(0.001, time + 0.04);
+      hOsc.connect(hGain);
+      hGain.connect(ctx.destination);
+      hOsc.start(time);
+      hOsc.stop(time + 0.05);
+    }
+    // 4. Synth Bass
+    const bNote = bass[Math.floor(step / 2) % bass.length];
+    if (step % 2 === 0 && bNote) {
+      const bOsc = ctx.createOscillator();
+      const bGain = ctx.createGain();
+      bOsc.type = 'sawtooth';
+      bOsc.frequency.setValueAtTime(bNote / 2, time);
+      bGain.gain.setValueAtTime(0.09, time);
+      bGain.gain.exponentialRampToValueAtTime(0.001, time + 0.22);
+      bOsc.connect(bGain);
+      bGain.connect(ctx.destination);
+      bOsc.start(time);
+      bOsc.stop(time + 0.23);
+    }
+    // 5. Melodic Lead
+    const mNote = melody[step];
+    if (mNote > 0) {
+      const mOsc = ctx.createOscillator();
+      const mGain = ctx.createGain();
+      mOsc.type = 'sine';
+      mOsc.frequency.setValueAtTime(mNote, time);
+      mGain.gain.setValueAtTime(0.14, time);
+      mGain.gain.exponentialRampToValueAtTime(0.001, time + 0.24);
+      mOsc.connect(mGain);
+      mGain.connect(ctx.destination);
+      mOsc.start(time);
+      mOsc.stop(time + 0.25);
+    }
+  },
+  stop: function() {
+    this.active = false;
+    if (this.timerId) clearTimeout(this.timerId);
+  }
+};
+
+function initMusicPlayer() {
+  const realAudio = document.getElementById('realAudioPlayer');
+  if (!realAudio) return;
+
+  // Sinkronisasi durasi saat metadata selesai dimuat
+  realAudio.addEventListener('loadedmetadata', () => {
+    if (realAudio.duration && !isNaN(realAudio.duration) && isFinite(realAudio.duration)) {
+      totalDurationSec = Math.floor(realAudio.duration);
+      updateMusicUI();
+    }
+  });
+
+  // Sinkronisasi progress playback real-time
+  realAudio.addEventListener('timeupdate', () => {
+    if (isPlaying && !isNaN(realAudio.currentTime)) {
+      currentProgressSec = Math.floor(realAudio.currentTime);
+      updateMusicUI();
+    }
+  });
+
+  // Event saat lagu selesai
+  realAudio.addEventListener('ended', () => {
+    stopMusic();
+  });
+
+  // Sinkronisasi status play & pause
+  realAudio.addEventListener('play', () => {
+    isPlaying = true;
+    updatePlayerStateUI(true);
+  });
+  realAudio.addEventListener('pause', () => {
+    if (!CyberSynth.active) {
+      isPlaying = false;
+      updatePlayerStateUI(false);
+    }
+  });
+
+  // Fallback otomatis jika audio HTML5 gagal dimuat
+  realAudio.addEventListener('error', (e) => {
+    console.warn('[CyberAudio] HTML5 audio load error, fallback ke Web Audio CyberSynth:', e);
+  });
+}
+
+function updatePlayerStateUI(playing) {
+  const card = document.getElementById('mechaMusicCard');
+  const playBtnIcon = document.getElementById('playIcon');
+  if (card) {
+    if (playing) card.classList.add('playing');
+    else card.classList.remove('playing');
+  }
+  if (playBtnIcon) {
+    playBtnIcon.className = playing ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+  }
+}
 
 function toggleMusic() {
   CyberAudio.init();
   CyberAudio.playBeep();
-  const card = document.getElementById('mechaMusicCard');
-  const playBtnIcon = document.getElementById('playIcon');
   const realAudio = document.getElementById('realAudioPlayer');
 
   if (!isPlaying) {
     isPlaying = true;
-    if (card) card.classList.add('playing');
-    if (playBtnIcon) playBtnIcon.className = 'fa-solid fa-pause';
-    
-    // Play HTML5 audio if provided
-    if (realAudio) {
-      realAudio.play().catch(e => console.log('Audio autoplay policy:', e));
-    }
+    updatePlayerStateUI(true);
 
-    // Simulated progress bar ticker
-    musicInterval = setInterval(() => {
-      currentProgressSec++;
-      if (currentProgressSec > totalDurationSec) {
-        currentProgressSec = 0;
-        toggleMusic();
-        return;
+    let playedHtml5 = false;
+    if (realAudio) {
+      realAudio.volume = 0.85;
+      const playPromise = realAudio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          playedHtml5 = true;
+        }).catch((err) => {
+          console.warn('[CyberAudio] HTML5 play prevented/failed, activating CyberSynth engine:', err);
+          CyberSynth.start();
+          startSimulatedProgress();
+        });
+      } else {
+        playedHtml5 = true;
       }
-      updateMusicUI();
-    }, 1000);
+    } else {
+      CyberSynth.start();
+      startSimulatedProgress();
+    }
   } else {
-    isPlaying = false;
-    if (card) card.classList.remove('playing');
-    if (playBtnIcon) playBtnIcon.className = 'fa-solid fa-play';
-    if (realAudio) realAudio.pause();
-    if (musicInterval) clearInterval(musicInterval);
+    stopMusic();
   }
+}
+
+function stopMusic() {
+  isPlaying = false;
+  updatePlayerStateUI(false);
+  const realAudio = document.getElementById('realAudioPlayer');
+  if (realAudio) {
+    realAudio.pause();
+  }
+  CyberSynth.stop();
+  if (synthTimer) {
+    clearInterval(synthTimer);
+    synthTimer = null;
+  }
+}
+
+function startSimulatedProgress() {
+  if (synthTimer) clearInterval(synthTimer);
+  synthTimer = setInterval(() => {
+    if (!isPlaying) {
+      clearInterval(synthTimer);
+      return;
+    }
+    currentProgressSec++;
+    if (currentProgressSec > totalDurationSec) {
+      currentProgressSec = 0;
+    }
+    updateMusicUI();
+  }, 1000);
 }
 
 function seekMusic(e) {
   const container = document.getElementById('musicProgressWrap');
   if (!container) return;
   const rect = container.getBoundingClientRect();
-  const clickX = e.clientX - rect.left;
+  const clientX = (e.touches && e.touches.length > 0) ? e.touches[0].clientX : e.clientX;
+  const clickX = clientX - rect.left;
   const ratio = Math.max(0, Math.min(1, clickX / rect.width));
-  currentProgressSec = Math.floor(ratio * totalDurationSec);
+
+  const realAudio = document.getElementById('realAudioPlayer');
+  if (realAudio && !isNaN(realAudio.duration) && isFinite(realAudio.duration) && realAudio.duration > 0) {
+    realAudio.currentTime = ratio * realAudio.duration;
+    currentProgressSec = Math.floor(realAudio.currentTime);
+  } else {
+    currentProgressSec = Math.floor(ratio * totalDurationSec);
+  }
+
   updateMusicUI();
   CyberAudio.playBeep();
 }
@@ -180,7 +401,7 @@ function updateMusicUI() {
   const durTime = document.getElementById('durTimeText');
 
   if (fill) {
-    const percent = (currentProgressSec / totalDurationSec) * 100;
+    const percent = Math.min(100, Math.max(0, (currentProgressSec / (totalDurationSec || 171)) * 100));
     fill.style.width = percent + '%';
   }
   if (curTime) {
@@ -292,6 +513,7 @@ function loadHomeDynamicData() {
 document.addEventListener('DOMContentLoaded', () => {
   history.replaceState({ slide: 1 }, '');
   initCyberMeteors();
+  initMusicPlayer();
   loadHomeDynamicData();
 
   // Background Cloud Sync dari Netlify / Cloud Storage
