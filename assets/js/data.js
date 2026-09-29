@@ -173,67 +173,61 @@ const DEFAULT_EVENTS = [
   }
 ];
 
+// Bersihkan cache lama di localStorage agar data 100% murni dari GitHub
+if (typeof localStorage !== 'undefined') {
+  try {
+    localStorage.removeItem("ax_bio");
+    localStorage.removeItem("ax_films");
+    localStorage.removeItem("ax_events");
+  } catch (e) {}
+}
+
+// In-Memory Live Store (Single Source of Truth: GitHub Repository)
+let _currentBio = null;
+let _currentFilms = null;
+let _currentEvents = null;
+
 // Helper Functions
 const FanbaseStore = {
   getBio: function() {
-    const raw = localStorage.getItem("ax_bio");
-    if (!raw) {
-      localStorage.setItem("ax_bio", JSON.stringify(DEFAULT_BIO));
-      return DEFAULT_BIO;
-    }
-    try {
-      const parsed = JSON.parse(raw);
-      const merged = Object.assign({}, DEFAULT_BIO, parsed);
-      if (!merged.fanbaseName || merged.fanbaseName === "XavierBots") {
-        merged.fanbaseName = "AdamUnited";
-        localStorage.setItem("ax_bio", JSON.stringify(merged));
-      }
-      return merged;
-    } catch (e) {
-      return DEFAULT_BIO;
-    }
+    return _currentBio || DEFAULT_BIO;
   },
-  saveBio: function(bio) {
-    localStorage.setItem("ax_bio", JSON.stringify(bio));
+  saveBio: function(bio, options) {
+    _currentBio = Object.assign({}, DEFAULT_BIO, bio);
+    // HANYA update ke LocalStorage jika diperintah secara eksplisit { allowLocalStorage: true }
+    if (options && options.allowLocalStorage === true && typeof localStorage !== 'undefined') {
+      localStorage.setItem("ax_bio", JSON.stringify(_currentBio));
+    }
   },
   getFilms: function() {
-    const raw = localStorage.getItem("ax_films");
-    if (!raw) {
-      localStorage.setItem("ax_films", JSON.stringify(DEFAULT_FILMS));
-      return DEFAULT_FILMS;
-    }
-    try {
-      const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-      return DEFAULT_FILMS;
-    } catch (e) {
-      return DEFAULT_FILMS;
-    }
+    return _currentFilms || DEFAULT_FILMS;
   },
-  saveFilms: function(films) {
-    localStorage.setItem("ax_films", JSON.stringify(films));
+  saveFilms: function(films, options) {
+    _currentFilms = Array.isArray(films) ? films.slice() : DEFAULT_FILMS;
+    // HANYA update ke LocalStorage jika diperintah secara eksplisit { allowLocalStorage: true }
+    if (options && options.allowLocalStorage === true && typeof localStorage !== 'undefined') {
+      localStorage.setItem("ax_films", JSON.stringify(_currentFilms));
+    }
   },
   getEvents: function() {
-    const raw = localStorage.getItem("ax_events");
-    if (!raw) {
+    return _currentEvents || DEFAULT_EVENTS;
+  },
+  saveEvents: function(events, options) {
+    _currentEvents = Array.isArray(events) ? events.slice() : DEFAULT_EVENTS;
+    // HANYA update ke LocalStorage jika diperintah secara eksplisit { allowLocalStorage: true }
+    if (options && options.allowLocalStorage === true && typeof localStorage !== 'undefined') {
+      localStorage.setItem("ax_events", JSON.stringify(_currentEvents));
+    }
+  },
+  resetToDefault: function(options) {
+    _currentBio = Object.assign({}, DEFAULT_BIO);
+    _currentFilms = DEFAULT_FILMS.slice();
+    _currentEvents = DEFAULT_EVENTS.slice();
+    if (options && options.allowLocalStorage === true && typeof localStorage !== 'undefined') {
+      localStorage.setItem("ax_bio", JSON.stringify(DEFAULT_BIO));
+      localStorage.setItem("ax_films", JSON.stringify(DEFAULT_FILMS));
       localStorage.setItem("ax_events", JSON.stringify(DEFAULT_EVENTS));
-      return DEFAULT_EVENTS;
     }
-    try {
-      const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-      return DEFAULT_EVENTS;
-    } catch (e) {
-      return DEFAULT_EVENTS;
-    }
-  },
-  saveEvents: function(events) {
-    localStorage.setItem("ax_events", JSON.stringify(events));
-  },
-  resetToDefault: function() {
-    localStorage.setItem("ax_bio", JSON.stringify(DEFAULT_BIO));
-    localStorage.setItem("ax_films", JSON.stringify(DEFAULT_FILMS));
-    localStorage.setItem("ax_events", JSON.stringify(DEFAULT_EVENTS));
   },
   // Sinkronisasi otomatis dari Cloud Database (GitHub Raw & Fallbacks)
   initCloudSync: async function(onUpdatedCallback) {
@@ -271,43 +265,19 @@ const FanbaseStore = {
       } catch (e) {}
     }
 
-    // 3. Cek Cloud Storage Mandiri (JSONBin.io) jika dikonfigurasi
-    if (!cloudData) {
-      try {
-        const rawCfg = localStorage.getItem('ax_cloud_config');
-        if (rawCfg) {
-          const cfg = JSON.parse(rawCfg);
-          if (cfg.binId) {
-            const headers = {};
-            if (cfg.apiKey) headers['X-Master-Key'] = cfg.apiKey;
-            if (cfg.accessKey) headers['X-Access-Key'] = cfg.accessKey;
-
-            const resp = await fetch(`https://api.jsonbin.io/v3/b/${cfg.binId}/latest`, { headers });
-            if (resp.ok) {
-              const resJson = await resp.json();
-              if (resJson && resJson.record) {
-                cloudData = resJson.record;
-                console.log('[CloudSync] Data berhasil disinkronkan dari Cloud Storage JSONBin.');
-              }
-            }
-          }
-        }
-      } catch (e) {}
-    }
-
-    // Jika cloudData ditemukan, perbarui cache localStorage & jalankan callback
+    // Jika cloudData ditemukan, perbarui cache in-memory & jalankan callback (TIDAK menyentuh LocalStorage)
     if (cloudData) {
       let updated = false;
       if (cloudData.bio) {
-        localStorage.setItem("ax_bio", JSON.stringify(cloudData.bio));
+        _currentBio = Object.assign({}, DEFAULT_BIO, cloudData.bio);
         updated = true;
       }
       if (cloudData.films && Array.isArray(cloudData.films)) {
-        localStorage.setItem("ax_films", JSON.stringify(cloudData.films));
+        _currentFilms = cloudData.films.slice();
         updated = true;
       }
       if (cloudData.events && Array.isArray(cloudData.events)) {
-        localStorage.setItem("ax_events", JSON.stringify(cloudData.events));
+        _currentEvents = cloudData.events.slice();
         updated = true;
       }
       if (updated && typeof onUpdatedCallback === 'function') {
