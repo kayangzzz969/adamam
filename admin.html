@@ -114,31 +114,31 @@
           </div>
         </div>
 
-        <!-- CYBER STORAGE & DIRECT FILE SAVE BAR -->
+        <!-- GITHUB CLOUD DATABASE BAR -->
         <div style="background:#FFF; border:2px solid var(--yellow-primary); border-radius:14px; padding:16px 20px; margin-bottom:24px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:14px; box-shadow:var(--shadow-sm);">
           <div style="display:flex; align-items:center; gap:12px;">
-            <div style="width:42px; height:42px; border-radius:10px; background:var(--yellow-soft); border:1.5px solid var(--yellow-primary); display:flex; align-items:center; justify-content:center; font-size:20px; color:#B45309;">
-              <i class="fa-solid fa-hard-drive"></i>
+            <div style="width:42px; height:42px; border-radius:10px; background:#0F172A; border:1.5px solid var(--yellow-primary); display:flex; align-items:center; justify-content:center; font-size:22px; color:#38BDF8;">
+              <i class="fa-brands fa-github"></i>
             </div>
             <div>
               <div style="display:flex; align-items:center; gap:8px;">
-                <span style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:var(--cyber-dark);">STATUS PENYIMPANAN:</span>
-                <span id="storageModeBadge" class="status-upcoming" style="font-size:11px; padding:3px 10px; border-radius:12px; font-weight:800; background:#FEF3C7; color:#B45309; border:1px solid #F59E0B;">
-                  <i class="fa-solid fa-circle-notch fa-spin"></i> Memeriksa Status...
+                <span style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:var(--cyber-dark);">DATABASE UTAMA (GITHUB):</span>
+                <span id="storageModeBadge" style="font-size:11px; padding:3px 10px; border-radius:12px; font-weight:800; background:#064E3B; color:#34D399; border:1px solid #059669;">
+                  <i class="fa-solid fa-circle-check"></i> kayangzzz969/adamam (Live Cloud)
                 </span>
               </div>
               <div id="storageStatusText" style="font-size:12px; color:#64748B; margin-top:3px;">
-                Perubahan langsung aktif di browser. Anda juga bisa menghubungkan folder proyek agar otomatis mengedit file fisik!
+                🟢 <strong>Full Cloud Database Aktif!</strong> Seluruh data disimpan dan disinkronkan langsung ke GitHub.
               </div>
             </div>
           </div>
 
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <button id="btnConnectFolder" class="btn-cyber-primary" style="font-size:12px; padding:9px 16px;" onclick="connectProjectFolder()">
-              <i class="fa-solid fa-folder-open"></i> Hubungkan Folder (Auto-Save ke File)
-            </button>
-            <button class="btn-cyber-primary" style="background:#FFF; color:var(--cyber-dark); border-color:var(--yellow-primary); font-size:12px; padding:9px 16px;" onclick="manualSaveToFile()">
-              <i class="fa-solid fa-floppy-disk"></i> Simpan ke File data.js
+            <a href="https://github.com/kayangzzz969/adamam" target="_blank" class="btn-cyber-primary" style="background:#0F172A; color:#FFF; border-color:#334155; font-size:12px; padding:9px 16px; text-decoration:none;">
+              <i class="fa-brands fa-github"></i> Buka Repo GitHub
+            </a>
+            <button class="btn-cyber-primary" style="background:var(--yellow-primary); color:var(--cyber-dark); border-color:var(--yellow-accent); font-size:12px; padding:9px 16px;" onclick="syncFromGitHub(false)">
+              <i class="fa-solid fa-rotate"></i> Sinkronkan dari GitHub
             </button>
           </div>
         </div>
@@ -499,19 +499,24 @@
           </div>
         </div>
 
-        <!-- Ekspor File Data Permanen -->
+        <!-- Status Cloud Database GitHub -->
         <div style="margin-top:35px; padding:18px; background:#FFF; border:2px solid var(--yellow-primary); border-radius:14px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; box-shadow:var(--shadow-sm);">
           <div>
-            <div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:var(--cyber-dark);">
-              <i class="fa-solid fa-floppy-disk" style="color:var(--yellow-accent);"></i> Simpan Permanen ke File (Ekspor data.js)
+            <div style="font-family:'Orbitron',sans-serif; font-size:14px; font-weight:800; color:var(--cyber-dark); display:flex; align-items:center; gap:8px;">
+              <i class="fa-brands fa-github" style="color:var(--yellow-accent); font-size:18px;"></i> Cloud Database GitHub: <span style="color:#2563EB;">kayangzzz969/adamam</span>
             </div>
             <div style="font-size:12px; color:#64748B; margin-top:3px; max-width:650px;">
-              Data yang Anda ubah di Admin <strong>sudah otomatis tersimpan</strong> di browser (localStorage) dan langsung tampil di film.html & event.html. Jika ingin menyimpan perubahan ke file fisik agar bisa diupload ke hosting atau komputer lain, unduh file <code>data.js</code> baru di sini.
+              Arsitektur database website ini <strong>100% tersambung ke GitHub</strong>. Setiap kali Anda menambah atau mengedit film, event, dan profil, data langsung di-commit ke repositori GitHub sehingga seluruh pengunjung dan hosting (Vercel/Netlify) selalu mendapatkan data live terbaru.
             </div>
           </div>
-          <button class="btn-cyber-primary" onclick="exportDataJs()">
-            <i class="fa-solid fa-download"></i> Unduh File data.js Baru
-          </button>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn-cyber-primary" style="background:#059669; color:#FFF; border-color:#059669; font-size:12px; padding:9px 16px;" onclick="manualCommitToGitHub()">
+              <i class="fa-brands fa-github"></i> Commit Data Sekarang
+            </button>
+            <button class="btn-cyber-primary" style="background:#FFF; color:var(--cyber-dark); border-color:var(--yellow-primary); font-size:12px; padding:9px 16px;" onclick="syncFromGitHub(false)">
+              <i class="fa-solid fa-rotate"></i> Tarik Data dari GitHub
+            </button>
+          </div>
         </div>
 
         <!-- Reset Button -->
@@ -1067,10 +1072,8 @@
     }
 
     /* ============================================================
-       STORAGE & CLOUD / DISK SYNCHRONIZATION SYSTEM
+       STORAGE & CLOUD / GITHUB SYNCHRONIZATION SYSTEM
        ============================================================ */
-    let projectDirHandle = null;
-    let isServerConnected = false;
     let isNetlifyConnected = false;
     let isVercelConnected = false;
 
@@ -1087,7 +1090,7 @@
 
       // 0. Cek GitHub Repository Sync
       const ghRepo = localStorage.getItem('ax_github_repo') || 'kayangzzz969/adamam';
-      const ghToken = localStorage.getItem('ax_github_token') || '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';
+      const ghToken = localStorage.getItem('ax_github_token') || '';
       const isGitHubConfigured = Boolean(ghRepo && ghToken);
 
       if (githubBadge) {
@@ -1100,7 +1103,7 @@
           githubBadge.style.background = '#7F1D1D';
           githubBadge.style.color = '#FCA5A5';
           githubBadge.style.border = '1px solid #DC2626';
-          githubBadge.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> GitHub Belum Dikonfigurasi';
+          githubBadge.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> GitHub Token Diperlukan';
         }
       }
 
@@ -1127,7 +1130,7 @@
           vercelBadge.style.background = '#451A03';
           vercelBadge.style.color = '#FCD34D';
           vercelBadge.style.border = '1px solid #B45309';
-          vercelBadge.innerHTML = '<i class="fa-solid fa-triangle"></i> Vercel Aktif (Belum Sambung KV)';
+          vercelBadge.innerHTML = '<i class="fa-solid fa-triangle"></i> Vercel Aktif (Auto-Sync via GitHub)';
         } else {
           vercelBadge.style.background = '#1E293B';
           vercelBadge.style.color = '#94A3B8';
@@ -1150,95 +1153,26 @@
         }
       }
 
-      // 2. Cek apakah berjalan melalui local sync server (http://localhost:8080)
-      isServerConnected = false;
-      try {
-        const res = await fetch('/api/status', { method: 'GET' });
-        if (res.ok) {
-          isServerConnected = true;
-        }
-      } catch (e) {}
-
-      // 3. Cek apakah Cloud REST API (JSONBin) dikonfigurasi
-      let isJsonBinConfigured = false;
-      try {
-        const rawCfg = localStorage.getItem('ax_cloud_config');
-        if (rawCfg) {
-          const cfg = JSON.parse(rawCfg);
-          if (cfg.binId) isJsonBinConfigured = true;
-        }
-      } catch (e) {}
-
-      // Perbarui tampilan badge & teks status bar atas (Prioritas GitHub & LocalStorage)
+      // Perbarui tampilan badge & teks status bar atas (Prioritas Mutlak: GitHub Cloud Database)
       if (isGitHubConfigured) {
         if (badge) {
-          badge.style.background = '#0F172A';
-          badge.style.color = '#38BDF8';
-          badge.style.border = '1px solid #0284C7';
-          badge.innerHTML = '<i class="fa-brands fa-github"></i> GitHub & LocalStorage Aktif';
+          badge.style.background = '#064E3B';
+          badge.style.color = '#34D399';
+          badge.style.border = '1px solid #059669';
+          badge.innerHTML = `<i class="fa-brands fa-github"></i> GitHub Cloud: ${ghRepo}`;
         }
         if (text) {
-          text.innerHTML = `🟢 <strong>Mode Auto-Update Aktif!</strong> Setiap perubahan otomatis tersimpan di <strong>LocalStorage</strong> browser dan langsung di-commit ke repositori <strong>GitHub (${ghRepo})</strong>!`;
-        }
-      } else if (isVercelHost || (apiData && apiData.storageConfigured)) {
-        if (badge) {
-          badge.style.background = '#000';
-          badge.style.color = '#FFF';
-          badge.style.border = '1px solid #333';
-          badge.innerHTML = '▲ Vercel Cloud Storage Aktif';
-        }
-        if (text) {
-          text.innerHTML = '🟢 <strong>Mode Vercel Storage Aktif!</strong> Setiap perubahan tersimpan ke Vercel KV / Blob dan langsung aktif ke seluruh dunia.';
-        }
-      } else if (isNetlifyConnected) {
-        if (badge) {
-          badge.style.background = '#CCFBF1';
-          badge.style.color = '#0F766E';
-          badge.style.border = '1px solid #14B8A6';
-          badge.innerHTML = '<i class="fa-solid fa-cloud"></i> Netlify Cloud Storage Aktif';
-        }
-        if (text) {
-          text.innerHTML = '🟢 <strong>Mode Netlify Storage Aktif!</strong> Setiap perubahan otomatis tersimpan ke Cloud Netlify dan langsung tampil ke seluruh pengunjung situs.';
-        }
-      } else if (isServerConnected) {
-        if (badge) {
-          badge.style.background = '#DCFCE7';
-          badge.style.color = '#166534';
-          badge.style.border = '1px solid #86EFAC';
-          badge.innerHTML = '<i class="fa-solid fa-server"></i> Local Server Terhubung';
-        }
-        if (text) {
-          text.innerHTML = '🟢 <strong>Mode Auto-Save Hard Disk Aktif!</strong> Setiap perubahan yang Anda buat langsung ditulis ke file fisik proyek di komputer Anda.';
-        }
-      } else if (projectDirHandle) {
-        if (badge) {
-          badge.style.background = '#DCFCE7';
-          badge.style.color = '#166534';
-          badge.style.border = '1px solid #86EFAC';
-          badge.innerHTML = '<i class="fa-solid fa-folder-check"></i> Folder Proyek Terhubung';
-        }
-        if (text) {
-          text.innerHTML = `🟢 <strong>Folder Terhubung:</strong> "${projectDirHandle.name}". Setiap perubahan langsung otomatis mengedit file di hard disk!`;
-        }
-      } else if (isJsonBinConfigured) {
-        if (badge) {
-          badge.style.background = '#EFF6FF';
-          badge.style.color = '#1D4ED8';
-          badge.style.border = '1px solid #93C5FD';
-          badge.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Cloud REST API Terhubung';
-        }
-        if (text) {
-          text.innerHTML = '🟢 <strong>Mode Cloud REST API Aktif!</strong> Perubahan disimpan ke Cloud JSONBin untuk dibagikan secara global ke seluruh pengunjung.';
+          text.innerHTML = `🟢 <strong>Mode Full GitHub Cloud Database Aktif!</strong> Setiap perubahan tersimpan langsung ke repositori <strong>GitHub (${ghRepo})</strong> & ter-deploy otomatis ke seluruh dunia.`;
         }
       } else {
         if (badge) {
           badge.style.background = '#FEF3C7';
           badge.style.color = '#B45309';
           badge.style.border = '1px solid #F59E0B';
-          badge.innerHTML = '<i class="fa-solid fa-hard-drive"></i> Mode Browser (LocalStorage)';
+          badge.innerHTML = '<i class="fa-brands fa-github"></i> GitHub Token Diperlukan';
         }
         if (text) {
-          text.innerHTML = 'Data tersimpan di browser (LocalStorage). Untuk menyimpan otomatis ke GitHub atau Vercel, buka tab <strong>"GitHub & Cloud Storage"</strong>.';
+          text.innerHTML = '⚠️ Masukkan Token GitHub Anda di tab <strong>"GitHub & Cloud Storage"</strong> agar setiap perubahan otomatis ter-commit ke repositori GitHub.';
         }
       }
     }
@@ -1249,7 +1183,7 @@
     function loadGitHubConfig() {
       const defaultRepo = 'kayangzzz969/adamam';
       const defaultBranch = 'main';
-      const defaultToken = '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';
+      const defaultToken = '';
 
       const repo = localStorage.getItem('ax_github_repo') || defaultRepo;
       const branch = localStorage.getItem('ax_github_branch') || defaultBranch;
@@ -1257,7 +1191,7 @@
 
       localStorage.setItem('ax_github_repo', repo);
       localStorage.setItem('ax_github_branch', branch);
-      localStorage.setItem('ax_github_token', token);
+      if (token) localStorage.setItem('ax_github_token', token);
 
       if (document.getElementById('cfgGitHubRepo')) document.getElementById('cfgGitHubRepo').value = repo;
       if (document.getElementById('cfgGitHubBranch')) document.getElementById('cfgGitHubBranch').value = branch;
@@ -1570,28 +1504,50 @@
       checkStorageStatus();
     }
 
-    async function connectProjectFolder() {
-      if (!('showDirectoryPicker' in window)) {
-        alert('Browser ini belum mendukung pemilihan folder langsung secara native. Disarankan menggunakan Google Chrome atau Microsoft Edge, atau cukup jalankan file "start_server.bat" di folder proyek.');
-        return;
-      }
+    /* ------------------------------------------------------------
+       FULL GITHUB CLOUD DATABASE: SYNC & COMMIT METHODS
+       ------------------------------------------------------------ */
+    async function syncFromGitHub(silent = false) {
+      const repo = localStorage.getItem('ax_github_repo') || 'kayangzzz969/adamam';
+      const branch = localStorage.getItem('ax_github_branch') || 'main';
+      const rawUrl = `https://raw.githubusercontent.com/${repo}/${branch}/assets/js/data.js?_t=${Date.now()}`;
+
+      if (!silent) showSyncIndicator('Mengambil data terbaru langsung dari GitHub Cloud...');
       try {
-        projectDirHandle = await window.showDirectoryPicker({ mode: 'readwrite' });
-        await checkStorageStatus();
-        const targets = await writeDataToDisk();
-        if (targets && targets.length > 0) {
-          alert(`Folder "${projectDirHandle.name}" sukses terhubung!\n\nFile assets/js/data.js di hard disk Anda berhasil diperbarui secara otomatis.`);
+        const resp = await fetch(rawUrl, { cache: 'no-store' });
+        if (resp.ok) {
+          const text = await resp.text();
+          const parsed = FanbaseStore._parseDataJs ? FanbaseStore._parseDataJs(text) : null;
+          if (parsed && (parsed.bio || parsed.films || parsed.events)) {
+            if (parsed.bio) FanbaseStore.saveBio(parsed.bio);
+            if (parsed.films && Array.isArray(parsed.films)) FanbaseStore.saveFilms(parsed.films);
+            if (parsed.events && Array.isArray(parsed.events)) FanbaseStore.saveEvents(parsed.events);
+
+            renderAdminFilms();
+            renderAdminEvents();
+            renderAdminBio();
+
+            if (!silent) {
+              hideSyncIndicator();
+              alert(`✅ Berhasil Menarik Data dari GitHub!\n\nRepositori: ${repo}\n• Film: ${parsed.films ? parsed.films.length : 0} judul\n• Event: ${parsed.events ? parsed.events.length : 0} event\n• Fanbase: ${parsed.bio ? parsed.bio.fanbaseName : 'AdamUnited'}\n\nPanel Admin kini menampilkan data live terbaru dari GitHub.`);
+            }
+            return true;
+          }
         }
       } catch (err) {
-        if (err.name !== 'AbortError') {
-          alert('Pemberitahuan: ' + err.message);
-        }
+        console.warn('Sync from GitHub error:', err);
       }
+      if (!silent) {
+        hideSyncIndicator();
+        alert('⚠️ Tidak dapat terhubung ke GitHub Raw. Data tetap dimuat dari cache lokal.');
+      }
+      return false;
     }
 
     function generateDataJsCode(bio, films, events) {
       return `/**
  * DATA STORE FOR ADAM XAVIER FANBASE
+ * Cloud Database GitHub (kayangzzz969/adamam)
  * Terakhir diperbarui melalui Panel Admin pada: ${new Date().toLocaleString('id-ID')}
  */
 
@@ -1663,16 +1619,43 @@ const FanbaseStore = {
     localStorage.setItem("ax_films", JSON.stringify(DEFAULT_FILMS));
     localStorage.setItem("ax_events", JSON.stringify(DEFAULT_EVENTS));
   },
+  // Sinkronisasi otomatis dari Cloud Database (GitHub Raw & Fallbacks)
   initCloudSync: async function(onUpdatedCallback) {
     let cloudData = null;
-    try {
-      const resp = await fetch('/api/data', { method: 'GET' });
-      if (resp.ok) {
-        const json = await resp.json();
-        if (json && (json.bio || json.films || json.events)) cloudData = json;
-      }
-    } catch (e) {}
+    const githubRepo = (typeof localStorage !== 'undefined' && localStorage.getItem('ax_github_repo')) || 'kayangzzz969/adamam';
+    const githubBranch = (typeof localStorage !== 'undefined' && localStorage.getItem('ax_github_branch')) || 'main';
+    const githubRawUrl = "https://raw.githubusercontent.com/" + githubRepo + "/" + githubBranch + "/assets/js/data.js?_t=" + Date.now();
 
+    // 1. Ambil data real-time langsung dari GitHub Raw (Cloud Database Utama)
+    try {
+      const ghResp = await fetch(githubRawUrl, { cache: 'no-store' });
+      if (ghResp.ok) {
+        const text = await ghResp.text();
+        const parsed = FanbaseStore._parseDataJs(text);
+        if (parsed && (parsed.bio || parsed.films || parsed.events)) {
+          cloudData = parsed;
+          console.log("[CloudSync] Data berhasil disinkronkan langsung dari GitHub Raw (" + githubRepo + ").");
+        }
+      }
+    } catch (ghErr) {
+      console.warn('[CloudSync] Fallback dari GitHub Raw:', ghErr.message);
+    }
+
+    // 2. Cek Serverless Function /api/data (Vercel KV / Netlify Storage)
+    if (!cloudData) {
+      try {
+        const resp = await fetch('/api/data', { method: 'GET' });
+        if (resp.ok) {
+          const json = await resp.json();
+          if (json && (json.bio || json.films || json.events)) {
+            cloudData = json;
+            console.log('[CloudSync] Data berhasil disinkronkan dari /api/data.');
+          }
+        }
+      } catch (e) {}
+    }
+
+    // 3. Cek Cloud Storage Mandiri (JSONBin.io) jika dikonfigurasi
     if (!cloudData) {
       try {
         const rawCfg = localStorage.getItem('ax_cloud_config');
@@ -1681,23 +1664,60 @@ const FanbaseStore = {
           if (cfg.binId) {
             const headers = {};
             if (cfg.apiKey) headers['X-Master-Key'] = cfg.apiKey;
-            const resp = await fetch('https://api.jsonbin.io/v3/b/' + cfg.binId + '/latest', { headers });
+            if (cfg.accessKey) headers['X-Access-Key'] = cfg.accessKey;
+
+            const resp = await fetch("https://api.jsonbin.io/v3/b/" + cfg.binId + "/latest", { headers });
             if (resp.ok) {
               const resJson = await resp.json();
-              if (resJson && resJson.record) cloudData = resJson.record;
+              if (resJson && resJson.record) {
+                cloudData = resJson.record;
+                console.log('[CloudSync] Data berhasil disinkronkan dari Cloud Storage JSONBin.');
+              }
             }
           }
         }
       } catch (e) {}
     }
 
+    // Jika cloudData ditemukan, perbarui cache localStorage & jalankan callback
     if (cloudData) {
       let updated = false;
-      if (cloudData.bio) { localStorage.setItem("ax_bio", JSON.stringify(cloudData.bio)); updated = true; }
-      if (cloudData.films && Array.isArray(cloudData.films)) { localStorage.setItem("ax_films", JSON.stringify(cloudData.films)); updated = true; }
-      if (cloudData.events && Array.isArray(cloudData.events)) { localStorage.setItem("ax_events", JSON.stringify(cloudData.events)); updated = true; }
-      if (updated && typeof onUpdatedCallback === 'function') onUpdatedCallback(cloudData);
+      if (cloudData.bio) {
+        localStorage.setItem("ax_bio", JSON.stringify(cloudData.bio));
+        updated = true;
+      }
+      if (cloudData.films && Array.isArray(cloudData.films)) {
+        localStorage.setItem("ax_films", JSON.stringify(cloudData.films));
+        updated = true;
+      }
+      if (cloudData.events && Array.isArray(cloudData.events)) {
+        localStorage.setItem("ax_events", JSON.stringify(cloudData.events));
+        updated = true;
+      }
+      if (updated && typeof onUpdatedCallback === 'function') {
+        onUpdatedCallback(cloudData);
+      }
       return cloudData;
+    }
+    return null;
+  },
+  _parseDataJs: function(text) {
+    if (!text) return null;
+    let bio = null, films = null, events = null;
+    try {
+      const bioMatch = text.match(/const\\s+DEFAULT_BIO\\s*=\\s*([\\s\\S]*?);\\s*const\\s+DEFAULT_FILMS/);
+      if (bioMatch) bio = JSON.parse(bioMatch[1].trim());
+
+      const filmsMatch = text.match(/const\\s+DEFAULT_FILMS\\s*=\\s*([\\s\\S]*?);\\s*const\\s+DEFAULT_EVENTS/);
+      if (filmsMatch) films = JSON.parse(filmsMatch[1].trim());
+
+      const eventsMatch = text.match(/const\\s+DEFAULT_EVENTS\\s*=\\s*([\\s\\S]*?);\\s*(?:\\/\\/|\\/\\*|const\\s+FanbaseStore|$)/);
+      if (eventsMatch) events = JSON.parse(eventsMatch[1].trim());
+    } catch (e) {
+      console.warn('[CloudSync] Parse error:', e);
+    }
+    if (bio || films || events) {
+      return { bio, films, events };
     }
     return null;
   }
@@ -1705,21 +1725,22 @@ const FanbaseStore = {
 `;
     }
 
-    async function writeDataToDisk() {
+    async function writeDataToGitHubAndStorage() {
       const bio = FanbaseStore.getBio();
       const films = FanbaseStore.getFilms();
       const events = FanbaseStore.getEvents();
       const payload = { bio, films, events, lastUpdated: new Date().toISOString() };
       const savedTargets = [];
 
-      // 1. LocalStorage Browser (Penyimpanan instan di perangkat)
-      savedTargets.push('LocalStorage Browser (Tersimpan Instan)');
+      // 1. LocalStorage Browser (Cache Instan)
+      savedTargets.push('LocalStorage Browser (Cache)');
 
-      // 2. Wajib Auto-Commit ke GitHub Repository (assets/js/data.js)
+      // 2. Commit ke GitHub Repository (Primary Cloud Database)
+      let ghResult = null;
       try {
-        const ghResult = await syncToGitHub(bio, films, events);
+        ghResult = await syncToGitHub(bio, films, events);
         if (ghResult && ghResult.success) {
-          savedTargets.push(`GitHub Repository (${ghResult.repo} commit: ${ghResult.commitSha})`);
+          savedTargets.push(`GitHub Repository (${ghResult.repo} [Commit ${ghResult.commitSha}])`);
         } else if (ghResult && !ghResult.success) {
           savedTargets.push(`GitHub Warning (${ghResult.reason})`);
         }
@@ -1727,7 +1748,7 @@ const FanbaseStore = {
         console.error('GitHub auto-sync error:', ghErr);
       }
 
-      // 3. Simpan ke Cloud Endpoint (/api/data) -> Mendukung Vercel & Netlify!
+      // 3. Simpan ke Cloud Endpoint (/api/data) jika di-host di Vercel/Netlify
       try {
         const resp = await fetch('/api/data', {
           method: 'POST',
@@ -1738,29 +1759,11 @@ const FanbaseStore = {
           const resJson = await resp.json().catch(() => ({}));
           if (resJson && resJson.engines && resJson.engines.length > 0) {
             savedTargets.push(`Vercel Cloud (${resJson.engines.join(', ')})`);
-          } else if (resJson && resJson.requiresStorage) {
-            savedTargets.push('Vercel API (Belum tersambung KV database)');
-          } else {
-            savedTargets.push('Cloud Storage (/api/data)');
           }
         }
       } catch (e) {}
 
-      // 4. Simpan ke Local Server (server.ps1 via /api/save)
-      if (isServerConnected) {
-        try {
-          const resp = await fetch('/api/save', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-          if (resp.ok && !savedTargets.some(t => t.includes('/api/data'))) {
-            savedTargets.push('Local Server (server.ps1)');
-          }
-        } catch (e) {}
-      }
-
-      // 5. Simpan ke Cloud REST API (JSONBin.io jika dikonfigurasi)
+      // 4. Simpan ke Cloud REST API (JSONBin.io jika dikonfigurasi)
       try {
         const rawCfg = localStorage.getItem('ax_cloud_config');
         if (rawCfg) {
@@ -1780,72 +1783,32 @@ const FanbaseStore = {
         }
       } catch (e) {}
 
-      // 6. Simpan ke Hard Disk via Browser File System Access API
-      if (projectDirHandle) {
-        try {
-          const code = generateDataJsCode(bio, films, events);
-          const assetsHandle = await projectDirHandle.getDirectoryHandle('assets', { create: true });
-          const jsHandle = await assetsHandle.getDirectoryHandle('js', { create: true });
-          const fileHandle = await jsHandle.getFileHandle('data.js', { create: true });
-          const writable = await fileHandle.createWritable();
-          await writable.write(code);
-          await writable.close();
-          savedTargets.push('Hard Disk Proyek (assets/js/data.js)');
-        } catch (e) {
-          console.error('File System write error:', e);
-        }
-      }
-
-      return savedTargets;
+      return { savedTargets, ghResult };
     }
 
     async function syncToDisk(customMsg) {
-      showSyncIndicator('Menyimpan ke LocalStorage & Meng-commit ke GitHub...');
+      showSyncIndicator('Meng-commit perubahan ke Cloud Database GitHub...');
       try {
-        const targets = await writeDataToDisk();
+        const { savedTargets, ghResult } = await writeDataToGitHubAndStorage();
         hideSyncIndicator();
-        if (targets && targets.length > 0) {
-          const hasGitHub = targets.some(t => t.includes('GitHub Repository'));
-          if (hasGitHub) {
-            alert(customMsg + "\n\n✅ PEMBARUAN WAJIB BERHASIL DISIMPAN:\n• " + targets.join("\n• ") + "\n\n🚀 GitHub telah diperbarui! Vercel & Netlify otomatis men-deploy versi terbaru.");
-          } else {
-            alert(customMsg + "\n\n💾 Tersimpan di LocalStorage Browser:\n• " + targets.join("\n• ") + "\n\n⚠️ Catatan GitHub: Periksa koneksi internet atau token GitHub Anda di tab 'GitHub & Cloud Storage'.");
-          }
+        if (ghResult && ghResult.success) {
+          alert(`${customMsg}\n\n🚀 DATABASE GITHUB TELAH DIPERBARUI!\n• Repositori: ${ghResult.repo}\n• File: assets/js/data.js\n• Commit SHA: ${ghResult.commitSha}\n\nSeluruh pengunjung website dan layanan hosting (Vercel/Netlify) otomatis menerima versi terbaru!`);
+        } else if (ghResult && !ghResult.success) {
+          alert(`${customMsg}\n\n💾 Data tersimpan di cache browser.\n\n⚠️ Catatan GitHub: ${ghResult.reason}\nSilakan periksa Token GitHub Anda di tab 'GitHub & Cloud Storage' agar perubahan ter-commit ke GitHub.`);
         } else {
-          alert(customMsg + "\n\n💾 Tersimpan di browser (LocalStorage).");
+          alert(`${customMsg}\n\n💾 Tersimpan di browser (LocalStorage).`);
         }
       } catch (err) {
         hideSyncIndicator();
-        alert(customMsg + "\n\n💾 Tersimpan di browser (LocalStorage).");
+        alert(`${customMsg}\n\n💾 Tersimpan di browser (LocalStorage).`);
       }
     }
 
-    async function manualSaveToFile() {
-      const targets = await writeDataToDisk();
-      if (targets && targets.length > 0) {
-        alert("✅ Data berhasil disimpan ke:\n• " + targets.join("\n• "));
-      } else {
-        exportDataJs();
-      }
-    }
-
-    function exportDataJs() {
-      const bio = FanbaseStore.getBio();
-      const films = FanbaseStore.getFilms();
-      const events = FanbaseStore.getEvents();
-
-      const fileContent = generateDataJsCode(bio, films, events);
-      const blob = new Blob([fileContent], { type: 'text/javascript' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'data.js';
-      a.click();
-      URL.revokeObjectURL(a.href);
-      alert('File data.js berhasil diunduh! Cukup pindahkan file ini ke folder assets/js/data.js.');
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
       checkAuth();
+      loadGitHubConfig();
+      loadCloudConfig();
+      await syncFromGitHub(true); // Tarik data live dari GitHub saat admin dibuka
       checkStorageStatus();
     });
   </script>
