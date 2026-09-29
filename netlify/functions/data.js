@@ -31,7 +31,31 @@ exports.handler = async (event, context) => {
 
     // 1. GET: Ambil data terbaru untuk pengunjung website & panel admin
     if (event.httpMethod === "GET") {
-      const data = await store.get("site_content", { type: "json" });
+      let data = null;
+      try {
+        data = await store.get("site_content", { type: "json" });
+      } catch (e) {}
+
+      // Fallback: Ambil data live dari GitHub Raw (Cloud Database Utama)
+      if (!data) {
+        try {
+          const ghResp = await fetch("https://raw.githubusercontent.com/kayangzzz969/adamam/main/assets/js/data.js?_t=" + Date.now());
+          if (ghResp.ok) {
+            const text = await ghResp.text();
+            const bioMatch = text.match(/const\s+DEFAULT_BIO\s*=\s*([\s\S]*?);\s*const\s+DEFAULT_FILMS/);
+            const filmsMatch = text.match(/const\s+DEFAULT_FILMS\s*=\s*([\s\S]*?);\s*const\s+DEFAULT_EVENTS/);
+            const eventsMatch = text.match(/const\s+DEFAULT_EVENTS\s*=\s*([\s\S]*?);\s*(?:\/\/|\/\*|const\s+FanbaseStore|$)/);
+            if (bioMatch || filmsMatch || eventsMatch) {
+              data = {
+                bio: bioMatch ? JSON.parse(bioMatch[1].trim()) : null,
+                films: filmsMatch ? JSON.parse(filmsMatch[1].trim()) : [],
+                events: eventsMatch ? JSON.parse(eventsMatch[1].trim()) : []
+              };
+            }
+          }
+        } catch (ghErr) {}
+      }
+
       return {
         statusCode: 200,
         headers,
