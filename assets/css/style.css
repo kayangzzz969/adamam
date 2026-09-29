@@ -1584,8 +1584,282 @@ body::before {
   animation: fadeInUp 0.6s ease forwards;
 }
 
-@media (max-width: 480px) {
-  .hero-headline { font-size: 21px; }
-  .cyber-title-gradient { font-size: 26px; }
-  .mecha-music-card { width: 100%; }
+/* ==========================================================================
+   MOBILE ANDROID RESPONSIVE LAYOUT (360px, 390px, 412px & <= 768px)
+   Perbaikan layout Android: Anti-mepet, Flex-wrap & Gap 12px, 16px Side Padding
+   Tampilan Desktop (> 768px) Tetap Terjaga Utuh Tanpa Perubahan
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* 1. Global Box-Sizing & Viewport Guard */
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+
+  .app-wrapper,
+  .desktop-wrapper {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 2. Semua h1, h2, p punya padding-left: 16px dan padding-right: 16px */
+  h1, h2, p {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Card components: semua card punya padding-left: 16px dan padding-right: 16px */
+  .card,
+  [class*="card"],
+  .film-card,
+  .event-card,
+  .mecha-music-card,
+  .autobot-quote-card,
+  .fact-card,
+  .about-avatar-card,
+  .admin-login-card,
+  .mini-poster-card,
+  .spec-box {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Cegah double-padding bila h1, h2, p berada di dalam card yang sudah ber-padding */
+  .card h1, .card h2, .card p,
+  [class*="card"] h1, [class*="card"] h2, [class*="card"] p,
+  .film-card p,
+  .event-card p,
+  .autobot-quote-card p,
+  .fact-card p,
+  .about-avatar-card h2,
+  .about-avatar-card p {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* 3. Gunakan flex-wrap: wrap dan gap: 12px pada container flex */
+  .cyber-nav {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    padding: 10px 16px !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .brand-badge {
+    justify-content: flex-start !important;
+  }
+
+  .nav-links {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    width: 100% !important;
+    justify-content: space-between !important;
+    box-sizing: border-box !important;
+  }
+
+  .nav-link-btn {
+    flex: 1 1 auto !important;
+    justify-content: center !important;
+    padding: 6px 8px !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+  }
+
+  .filter-bar {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    overflow-x: visible !important;
+    padding: 0 16px 8px !important;
+    box-sizing: border-box !important;
+  }
+
+  .film-meta-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+
+  .film-header {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    justify-content: space-between !important;
+  }
+
+  .event-details-bar {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+  }
+
+  .winner-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+  }
+
+  .admin-tabs {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+  }
+
+  .page-header-banner {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    padding: 24px 0 20px !important;
+    box-sizing: border-box !important;
+  }
+
+  .page-header-banner > div:first-child {
+    min-width: 0 !important;
+    flex: 1 1 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .page-header-banner .banner-badge {
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+  }
+
+  .actor-header-avatar {
+    margin-left: 16px !important;
+  }
+
+  .content-body {
+    padding: 16px 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .film-card {
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+    width: calc(100% - 32px) !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+  }
+
+  .film-content {
+    padding: 16px 0 !important;
+    width: 100% !important;
+  }
+
+  .film-header,
+  .film-role-badge,
+  .film-synopsis,
+  .film-meta-row {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .event-card {
+    margin-left: 16px !important;
+    margin-right: 16px !important;
+    width: calc(100% - 32px) !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .event-title {
+    padding-right: 0 !important;
+  }
+
+  .event-status-pill {
+    position: static !important;
+    display: inline-flex !important;
+    margin-bottom: 8px !important;
+  }
+
+  .admin-login-card {
+    margin: 30px 16px !important;
+    width: calc(100% - 32px) !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .slide-1-content {
+    padding: 20px 0 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .profile-top-section {
+    padding: 50px 0 20px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .bio-specs-grid {
+    padding: 0 16px !important;
+    gap: 12px !important;
+  }
+
+  .autobot-quote-card {
+    margin: 15px 16px 22px !important;
+    gap: 12px !important;
+  }
+
+  .mecha-music-card {
+    max-width: calc(100% - 32px) !important;
+    margin: 6px 16px 16px !important;
+    gap: 12px !important;
+  }
+
+  .mecha-badge {
+    max-width: calc(100% - 32px) !important;
+    font-size: 10px !important;
+    padding: 5px 10px !important;
+    text-align: center !important;
+  }
+
+  .bottom-cyber-bar {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    height: auto !important;
+    min-height: var(--bar-h) !important;
+    padding: 8px 16px !important;
+    font-size: 10px !important;
+    justify-content: center !important;
+  }
+
+  .about-hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    padding: 0 16px !important;
+  }
+
+  .about-avatar-card {
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  .timeline-container {
+    margin: 20px 16px 30px !important;
+  }
+
+  .modal-window {
+    width: calc(100% - 32px) !important;
+    margin: 20px 16px !important;
+    padding: 20px 16px !important;
+  }
+
+  .hero-headline { font-size: 21px !important; }
+  .cyber-title-gradient { font-size: 26px !important; }
+  .banner-title { font-size: 22px !important; }
 }
