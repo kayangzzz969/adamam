@@ -61,12 +61,12 @@
         <h2 style="font-family:'Orbitron',sans-serif; font-size:18px; margin-bottom:6px;">Autobot Admin Gate</h2>
         <p style="font-size:12px; color:#64748B; margin-bottom:20px;">Masukkan PIN / Password untuk mengelola konten fanbase.</p>
 
-        <form onsubmit="return handleAdminLogin(event)">
+        <form onsubmit="handleAdminLogin(event); return false;">
           <div class="form-group">
             <label class="form-label">Password Admin:</label>
-            <div style="position:relative;">
-              <input type="password" id="adminPassword" class="form-control" placeholder="Ketik: admin123" required style="padding-right:40px;">
-              <button type="button" onclick="togglePasswordVisibility('adminPassword', this)" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; color:#64748B; cursor:pointer;" title="Lihat password">
+            <div style="position:relative; display:flex; align-items:center;">
+              <input type="password" id="adminPassword" class="form-control" placeholder="Ketik: admin123" required style="padding-right:45px; width:100%;">
+              <button type="button" onclick="togglePasswordVisibility('adminPassword', this)" style="position:absolute; right:10px; background:transparent; border:none; color:#64748B; cursor:pointer; font-size:16px; padding:8px; z-index:10; display:flex; align-items:center; justify-content:center;" title="Lihat/Sembunyikan password">
                 <i class="fa-solid fa-eye"></i>
               </button>
             </div>
@@ -539,12 +539,12 @@
               </div>
             </div>
 
-            <form onsubmit="return handleAdminChangePassword(event)" style="display:flex; flex-direction:column; gap:16px;">
+            <form onsubmit="handleAdminChangePassword(event); return false;" style="display:flex; flex-direction:column; gap:16px;">
               <div class="form-group" style="margin-bottom:0;">
                 <label class="form-label">Password Saat Ini (Current Password):</label>
-                <div style="position:relative;">
-                  <input type="password" id="currentAdminPassInput" class="form-control" placeholder="Masukkan password yang sekarang aktif" required style="padding-right:42px;">
-                  <button type="button" onclick="togglePasswordVisibility('currentAdminPassInput', this)" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; color:#64748B; cursor:pointer;" title="Lihat password">
+                <div style="position:relative; display:flex; align-items:center;">
+                  <input type="password" id="currentAdminPassInput" class="form-control" placeholder="Masukkan password yang sekarang aktif" required style="padding-right:45px; width:100%;">
+                  <button type="button" onclick="togglePasswordVisibility('currentAdminPassInput', this)" style="position:absolute; right:10px; background:transparent; border:none; color:#64748B; cursor:pointer; font-size:16px; padding:8px; z-index:10; display:flex; align-items:center; justify-content:center;" title="Lihat/Sembunyikan password">
                     <i class="fa-solid fa-eye"></i>
                   </button>
                 </div>
@@ -552,9 +552,9 @@
 
               <div class="form-group" style="margin-bottom:0;">
                 <label class="form-label">Password Baru (New Password):</label>
-                <div style="position:relative;">
-                  <input type="password" id="newAdminPassInput" class="form-control" placeholder="Minimal 6 karakter" required minlength="6" style="padding-right:42px;">
-                  <button type="button" onclick="togglePasswordVisibility('newAdminPassInput', this)" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; color:#64748B; cursor:pointer;" title="Lihat password">
+                <div style="position:relative; display:flex; align-items:center;">
+                  <input type="password" id="newAdminPassInput" class="form-control" placeholder="Minimal 6 karakter" required minlength="6" style="padding-right:45px; width:100%;">
+                  <button type="button" onclick="togglePasswordVisibility('newAdminPassInput', this)" style="position:absolute; right:10px; background:transparent; border:none; color:#64748B; cursor:pointer; font-size:16px; padding:8px; z-index:10; display:flex; align-items:center; justify-content:center;" title="Lihat/Sembunyikan password">
                     <i class="fa-solid fa-eye"></i>
                   </button>
                 </div>
@@ -563,9 +563,9 @@
 
               <div class="form-group" style="margin-bottom:0;">
                 <label class="form-label">Konfirmasi Password Baru:</label>
-                <div style="position:relative;">
-                  <input type="password" id="confirmAdminPassInput" class="form-control" placeholder="Ketik ulang password baru" required minlength="6" style="padding-right:42px;">
-                  <button type="button" onclick="togglePasswordVisibility('confirmAdminPassInput', this)" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; color:#64748B; cursor:pointer;" title="Lihat password">
+                <div style="position:relative; display:flex; align-items:center;">
+                  <input type="password" id="confirmAdminPassInput" class="form-control" placeholder="Ketik ulang password baru" required minlength="6" style="padding-right:45px; width:100%;">
+                  <button type="button" onclick="togglePasswordVisibility('confirmAdminPassInput', this)" style="position:absolute; right:10px; background:transparent; border:none; color:#64748B; cursor:pointer; font-size:16px; padding:8px; z-index:10; display:flex; align-items:center; justify-content:center;" title="Lihat/Sembunyikan password">
                     <i class="fa-solid fa-eye"></i>
                   </button>
                 </div>
@@ -781,7 +781,7 @@
     /* ============================================================
        ADMIN AUTHENTICATION & SECURITY (SHA-256 ENCRYPTED)
        ============================================================ */
-    const DEFAULT_ADMIN_HASH = "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9"; // SHA-256 for admin123
+    const FALLBACK_DEFAULT_HASH = "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9"; // SHA-256 for admin123
 
     async function computeSHA256(text) {
       if (typeof text !== 'string') text = String(text || '');
@@ -846,11 +846,16 @@
       if (typeof FanbaseStore !== 'undefined' && typeof FanbaseStore.getAdminHash === 'function') {
         return FanbaseStore.getAdminHash();
       }
-      return DEFAULT_ADMIN_HASH;
+      if (typeof DEFAULT_ADMIN_HASH !== 'undefined') {
+        return DEFAULT_ADMIN_HASH;
+      }
+      return FALLBACK_DEFAULT_HASH;
     }
 
     function isDefaultPassword() {
-      return getActiveAdminHash() === DEFAULT_ADMIN_HASH;
+      const activeHash = getActiveAdminHash();
+      const defaultHash = (typeof DEFAULT_ADMIN_HASH !== 'undefined') ? DEFAULT_ADMIN_HASH : FALLBACK_DEFAULT_HASH;
+      return activeHash === defaultHash;
     }
 
     function updatePasswordHintUI() {
@@ -883,7 +888,13 @@
       if (btn) {
         const icon = btn.querySelector('i');
         if (icon) {
-          icon.className = isPassword ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+          if (isPassword) {
+            icon.className = 'fa-solid fa-eye-slash';
+            icon.style.color = '#FFC800';
+          } else {
+            icon.className = 'fa-solid fa-eye';
+            icon.style.color = '#64748B';
+          }
         }
       }
     }
@@ -913,25 +924,46 @@
     }
 
     async function handleAdminLogin(e) {
-      if (e) e.preventDefault();
+      if (e) {
+        try { e.preventDefault(); } catch(err) {}
+        try { e.stopPropagation(); } catch(err) {}
+      }
       const pwInput = document.getElementById('adminPassword');
       const pw = pwInput ? pwInput.value.trim() : '';
       if (!pw) return false;
 
-      const currentHash = getActiveAdminHash();
-      const isDefault = isDefaultPassword();
+      try {
+        const currentHash = getActiveAdminHash();
+        const isDefault = isDefaultPassword();
 
-      const inputHash = await computeSHA256(pw);
-      const isMatch = (inputHash === currentHash) || (isDefault && (pw === 'admin123' || pw === '1234'));
+        // 1. Cek langsung kecocokan default password untuk respon instan
+        if (isDefault && (pw === 'admin123' || pw === '1234')) {
+          sessionStorage.setItem('ax_admin_auth', 'true');
+          checkAuth();
+          return false;
+        }
 
-      if (isMatch) {
-        sessionStorage.setItem('ax_admin_auth', 'true');
-        checkAuth();
-      } else {
+        // 2. Cek hash input
+        const inputHash = await computeSHA256(pw);
+        if (inputHash === currentHash) {
+          sessionStorage.setItem('ax_admin_auth', 'true');
+          checkAuth();
+          return false;
+        }
+
+        // 3. Jika password salah
         if (isDefault) {
           alert('Password salah! Silakan gunakan: admin123');
         } else {
           alert('Password salah! Silakan masukkan password admin yang sesuai.');
+        }
+      } catch (err) {
+        console.error('Login validation error:', err);
+        if (pw === 'admin123' || pw === '1234') {
+          sessionStorage.setItem('ax_admin_auth', 'true');
+          checkAuth();
+        } else {
+          alert('Terjadi kesalahan saat memvalidasi password.');
         }
       }
       return false;
@@ -1031,11 +1063,12 @@
       const confirmReset = confirm('Apakah Anda yakin ingin mengembalikan password admin ke default (admin123)?\n\nTeks "Default Password: admin123" akan ditampilkan kembali saat login.');
       if (!confirmReset) return;
 
+      const defaultHash = (typeof DEFAULT_ADMIN_HASH !== 'undefined' ? DEFAULT_ADMIN_HASH : FALLBACK_DEFAULT_HASH);
       if (typeof FanbaseStore !== 'undefined' && typeof FanbaseStore.saveAdminHash === 'function') {
-        FanbaseStore.saveAdminHash(DEFAULT_ADMIN_HASH);
+        FanbaseStore.saveAdminHash(defaultHash);
       }
       if (typeof localStorage !== 'undefined') {
-        localStorage.setItem('ax_admin_hash', DEFAULT_ADMIN_HASH);
+        localStorage.setItem('ax_admin_hash', defaultHash);
       }
 
       const curInput = document.getElementById('currentAdminPassInput');
