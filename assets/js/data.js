@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 29/9/2026, 21.43.41
+ * Terakhir diperbarui melalui Panel Admin pada: 29/9/2026, 21.45.44
  */
 
 // Hash SHA-256 untuk password admin
@@ -48,19 +48,6 @@ const DEFAULT_FILMS = [
     "image": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&auto=format&fit=crop&q=80",
     "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     "synopsis": "FARIS (Emir Mahira), seorang damkar yang menanti kelahiran anak pertamanya, batal ke RS untuk damping istrinya karena harus membantu ARA (Luisa Adreena) mencari kado ulang tahun untuk ibunya. Perjalanan mereka menjadi petualangan seru yang mengajarkan banyak kebaikan juga memaknai kehilangan tak terduga."
-  },
-  {
-    "id": "film-2",
-    "title": "Satria Cilik & Mecha Titan",
-    "year": "2024",
-    "role": "Danu (Pilot Mecha Muda)",
-    "genre": "Aksi, Mecha, Fantasi",
-    "status": "Tersedia di Streaming",
-    "rating": "4.8 / 5.0",
-    "synopsis": "Ketika monster besi menyerang pesisir Nusantara, Danu terpilih secara tak sengaja menjadi pilot robot Mecha Titan generasi terbaru berkat refleks kilat dan keberaniannya.",
-    "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&auto=format&fit=crop&q=80",
-    "badge": "Box Office Hit",
-    "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
   },
   {
     "id": "film-3",
