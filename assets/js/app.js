@@ -444,7 +444,7 @@ function initCyberMeteors() {
 }
 
 /* ==========================================================================
-   DYNAMIC POPULATION FROM LOCALSTORAGE DATA
+   DYNAMIC POPULATION FROM STORE DATA (GITHUB LIVE / MEMORY)
    ========================================================================== */
 function loadHomeDynamicData() {
   if (typeof FanbaseStore === 'undefined') return;
