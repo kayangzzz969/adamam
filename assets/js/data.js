@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 29/9/2026, 20.56.49
+ * Terakhir diperbarui melalui Panel Admin pada: 29/9/2026, 20.56.58
  */
 
 const DEFAULT_BIO = {
@@ -34,19 +34,6 @@ const DEFAULT_BIO = {
 };
 
 const DEFAULT_FILMS = [
-  {
-    "id": "film-3",
-    "title": "Petualangan Rahasia Musim Panas",
-    "year": "2024",
-    "role": "Bima (Penyelidik Cerdik)",
-    "genre": "Komedi, Petualangan, Sahabat",
-    "status": "Streaming Exclusive",
-    "rating": "4.7 / 5.0",
-    "synopsis": "Liburan sekolah berubah menjadi perburuan teka-teki harta karun berteknologi tinggi ketika Bima dan teman-temannya menemukan peta peninggalan sang kakek di loteng tua.",
-    "image": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&auto=format&fit=crop&q=80",
-    "badge": "Festival Film Anak",
-    "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-  },
   {
     "id": "film-4",
     "title": "Detektif Cilik: Misteri Jam Robot",
