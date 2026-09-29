@@ -353,8 +353,8 @@
                     <i class="fa-brands fa-github"></i>
                   </span>
                   <div>
-                    <strong style="font-family:'Orbitron',sans-serif; font-size:15px; color:#60A5FA;">Sinkronisasi GitHub & LocalStorage (Auto-Update)</strong>
-                    <div style="font-size:11px; color:#94A3B8;">Setiap kali data disimpan di admin, otomatis ter-commit ke GitHub & LocalStorage!</div>
+                    <strong style="font-family:'Orbitron',sans-serif; font-size:15px; color:#60A5FA;">Sinkronisasi GitHub Cloud Database (Direct-to-GitHub)</strong>
+                    <div style="font-size:11px; color:#94A3B8;">Setiap kali data disimpan di admin, otomatis ter-commit langsung ke GitHub! (LocalStorage tidak digunakan)</div>
                   </div>
                 </div>
                 <span id="githubStatusBadge" style="font-size:11px; padding:4px 12px; border-radius:12px; font-weight:800; background:#064E3B; color:#34D399; border:1px solid #059669;">
@@ -362,7 +362,7 @@
                 </span>
               </div>
               <p style="font-size:12px; color:#CBD5E1; line-height:1.6; margin-bottom:14px;">
-                Setiap kali Anda menekan tombol simpan film, event, atau profil, panel admin akan <strong>langsung menulis ke LocalStorage browser</strong> dan <strong>membuat commit baru di repositori GitHub Anda</strong> (file <code>assets/js/data.js</code>). Layanan hosting (Vercel/Netlify) yang terhubung ke GitHub akan otomatis men-deploy versi terbaru!
+                Setiap kali Anda menekan tombol simpan film, event, atau profil, panel admin akan <strong>membuat commit baru langsung di repositori GitHub Anda</strong> (file <code>assets/js/data.js</code>) tanpa menyimpan ke LocalStorage browser. Layanan hosting (Vercel/Netlify) yang terhubung ke GitHub akan otomatis men-deploy versi terbaru!
               </p>
 
               <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;">
@@ -672,7 +672,7 @@
   </div>
 
   <!-- ============================================================
-       LOADING OVERLAY SINKRONISASI WAJIB GITHUB & LOCALSTORAGE
+       LOADING OVERLAY DIRECT GITHUB SYNC
        ============================================================ -->
   <div id="syncLoadingOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(15,23,42,0.8); z-index:99999; justify-content:center; align-items:center; backdrop-filter:blur(5px);">
     <div style="background:#FFF; padding:28px 36px; border-radius:18px; border:2px solid var(--yellow-primary); box-shadow:0 15px 35px rgba(0,0,0,0.4); text-align:center; max-width:400px; width:90%;">
@@ -680,10 +680,10 @@
         <i class="fa-solid fa-cloud-arrow-up fa-bounce"></i>
       </div>
       <div style="font-family:'Orbitron',sans-serif; font-size:16px; font-weight:900; color:var(--cyber-dark); margin-bottom:8px;">
-        Sinkronisasi Data Wajib
+        Sinkronisasi GitHub Cloud Database
       </div>
       <div style="font-size:13px; color:#64748B; line-height:1.6;" id="syncLoadingMsg">
-        Menyimpan ke LocalStorage & Commit ke GitHub...
+        Meng-commit perubahan langsung ke GitHub...
       </div>
       <div style="margin-top:14px; display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:700; background:#F1F5F9; color:#475569; padding:5px 12px; border-radius:20px;">
         <i class="fa-brands fa-github"></i> kayangzzz969/adamam
@@ -1568,67 +1568,58 @@ const DEFAULT_FILMS = ${JSON.stringify(films, null, 2)};
 
 const DEFAULT_EVENTS = ${JSON.stringify(events, null, 2)};
 
+// Bersihkan cache lama di localStorage agar data 100% murni dari GitHub
+if (typeof localStorage !== 'undefined') {
+  try {
+    localStorage.removeItem("ax_bio");
+    localStorage.removeItem("ax_films");
+    localStorage.removeItem("ax_events");
+  } catch (e) {}
+}
+
+// In-Memory Live Store (Single Source of Truth: GitHub Repository)
+let _currentBio = null;
+let _currentFilms = null;
+let _currentEvents = null;
+
 // Helper Functions
 const FanbaseStore = {
   getBio: function() {
-    const raw = localStorage.getItem("ax_bio");
-    if (!raw) {
-      localStorage.setItem("ax_bio", JSON.stringify(DEFAULT_BIO));
-      return DEFAULT_BIO;
-    }
-    try {
-      const parsed = JSON.parse(raw);
-      const merged = Object.assign({}, DEFAULT_BIO, parsed);
-      if (!merged.fanbaseName || merged.fanbaseName === "XavierBots") {
-        merged.fanbaseName = "AdamUnited";
-        localStorage.setItem("ax_bio", JSON.stringify(merged));
-      }
-      return merged;
-    } catch (e) {
-      return DEFAULT_BIO;
-    }
+    return _currentBio || DEFAULT_BIO;
   },
-  saveBio: function(bio) {
-    localStorage.setItem("ax_bio", JSON.stringify(bio));
+  saveBio: function(bio, options) {
+    _currentBio = Object.assign({}, DEFAULT_BIO, bio);
+    if (options && options.allowLocalStorage === true && typeof localStorage !== 'undefined') {
+      localStorage.setItem("ax_bio", JSON.stringify(_currentBio));
+    }
   },
   getFilms: function() {
-    const raw = localStorage.getItem("ax_films");
-    if (!raw) {
-      localStorage.setItem("ax_films", JSON.stringify(DEFAULT_FILMS));
-      return DEFAULT_FILMS;
-    }
-    try {
-      const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-      return DEFAULT_FILMS;
-    } catch (e) {
-      return DEFAULT_FILMS;
-    }
+    return _currentFilms || DEFAULT_FILMS;
   },
-  saveFilms: function(films) {
-    localStorage.setItem("ax_films", JSON.stringify(films));
+  saveFilms: function(films, options) {
+    _currentFilms = Array.isArray(films) ? films.slice() : DEFAULT_FILMS;
+    if (options && options.allowLocalStorage === true && typeof localStorage !== 'undefined') {
+      localStorage.setItem("ax_films", JSON.stringify(_currentFilms));
+    }
   },
   getEvents: function() {
-    const raw = localStorage.getItem("ax_events");
-    if (!raw) {
+    return _currentEvents || DEFAULT_EVENTS;
+  },
+  saveEvents: function(events, options) {
+    _currentEvents = Array.isArray(events) ? events.slice() : DEFAULT_EVENTS;
+    if (options && options.allowLocalStorage === true && typeof localStorage !== 'undefined') {
+      localStorage.setItem("ax_events", JSON.stringify(_currentEvents));
+    }
+  },
+  resetToDefault: function(options) {
+    _currentBio = Object.assign({}, DEFAULT_BIO);
+    _currentFilms = DEFAULT_FILMS.slice();
+    _currentEvents = DEFAULT_EVENTS.slice();
+    if (options && options.allowLocalStorage === true && typeof localStorage !== 'undefined') {
+      localStorage.setItem("ax_bio", JSON.stringify(DEFAULT_BIO));
+      localStorage.setItem("ax_films", JSON.stringify(DEFAULT_FILMS));
       localStorage.setItem("ax_events", JSON.stringify(DEFAULT_EVENTS));
-      return DEFAULT_EVENTS;
     }
-    try {
-      const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-      return DEFAULT_EVENTS;
-    } catch (e) {
-      return DEFAULT_EVENTS;
-    }
-  },
-  saveEvents: function(events) {
-    localStorage.setItem("ax_events", JSON.stringify(events));
-  },
-  resetToDefault: function() {
-    localStorage.setItem("ax_bio", JSON.stringify(DEFAULT_BIO));
-    localStorage.setItem("ax_films", JSON.stringify(DEFAULT_FILMS));
-    localStorage.setItem("ax_events", JSON.stringify(DEFAULT_EVENTS));
   },
   // Sinkronisasi otomatis dari Cloud Database (GitHub Raw & Fallbacks)
   initCloudSync: async function(onUpdatedCallback) {
@@ -1666,43 +1657,19 @@ const FanbaseStore = {
       } catch (e) {}
     }
 
-    // 3. Cek Cloud Storage Mandiri (JSONBin.io) jika dikonfigurasi
-    if (!cloudData) {
-      try {
-        const rawCfg = localStorage.getItem('ax_cloud_config');
-        if (rawCfg) {
-          const cfg = JSON.parse(rawCfg);
-          if (cfg.binId) {
-            const headers = {};
-            if (cfg.apiKey) headers['X-Master-Key'] = cfg.apiKey;
-            if (cfg.accessKey) headers['X-Access-Key'] = cfg.accessKey;
-
-            const resp = await fetch("https://api.jsonbin.io/v3/b/" + cfg.binId + "/latest", { headers });
-            if (resp.ok) {
-              const resJson = await resp.json();
-              if (resJson && resJson.record) {
-                cloudData = resJson.record;
-                console.log('[CloudSync] Data berhasil disinkronkan dari Cloud Storage JSONBin.');
-              }
-            }
-          }
-        }
-      } catch (e) {}
-    }
-
-    // Jika cloudData ditemukan, perbarui cache localStorage & jalankan callback
+    // Jika cloudData ditemukan, perbarui cache in-memory & jalankan callback (TIDAK menyentuh LocalStorage)
     if (cloudData) {
       let updated = false;
       if (cloudData.bio) {
-        localStorage.setItem("ax_bio", JSON.stringify(cloudData.bio));
+        _currentBio = Object.assign({}, DEFAULT_BIO, cloudData.bio);
         updated = true;
       }
       if (cloudData.films && Array.isArray(cloudData.films)) {
-        localStorage.setItem("ax_films", JSON.stringify(cloudData.films));
+        _currentFilms = cloudData.films.slice();
         updated = true;
       }
       if (cloudData.events && Array.isArray(cloudData.events)) {
-        localStorage.setItem("ax_events", JSON.stringify(cloudData.events));
+        _currentEvents = cloudData.events.slice();
         updated = true;
       }
       if (updated && typeof onUpdatedCallback === 'function') {
@@ -1743,10 +1710,7 @@ const FanbaseStore = {
       const payload = { bio, films, events, lastUpdated: new Date().toISOString() };
       const savedTargets = [];
 
-      // 1. LocalStorage Browser (Cache Instan)
-      savedTargets.push('LocalStorage Browser (Cache)');
-
-      // 2. Commit ke GitHub Repository (Primary Cloud Database)
+      // 1. Commit ke GitHub Repository (Satu-satunya Database Utama Cloud)
       let ghResult = null;
       try {
         ghResult = await syncToGitHub(bio, films, events);
@@ -1851,32 +1815,32 @@ const FanbaseStore = {
     }
 
     async function syncToDisk(customMsg) {
-      showSyncIndicator('Meng-commit otomatis ke Cloud Database GitHub...');
+      showSyncIndicator('Meng-commit otomatis langsung ke GitHub...');
       try {
         const { savedTargets, ghResult } = await writeDataToGitHubAndStorage();
         hideSyncIndicator();
         if (ghResult && ghResult.success) {
           const statusText = document.getElementById('storageStatusText');
           if (statusText) {
-            statusText.innerHTML = `🟢 <strong>Live & Auto-Synced!</strong> Terakhir tersimpan otomatis ke GitHub: Commit <code>${ghResult.commitSha}</code> (${new Date().toLocaleTimeString('id-ID')}).`;
+            statusText.innerHTML = `🟢 <strong>Live & Auto-Synced!</strong> Terakhir tersimpan otomatis ke GitHub: Commit <code>${ghResult.commitSha}</code> (${new Date().toLocaleTimeString('id-ID')}). LocalStorage tidak disentuh.`;
           }
           showCyberToast(
             'AUTO-COMMIT BERHASIL',
-            `<strong>${customMsg}</strong><br>Perubahan telah otomatis di-commit ke <strong>GitHub (${ghResult.repo})</strong> [Commit: ${ghResult.commitSha}] dan langsung live!`,
+            `<strong>${customMsg}</strong><br>Perubahan telah otomatis di-commit ke <strong>GitHub (${ghResult.repo})</strong> [Commit: ${ghResult.commitSha}] dan langsung live! LocalStorage tidak disentuh.`,
             'success'
           );
         } else if (ghResult && !ghResult.success) {
           showCyberToast(
             'PERINGATAN GITHUB',
-            `<strong>${customMsg}</strong><br>Tersimpan di browser, tetapi gagal auto-commit ke GitHub: ${ghResult.reason}`,
+            `<strong>${customMsg}</strong><br>Gagal auto-commit ke GitHub: ${ghResult.reason}. Periksa koneksi atau token.`,
             'error'
           );
         } else {
-          showCyberToast('TERSINKRONISASI', `<strong>${customMsg}</strong><br>Tersimpan di browser.`, 'success');
+          showCyberToast('INFO', `<strong>${customMsg}</strong><br>Perubahan disimpan ke memori sesi.`, 'success');
         }
       } catch (err) {
         hideSyncIndicator();
-        showCyberToast('TERSINKRONISASI', `<strong>${customMsg}</strong><br>Tersimpan di browser.`, 'success');
+        showCyberToast('INFO', `<strong>${customMsg}</strong><br>Perubahan selesai diproses.`, 'success');
       }
     }
 
