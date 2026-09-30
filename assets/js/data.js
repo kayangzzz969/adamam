@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 29/9/2026, 22.01.20
+ * Terakhir diperbarui melalui Panel Admin pada: 30/9/2026, 20.19.15
  */
 
 // Hash SHA-256 untuk password admin
@@ -10,12 +10,12 @@ const DEFAULT_ADMIN_HASH = "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822
 const DEFAULT_BIO = {
   "name": "Adam Xavier",
   "nickname": "Adam / Xavi",
-  "birthdate": "15 Mei 2014",
-  "age": 12,
+  "birthdate": "28 Agustus 2018",
+  "age": 8,
   "domicile": "Jakarta, Indonesia",
   "fanbaseName": "AdamUnited",
   "tagline": "The Young Cyber Hero",
-  "profession": "Aktor Cilik • Voice Actor • Robot Enthusiast",
+  "profession": "Aktor Cilik •",
   "favoriteRobot": "Bumblebee & Optimus Prime (Transformers)",
   "hobbies": [
     "Bermain Robotic & LEGO Transformers",
