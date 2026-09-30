@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 30/9/2026, 20.19.15
+ * Terakhir diperbarui melalui Panel Admin pada: 30/9/2026, 20.21.57
  */
 
 // Hash SHA-256 untuk password admin
@@ -9,13 +9,13 @@ const DEFAULT_ADMIN_HASH = "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822
 
 const DEFAULT_BIO = {
   "name": "Adam Xavier",
-  "nickname": "Adam / Xavi",
+  "nickname": "Adam",
   "birthdate": "28 Agustus 2018",
   "age": 8,
   "domicile": "Jakarta, Indonesia",
   "fanbaseName": "AdamUnited",
-  "tagline": "The Young Cyber Hero",
-  "profession": "Aktor Cilik •",
+  "tagline": "-",
+  "profession": "Aktor Cilik",
   "favoriteRobot": "Bumblebee & Optimus Prime (Transformers)",
   "hobbies": [
     "Bermain Robotic & LEGO Transformers",
@@ -23,10 +23,10 @@ const DEFAULT_BIO = {
     "Piano & Drum",
     "Coding Game"
   ],
-  "motto": "Transform and Rise Up! Setiap peran adalah petualangan baru.",
-  "about1": "Adam Xavier lahir di Jakarta pada 15 Mei 2014. Sejak balita, Adam memiliki ketertarikan luar biasa terhadap figur robot, animasi sains fiksi, dan seni peran. Memulai langkah pertamanya di industri hiburan pada usia 7 tahun, kepribadian Adam yang santun, ekspresif, dan berjiwa petualang langsung memikat hati para sutradara serta penonton Indonesia.",
-  "about2": "Terinspirasi oleh karakter favoritnya, Bumblebee dan Optimus Prime, Adam selalu memegang teguh prinsip keberanian dan kerja keras. Di lokasi syuting film laga maupun drama anak, Adam dikenal sebagai aktor cilik yang penuh dedikasi, mampu melakukan adegan aksi dengan bimbingan pelatih, namun tetap ceria dan rajin belajar di sela waktu syuting.",
-  "quoteInspiration": "Transform and Rise Up! Di setiap peran baru, kita belajar memahami perasaan orang lain dan bertransformasi menjadi versi terbaik dari diri kita sendiri.",
+  "motto": "-",
+  "about1": "-",
+  "about2": "-",
+  "quoteInspiration": "-",
   "avatar": "assets/images/adam_avatar.jpeg",
   "socials": {
     "instagram": "https://instagram.com",
