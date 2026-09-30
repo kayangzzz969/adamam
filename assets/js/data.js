@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 30/9/2026, 20.21.57
+ * Terakhir diperbarui melalui Panel Admin pada: 30/9/2026, 20.50.52
  */
 
 // Hash SHA-256 untuk password admin
@@ -24,7 +24,7 @@ const DEFAULT_BIO = {
     "Coding Game"
   ],
   "motto": "-",
-  "about1": "-",
+  "about1": "Adam Xavier adalah seorang aktor cilik dan bintang iklan (TVC) asal Indonesia yang tengah naik daun berkat kemampuan aktingnya yang natural.\n\n • Bakat Akting: Ia menuai banyak pujian dari sineas perfilman karena kemampuannya melakukan adegan emosional (seperti menangis) secara spontan dan alami tanpa bantuan alat pemancing air mata.",
   "about2": "-",
   "quoteInspiration": "-",
   "avatar": "assets/images/adam_avatar.jpeg",
