@@ -463,6 +463,28 @@ function loadHomeDynamicData() {
   const avatarEl = document.getElementById('indexAvatarImg');
   if (avatarEl && bio.avatar) avatarEl.src = bio.avatar;
 
+  // Populate Music Anthem Player (Slide 1)
+  const music = (typeof FanbaseStore.getMusic === 'function') ? FanbaseStore.getMusic() : (bio.music || null);
+  if (music) {
+    const titleEl = document.querySelector('.mecha-music-card .music-title');
+    if (titleEl && music.title) titleEl.textContent = music.title;
+
+    const artistEl = document.querySelector('.mecha-music-card .music-artist');
+    if (artistEl && music.artist) artistEl.textContent = music.artist;
+
+    const audioEl = document.getElementById('realAudioPlayer');
+    if (audioEl && music.url) {
+      const currentSrc = audioEl.getAttribute('data-current-src') || audioEl.querySelector('source')?.getAttribute('src');
+      if (currentSrc !== music.url) {
+        audioEl.setAttribute('data-current-src', music.url);
+        const sourceEl = audioEl.querySelector('source');
+        if (sourceEl) sourceEl.setAttribute('src', music.url);
+        audioEl.src = music.url;
+        audioEl.load();
+      }
+    }
+  }
+
   // Populate Slide 2 Bio
   const actorNameEl = document.getElementById('bioActorName');
   if (actorNameEl) actorNameEl.textContent = bio.name;
