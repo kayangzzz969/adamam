@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 1/10/2026, 21.30.46
+ * Terakhir diperbarui melalui Panel Admin pada: 1/10/2026, 21.35.39
  */
 
 // Hash SHA-256 untuk password admin
@@ -9,13 +9,13 @@ const DEFAULT_ADMIN_HASH = "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822
 
 const DEFAULT_BIO = {
   "name": "Adam Xavier",
-  "nickname": "Adam / Xavi",
-  "birthdate": "15 Mei 2014",
-  "age": 12,
+  "nickname": "Adam",
+  "birthdate": "28 Agustus 2018",
+  "age": 7,
   "domicile": "Jakarta, Indonesia",
   "fanbaseName": "AdamUnited",
   "tagline": "The Young Cyber Hero",
-  "profession": "Aktor Cilik • Voice Actor • Robot Enthusiast",
+  "profession": "Aktor Cilik • Voice Actor",
   "favoriteRobot": "Bumblebee & Optimus Prime (Transformers)",
   "hobbies": [
     "Bermain Robotic & LEGO Transformers",
@@ -23,10 +23,10 @@ const DEFAULT_BIO = {
     "Piano & Drum",
     "Coding Game"
   ],
-  "motto": "Transform and Rise Up! Setiap peran adalah petualangan baru.",
-  "about1": "Adam Xavier lahir di Jakarta pada 15 Mei 2014. Sejak balita, Adam memiliki ketertarikan luar biasa terhadap figur robot, animasi sains fiksi, dan seni peran. Memulai langkah pertamanya di industri hiburan pada usia 7 tahun, kepribadian Adam yang santun, ekspresif, dan berjiwa petualang langsung memikat hati para sutradara serta penonton Indonesia.",
-  "about2": "Terinspirasi oleh karakter favoritnya, Bumblebee dan Optimus Prime, Adam selalu memegang teguh prinsip keberanian dan kerja keras. Di lokasi syuting film laga maupun drama anak, Adam dikenal sebagai aktor cilik yang penuh dedikasi, mampu melakukan adegan aksi dengan bimbingan pelatih, namun tetap ceria dan rajin belajar di sela waktu syuting.",
-  "quoteInspiration": "Transform and Rise Up! Di setiap peran baru, kita belajar memahami perasaan orang lain dan bertransformasi menjadi versi terbaik dari diri kita sendiri.",
+  "motto": "-",
+  "about1": "• Akting yang Natural dan Ekspresif: Adam dinilai memiliki kemampuan akting yang sangat organik. Salah satu kelebihan utamanya yang dipuji oleh sutradara dan produser adalah kemampuannya untuk melakukan adegan emosional, seperti menangis secara spontan tanpa bantuan alat bantu.\n\n• Kepribadian yang Ceria di Lokasi Syuting: Meskipun mampu berakting serius saat kamera menyala, Adam dikenal sebagai anak yang periang di dunia nyata. Ia mudah membaur dan membangun kedekatan (chemistry) dengan aktor lawan mainnya, contohnya lewat aktivitas bermain bersama di sela-sela syuting.\n\n• Penghidup Suasana: Kehadiran Adam dalam film drama keluarga dinilai sukses menghidupkan dinamika cerita dan memberikan warna tersendiri bagi penonton.",
+  "about2": "-",
+  "quoteInspiration": "-",
   "avatar": "assets/images/adam_avatar.jpeg",
   "music": {
     "title": "Transformers: Cyber Spark of Courage",
