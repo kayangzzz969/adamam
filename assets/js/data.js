@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 30/9/2026, 20.50.52
+ * Terakhir diperbarui melalui Panel Admin pada: 1/10/2026, 19.25.25
  */
 
 // Hash SHA-256 untuk password admin
@@ -91,19 +91,6 @@ const DEFAULT_FILMS = [
 ];
 
 const DEFAULT_EVENTS = [
-  {
-    "id": "event-1",
-    "title": "Transformers Movie Night & Meet Adam Xavier",
-    "date": "18 Oktober 2026",
-    "time": "14:00 - 18:00 WIB",
-    "location": "Cyber Arena Cineplex & Live Stream Zoom",
-    "status": "Upcoming",
-    "badge": "Akan Datang",
-    "description": "Nonton bareng film Transformers favorit bersama Adam Xavier! Dilengkapi sesi tanya-jawab interaktif, pameran kostum mecha Bumblebee, dan photo booth eksklusif untuk seluruh anggota AdamUnited.",
-    "registrationOpen": true,
-    "quota": "150 Kursi Terbatas",
-    "winners": []
-  },
   {
     "id": "event-2",
     "title": "Lomba Desain Robot Mecha & Fanart AdamUnited",
