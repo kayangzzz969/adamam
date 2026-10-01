@@ -159,6 +159,9 @@
           <button class="admin-tab-btn" onclick="switchAdminTab('bioTab', this)">
             <i class="fa-solid fa-user-astronaut"></i> Kelola Halaman Tentang (tentang.html)
           </button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('musicTab', this)">
+            <i class="fa-solid fa-music"></i> Kelola Musik Web
+          </button>
           <button class="admin-tab-btn" onclick="switchAdminTab('cloudTab', this)">
             <i class="fa-brands fa-github"></i> GitHub & Cloud Storage
           </button>
@@ -336,6 +339,150 @@
                 <i class="fa-solid fa-floppy-disk"></i> Simpan Perubahan Halaman Tentang & Profil
               </button>
             </form>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             TAB: KELOLA MUSIK WEB (ANTHEM PLAYER)
+             ========================================== -->
+        <div id="musicTab" class="tab-pane" style="display:none;">
+          <div style="background:#FFF; padding:24px; border-radius:16px; border:1px solid var(--border-light); max-width:850px;">
+            
+            <!-- Header Banner -->
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div style="width:44px; height:44px; border-radius:12px; background:linear-gradient(135deg, #FFC800 0%, #D97706 100%); display:flex; align-items:center; justify-content:center; color:#0F172A; font-size:22px; box-shadow:0 4px 12px rgba(255,200,0,0.3);">
+                  <i class="fa-solid fa-music"></i>
+                </div>
+                <div>
+                  <h3 style="font-family:'Orbitron',sans-serif; font-size:18px; color:var(--cyber-dark); margin:0;">
+                    Kelola Musik & Anthem Website
+                  </h3>
+                  <p style="font-size:12px; color:#64748B; margin:4px 0 0 0;">
+                    Atur lagu latar / anthem pemutar musik Bumblebee yang diputar di halaman utama (<a href="index.html" target="_blank" style="color:#2563EB; font-weight:700;">index.html</a>).
+                  </p>
+                </div>
+              </div>
+              <div style="font-size:11px; background:#0F172A; color:#38BDF8; padding:6px 14px; border-radius:20px; font-weight:700; display:inline-flex; align-items:center; gap:6px;">
+                <i class="fa-brands fa-github"></i> Auto-Sync to GitHub
+              </div>
+            </div>
+
+            <!-- CARD 1: LIVE PREVIEW PLAYER DI ADMIN -->
+            <div style="background:linear-gradient(135deg, #0F172A 0%, #1E293B 100%); border:2px solid var(--yellow-primary); border-radius:14px; padding:20px; color:#FFF; margin-bottom:24px; box-shadow:0 8px 25px rgba(0,0,0,0.3);">
+              <div style="font-size:11px; font-family:'Orbitron',sans-serif; font-weight:800; color:var(--yellow-accent); text-transform:uppercase; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+                <i class="fa-solid fa-headphones-simple"></i> PREVIEW PEMUTAR LAGU SAAT INI (LIVE)
+              </div>
+              <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:16px;">
+                <div style="width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg, #FFC800 0%, #F59E0B 100%); color:#0F172A; display:flex; align-items:center; justify-content:center; font-size:24px; box-shadow:0 0 15px rgba(255,200,0,0.4);">
+                  <i class="fa-solid fa-compact-disc fa-spin" style="animation-duration: 4s;" id="adminMusicDiscIcon"></i>
+                </div>
+                <div style="flex:1; min-width:200px;">
+                  <div style="font-family:'Orbitron',sans-serif; font-size:15px; font-weight:900; color:#FFF;" id="previewMusicTitle">
+                    Transformers: Cyber Spark of Courage
+                  </div>
+                  <div style="font-size:12px; color:#94A3B8; margin-top:2px;" id="previewMusicArtist">
+                    Adam Xavier Official Fanbase Anthem
+                  </div>
+                  <div style="font-size:11px; color:#60A5FA; margin-top:4px; word-break:break-all;" id="previewMusicUrl">
+                    <i class="fa-solid fa-link"></i> assets/audio/anthem.mp3
+                  </div>
+                </div>
+              </div>
+
+              <!-- HTML5 Mini Audio Player untuk tes langsung di admin -->
+              <div style="background:rgba(255,255,255,0.06); padding:10px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.1);">
+                <audio id="adminAudioPreview" controls style="width:100%; height:36px; border-radius:8px;">
+                  <source src="assets/audio/anthem.mp3" type="audio/mpeg" id="adminAudioPreviewSource">
+                  Browser Anda tidak mendukung elemen audio.
+                </audio>
+              </div>
+            </div>
+
+            <!-- CARD 2: PRESET LAGU CEPAT (READY-TO-USE) -->
+            <div style="background:#F8FAFC; border:1.5px solid #E2E8F0; border-radius:14px; padding:18px; margin-bottom:24px;">
+              <div style="font-family:'Orbitron',sans-serif; font-size:13px; font-weight:800; color:var(--cyber-dark); margin-bottom:6px; display:flex; align-items:center; gap:8px;">
+                <i class="fa-solid fa-wand-magic-sparkles" style="color:var(--yellow-accent);"></i> Pilihan Cepat (Preset Lagu Populer)
+              </div>
+              <p style="font-size:12px; color:#64748B; margin-bottom:12px;">
+                Klik salah satu preset di bawah untuk mengisi formulir lagu secara instan:
+              </p>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:10px;">
+                
+                <!-- Preset 1 -->
+                <button type="button" class="preset-song-btn" onclick="applyMusicPreset('anthem')" style="text-align:left; background:#FFF; border:1.5px solid #CBD5E1; border-radius:10px; padding:12px; cursor:pointer; transition:all 0.2s ease;">
+                  <div style="font-weight:800; font-size:12px; color:#0F172A; display:flex; align-items:center; gap:6px;">
+                    <i class="fa-solid fa-robot" style="color:#D97706;"></i> Cyber Spark of Courage
+                  </div>
+                  <div style="font-size:11px; color:#64748B; margin-top:2px;">Official Anthem Adam Xavier (Lokal MP3)</div>
+                </button>
+
+                <!-- Preset 2 -->
+                <button type="button" class="preset-song-btn" onclick="applyMusicPreset('autobot_theme')" style="text-align:left; background:#FFF; border:1.5px solid #CBD5E1; border-radius:10px; padding:12px; cursor:pointer; transition:all 0.2s ease;">
+                  <div style="font-weight:800; font-size:12px; color:#0F172A; display:flex; align-items:center; gap:6px;">
+                    <i class="fa-solid fa-shield-halved" style="color:#2563EB;"></i> Autobots Rise - Epic Theme
+                  </div>
+                  <div style="font-size:11px; color:#64748B; margin-top:2px;">Cinematic Mecha Orchestra</div>
+                </button>
+
+                <!-- Preset 3 -->
+                <button type="button" class="preset-song-btn" onclick="applyMusicPreset('cyber_beat')" style="text-align:left; background:#FFF; border:1.5px solid #CBD5E1; border-radius:10px; padding:12px; cursor:pointer; transition:all 0.2s ease;">
+                  <div style="font-weight:800; font-size:12px; color:#0F172A; display:flex; align-items:center; gap:6px;">
+                    <i class="fa-solid fa-bolt" style="color:#10B981;"></i> Cyber Hero Beats
+                  </div>
+                  <div style="font-size:11px; color:#64748B; margin-top:2px;">Upbeat Electronic Future Bass</div>
+                </button>
+
+              </div>
+            </div>
+
+            <!-- FORM GANTI LAGU -->
+            <form onsubmit="handleSaveMusic(event); return false;" style="display:flex; flex-direction:column; gap:16px;">
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label">Judul Lagu (Song Title):</label>
+                <input type="text" id="musicTitleInput" class="form-control" placeholder="Contoh: Transformers: Cyber Spark of Courage" required>
+              </div>
+
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label">Artis / Keterangan Subtitle:</label>
+                <input type="text" id="musicArtistInput" class="form-control" placeholder="Contoh: Adam Xavier Official Fanbase Anthem" required>
+              </div>
+
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label">Sumber File Audio / URL Link:</label>
+                <div style="display:flex; gap:8px;">
+                  <input type="text" id="musicUrlInput" class="form-control" placeholder="Contoh: assets/audio/anthem.mp3 atau https://.../lagu.mp3" required style="flex:1;">
+                  <button type="button" class="btn-cyber btn-cyber-outline btn-cyber-sm" onclick="testPlayEnteredMusic()" title="Tes Mainkan Audio Ini">
+                    <i class="fa-solid fa-play"></i> Tes Audio
+                  </button>
+                </div>
+                <div style="font-size:11px; color:#64748B; margin-top:4px;">
+                  💡 Masukkan path file audio lokal (misal: <code>assets/audio/anthem.mp3</code>) atau URL online MP3/WAV/OGG langsung.
+                </div>
+              </div>
+
+              <!-- Upload File Audio Langsung -->
+              <div style="background:#FFFDF5; border:1.5px dashed var(--yellow-primary); border-radius:12px; padding:16px;">
+                <div style="font-weight:700; font-size:12px; color:#B45309; margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+                  <i class="fa-solid fa-upload"></i> Atau Unggah File Audio Langsung dari Komputer/HP:
+                </div>
+                <input type="file" id="musicFileInput" accept="audio/*" class="form-control" style="background:#FFF; padding:6px; font-size:12px;" onchange="handleAudioFileSelect(event)">
+                <div style="font-size:11px; color:#64748B; margin-top:6px;" id="musicFileUploadStatus">
+                  Format didukung: <strong>MP3, WAV, OGG, M4A</strong>. File akan otomatis dikonfigurasi dan diunggah langsung ke GitHub!
+                </div>
+              </div>
+
+              <!-- Tombol Aksi -->
+              <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:10px;">
+                <button type="submit" class="btn-cyber btn-cyber-gold" style="flex:1; justify-content:center;">
+                  <i class="fa-solid fa-floppy-disk"></i> SIMPAN & COMMIT LAGU KE GITHUB
+                </button>
+                <button type="button" onclick="handleResetMusicDefault()" class="btn-cyber btn-cyber-outline btn-cyber-sm" style="justify-content:center;">
+                  <i class="fa-solid fa-rotate-left"></i> Reset ke Anthem Default
+                </button>
+              </div>
+            </form>
+
           </div>
         </div>
 
@@ -1097,6 +1244,9 @@
       if (tabId === 'securityTab') {
         renderSecurityTabStatus();
       }
+      if (tabId === 'musicTab') {
+        renderAdminMusic();
+      }
     }
 
     /* ============================================================
@@ -1106,6 +1256,7 @@
       renderAdminFilms();
       renderAdminEvents();
       renderAdminBio();
+      renderAdminMusic();
       renderSecurityTabStatus();
       loadCloudConfig();
       loadGitHubConfig();
@@ -1422,6 +1573,240 @@
       FanbaseStore.resetToDefault();
       loadAdminDashboard();
       await syncToDisk('Data berhasil di-reset ke default!');
+    }
+
+    /* ============================================================
+       KELOLA MUSIK WEB & ANTHEM CONTROLLER
+       ============================================================ */
+    const MUSIC_PRESETS = {
+      anthem: {
+        title: "Transformers: Cyber Spark of Courage",
+        artist: "Adam Xavier Official Fanbase Anthem",
+        url: "assets/audio/anthem.mp3"
+      },
+      autobot_theme: {
+        title: "Autobots Rise - Epic Theme",
+        artist: "Cinematic Mecha Orchestra",
+        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+      },
+      cyber_beat: {
+        title: "Cyber Hero Beats",
+        artist: "Upbeat Electronic Future Bass",
+        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+      }
+    };
+
+    let selectedAudioFile = null;
+    let selectedAudioBase64 = null;
+
+    function renderAdminMusic() {
+      const music = (typeof FanbaseStore !== 'undefined' && typeof FanbaseStore.getMusic === 'function')
+        ? FanbaseStore.getMusic()
+        : {
+            title: "Transformers: Cyber Spark of Courage",
+            artist: "Adam Xavier Official Fanbase Anthem",
+            url: "assets/audio/anthem.mp3"
+          };
+
+      const previewTitle = document.getElementById('previewMusicTitle');
+      const previewArtist = document.getElementById('previewMusicArtist');
+      const previewUrl = document.getElementById('previewMusicUrl');
+      const titleInput = document.getElementById('musicTitleInput');
+      const artistInput = document.getElementById('musicArtistInput');
+      const urlInput = document.getElementById('musicUrlInput');
+      const audioPreview = document.getElementById('adminAudioPreview');
+      const audioSource = document.getElementById('adminAudioPreviewSource');
+
+      if (previewTitle) previewTitle.textContent = music.title || 'Transformers: Cyber Spark of Courage';
+      if (previewArtist) previewArtist.textContent = music.artist || 'Adam Xavier Official Fanbase Anthem';
+      if (previewUrl) previewUrl.innerHTML = `<i class="fa-solid fa-link"></i> ${music.url || 'assets/audio/anthem.mp3'}`;
+
+      if (titleInput) titleInput.value = music.title || '';
+      if (artistInput) artistInput.value = music.artist || '';
+      if (urlInput) urlInput.value = music.url || '';
+
+      if (audioPreview && music.url) {
+        if (audioSource) audioSource.src = music.url;
+        audioPreview.src = music.url;
+        audioPreview.load();
+      }
+    }
+
+    function applyMusicPreset(presetKey) {
+      const preset = MUSIC_PRESETS[presetKey];
+      if (!preset) return;
+
+      const titleInput = document.getElementById('musicTitleInput');
+      const artistInput = document.getElementById('musicArtistInput');
+      const urlInput = document.getElementById('musicUrlInput');
+
+      if (titleInput) titleInput.value = preset.title;
+      if (artistInput) artistInput.value = preset.artist;
+      if (urlInput) urlInput.value = preset.url;
+
+      const audioPreview = document.getElementById('adminAudioPreview');
+      if (audioPreview) {
+        audioPreview.src = preset.url;
+        audioPreview.load();
+      }
+      showCyberToast('PRESET DIPILIH', `Lagu diatur ke <strong>${preset.title}</strong>. Klik Simpan & Commit untuk menerapkan!`, 'info');
+    }
+
+    function testPlayEnteredMusic() {
+      const urlInput = document.getElementById('musicUrlInput');
+      const url = urlInput ? urlInput.value.trim() : '';
+      if (!url) {
+        alert('Silakan masukkan URL atau path file audio terlebih dahulu.');
+        return;
+      }
+      const audioPreview = document.getElementById('adminAudioPreview');
+      if (audioPreview) {
+        audioPreview.src = url;
+        audioPreview.load();
+        const playPromise = audioPreview.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            showCyberToast('AUDIO PLAYING', 'Memutar audio preview...', 'success');
+          }).catch(err => {
+            alert('Gagal memutar audio: ' + err.message + '\nPastikan URL atau path dapat diakses browser.');
+          });
+        }
+      }
+    }
+
+    function handleAudioFileSelect(e) {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+
+      const statusEl = document.getElementById('musicFileUploadStatus');
+      const titleInput = document.getElementById('musicTitleInput');
+      const urlInput = document.getElementById('musicUrlInput');
+      const audioPreview = document.getElementById('adminAudioPreview');
+
+      const cleanName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+      const targetPath = `assets/audio/${cleanName}`;
+
+      if (statusEl) {
+        statusEl.innerHTML = `<span style="color:#D97706;"><i class="fa-solid fa-spinner fa-spin"></i> Membaca file audio <strong>${file.name}</strong> (${(file.size / (1024 * 1024)).toFixed(2)} MB)...</span>`;
+      }
+
+      // Preview lokal instan dengan Object URL
+      const objectUrl = URL.createObjectURL(file);
+      if (audioPreview) {
+        audioPreview.src = objectUrl;
+        audioPreview.load();
+      }
+
+      if (urlInput) {
+        urlInput.value = targetPath;
+      }
+
+      // Jika judul belum diubah, otomatis isi dengan nama file yang rapi
+      if (titleInput) {
+        const cleanTitle = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, ' ');
+        if (!titleInput.value || titleInput.value.includes('Transformers: Cyber Spark')) {
+          titleInput.value = cleanTitle;
+        }
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const dataUrl = evt.target.result;
+        const base64Index = dataUrl.indexOf('base64,');
+        if (base64Index !== -1) {
+          selectedAudioBase64 = dataUrl.substring(base64Index + 7);
+          selectedAudioFile = {
+            name: cleanName,
+            path: targetPath,
+            base64: selectedAudioBase64,
+            size: file.size
+          };
+          if (statusEl) {
+            statusEl.innerHTML = `<span style="color:#10B981;"><i class="fa-solid fa-circle-check"></i> File <strong>${file.name}</strong> siap diunggah ke GitHub pada <code>${targetPath}</code> saat Anda menekan tombol Simpan!</span>`;
+          }
+        }
+      };
+      reader.onerror = function() {
+        if (statusEl) {
+          statusEl.innerHTML = `<span style="color:#EF4444;"><i class="fa-solid fa-triangle-exclamation"></i> Gagal membaca file audio lokal.</span>`;
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    async function handleSaveMusic(e) {
+      if (e) e.preventDefault();
+
+      const title = document.getElementById('musicTitleInput').value.trim();
+      const artist = document.getElementById('musicArtistInput').value.trim();
+      const url = document.getElementById('musicUrlInput').value.trim();
+
+      if (!title || !artist || !url) {
+        alert('Mohon lengkapi Judul, Artis, dan URL lagu.');
+        return;
+      }
+
+      // 1. Jika ada file audio yang baru dipilih, upload ke repositori GitHub assets/audio/<filename>
+      if (selectedAudioFile && selectedAudioFile.base64) {
+        showSyncIndicator(`Mengunggah file audio ${selectedAudioFile.name} ke GitHub...`);
+        try {
+          const token = getActiveGitHubToken();
+          const repo = localStorage.getItem('ax_github_repo') || 'kayangzzz969/adamam';
+          const branch = localStorage.getItem('ax_github_branch') || 'main';
+
+          let fileSha = null;
+          try {
+            const shaResp = await fetch(`https://api.github.com/repos/${repo}/contents/${selectedAudioFile.path}?ref=${branch}&_t=${Date.now()}`, {
+              headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' }
+            });
+            if (shaResp.ok) {
+              const shaJson = await shaResp.json();
+              fileSha = shaJson.sha;
+            }
+          } catch (e) {}
+
+          const putAudioResp = await fetch(`https://api.github.com/repos/${repo}/contents/${selectedAudioFile.path}`, {
+            method: 'PUT',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Accept': 'application/vnd.github+json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              message: `Upload audio: ${selectedAudioFile.name} via Admin Panel`,
+              content: selectedAudioFile.base64,
+              sha: fileSha || undefined,
+              branch: branch
+            })
+          });
+
+          if (putAudioResp.ok) {
+            console.log(`[GitHubSync] Audio file ${selectedAudioFile.name} uploaded successfully.`);
+          }
+        } catch (audioUploadErr) {
+          console.warn('[GitHubSync] Audio upload error:', audioUploadErr);
+        }
+      }
+
+      // 2. Simpan konfigurasi lagu ke FanbaseStore & sinkronkan ke GitHub data.js
+      FanbaseStore.saveMusic({ title, artist, url });
+      renderAdminMusic();
+
+      await syncToDisk('Musik & Anthem Website berhasil diperbarui!');
+      selectedAudioFile = null;
+      selectedAudioBase64 = null;
+    }
+
+    async function handleResetMusicDefault() {
+      if (!confirm('Kembalikan musik website ke lagu anthem bawaan?')) return;
+      const defaultMusic = {
+        title: "Transformers: Cyber Spark of Courage",
+        artist: "Adam Xavier Official Fanbase Anthem",
+        url: "assets/audio/anthem.mp3"
+      };
+      FanbaseStore.saveMusic(defaultMusic);
+      renderAdminMusic();
+      await syncToDisk('Musik berhasil di-reset ke lagu anthem default!');
     }
 
     /* ============================================================
@@ -1896,6 +2281,7 @@
             renderAdminFilms();
             renderAdminEvents();
             renderAdminBio();
+            renderAdminMusic();
             renderSecurityTabStatus();
             updatePasswordHintUI();
 
@@ -1964,6 +2350,19 @@ const FanbaseStore = {
     if (options && options.allowLocalStorage === true && typeof localStorage !== 'undefined') {
       localStorage.setItem("ax_bio", JSON.stringify(_currentBio));
     }
+  },
+  getMusic: function() {
+    const bio = this.getBio();
+    return (bio && bio.music) ? bio.music : {
+      title: "Transformers: Cyber Spark of Courage",
+      artist: "Adam Xavier Official Fanbase Anthem",
+      url: "assets/audio/anthem.mp3"
+    };
+  },
+  saveMusic: function(musicObj, options) {
+    const bio = Object.assign({}, this.getBio());
+    bio.music = Object.assign({}, this.getMusic(), musicObj);
+    this.saveBio(bio, options);
   },
   getFilms: function() {
     return _currentFilms || DEFAULT_FILMS;
