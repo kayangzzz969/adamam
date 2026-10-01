@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 1/10/2026, 19.25.51
+ * Terakhir diperbarui melalui Panel Admin pada: 1/10/2026, 19.59.34
  */
 
 // Hash SHA-256 untuk password admin
@@ -48,19 +48,6 @@ const DEFAULT_FILMS = [
     "image": "https://nos.jkt-1.neo.id/media.cinema21.co.id/movie-images/16KUIU.jpg",
     "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     "synopsis": "FARIS (Emir Mahira), seorang damkar yang menanti kelahiran anak pertamanya, batal ke RS untuk damping istrinya karena harus membantu ARA (Luisa Adreena) mencari kado ulang tahun untuk ibunya. Perjalanan mereka menjadi petualangan seru yang mengajarkan banyak kebaikan juga memaknai kehilangan tak terduga."
-  },
-  {
-    "id": "film-5",
-    "title": "Ksatria Surya (Season 1 & 2)",
-    "year": "2024",
-    "role": "Bayu / Mini Solar Knight",
-    "genre": "Serial TV Superhero Anak",
-    "status": "Tayang Tiap Akhir Pekan",
-    "rating": "4.9 / 5.0",
-    "synopsis": "Serial aksi penuh visual efek memukau yang menceritakan Bayu, anak laki-laki yang meminjam kekuatan cahaya matahari untuk melindungi kawan-kawannya dari kegelapan.",
-    "image": "https://images.unsplash.com/photo-1563089145-599997674d42?w=800&auto=format&fit=crop&q=80",
-    "badge": "Serial TV No.1",
-    "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
   },
   {
     "id": "film-6",
