@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 1/10/2026, 19.25.25
+ * Terakhir diperbarui melalui Panel Admin pada: 1/10/2026, 19.25.30
  */
 
 // Hash SHA-256 untuk password admin
@@ -91,44 +91,6 @@ const DEFAULT_FILMS = [
 ];
 
 const DEFAULT_EVENTS = [
-  {
-    "id": "event-2",
-    "title": "Lomba Desain Robot Mecha & Fanart AdamUnited",
-    "date": "10 - 25 September 2026",
-    "time": "Pengumuman Pemenang Selesai",
-    "location": "Instagram & Website Resmi Fanbase",
-    "status": "Completed",
-    "badge": "Selesai",
-    "description": "Kompetisi kreasi robot transformer dan lukisan karakter Adam Xavier oleh para penggemar di seluruh nusantara.",
-    "registrationOpen": false,
-    "quota": "350 Karya Diterima",
-    "winners": [
-      {
-        "rank": "Juara 1",
-        "name": "Kevin Raditya (Bandung)",
-        "work": "Mecha Adam 'Gold Striker'",
-        "prize": "Miniatur Transformers Eksklusif + Video Call 1-on-1 dengan Adam Xavier"
-      },
-      {
-        "rank": "Juara 2",
-        "name": "Sarah Putri (Surabaya)",
-        "work": "Fanart Digital 'Bumblebee & Adam'",
-        "prize": "Hoodie Resmi AdamUnited Edisi Emas + Poster Bertanda Tangan Asli"
-      },
-      {
-        "rank": "Juara 3",
-        "name": "Dimas Arya (Jakarta)",
-        "work": "Custom LEGO Cyber-Adam",
-        "prize": "Merchandise Box AdamUnited + Topi Robotik"
-      },
-      {
-        "rank": "Juara Favorit",
-        "name": "Ayla & Bintang (Yogyakarta)",
-        "work": "Stopmotion LEGO Transformers",
-        "prize": "Paket Aksesoris Fanbase & Sertifikat Khusus"
-      }
-    ]
-  },
   {
     "id": "event-3",
     "title": "Workshop Voice Acting & Akting Cilik bareng Adam",
