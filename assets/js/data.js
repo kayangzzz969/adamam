@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 1/10/2026, 19.59.34
+ * Terakhir diperbarui melalui Panel Admin pada: 1/10/2026, 20.02.53
  */
 
 // Hash SHA-256 untuk password admin
@@ -51,16 +51,15 @@ const DEFAULT_FILMS = [
   },
   {
     "id": "film-6",
-    "title": "Transformers: Next Sparks (Indonesian Dub)",
-    "year": "2025",
-    "role": "Suara Karakter Sparks & Toby",
-    "genre": "Animasi Sulih Suara",
-    "status": "Official Dubbing",
-    "rating": "5.0 / 5.0",
-    "synopsis": "Adam Xavier dipercaya mengisi suara karakter anak robotik di versi resmi bahasa Indonesia, membawa nuansa ceria dan energik yang dicintai seluruh fans Transformers cilik!",
-    "image": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=800&auto=format&fit=crop&q=80",
-    "badge": "Official Voice Actor",
-    "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    "title": "Senin Harga Naik",
+    "year": "2026",
+    "badge": "Film Layar Lebar",
+    "role": "Alviero",
+    "genre": "drama, komedi, dan keluarga",
+    "rating": "7.5 / 10.0",
+    "image": "https://nos.jkt-1.neo.id/media.cinema21.co.id/movie-images/16SHNK.jpg",
+    "trailerUrl": "https://youtu.be/_OtkOB3QA64?si=Og9Bs5DEE9W4T6yK",
+    "synopsis": "Cerita Senin Harga Naik berpusat pada Mutia (Nadya Arina), seorang wanita muda yang berselisih dengan ibunya, Retno (Meriam Bellina), karena pilihannya berkarier di luar bidang farmasi. Mutia memilih pergi dari rumah demi membuktikan kemandiriannya.\nSetelah tiga tahun dan mendapat promosi jabatan di bidang properti, karier Mutia justru membentur dilema besar. Proyek yang ia tangani mengharuskannya menghadapi rencana penggusuran toko roti legendaris milik ibunya sendiri, yaitu Toko Roti Mercusuar. Mutia harus dihadapkan pada pilihan sulit antara ambisi karier atau mempertahankan warisan dan keharmonisan keluarga."
   }
 ];
 
