@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 1/10/2026, 19.25.40
+ * Terakhir diperbarui melalui Panel Admin pada: 1/10/2026, 19.25.51
  */
 
 // Hash SHA-256 untuk password admin
@@ -48,19 +48,6 @@ const DEFAULT_FILMS = [
     "image": "https://nos.jkt-1.neo.id/media.cinema21.co.id/movie-images/16KUIU.jpg",
     "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     "synopsis": "FARIS (Emir Mahira), seorang damkar yang menanti kelahiran anak pertamanya, batal ke RS untuk damping istrinya karena harus membantu ARA (Luisa Adreena) mencari kado ulang tahun untuk ibunya. Perjalanan mereka menjadi petualangan seru yang mengajarkan banyak kebaikan juga memaknai kehilangan tak terduga."
-  },
-  {
-    "id": "film-4",
-    "title": "Detektif Cilik: Misteri Jam Robot",
-    "year": "2023",
-    "role": "Reza (Jenius Gadget)",
-    "genre": "Misteri, Detektif",
-    "status": "Rilis Resmi",
-    "rating": "4.6 / 5.0",
-    "synopsis": "Reza menggunakan jam tangan robot buatannya untuk mengumpulkan petunjuk dan mengungkap misteri hilangnya prototipe sains di museum nasional.",
-    "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80",
-    "badge": "Pemenang Penghargaan",
-    "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
   },
   {
     "id": "film-5",
