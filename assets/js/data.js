@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 1/10/2026, 21.26.54
+ * Terakhir diperbarui melalui Panel Admin pada: 1/10/2026, 21.30.46
  */
 
 // Hash SHA-256 untuk password admin
@@ -68,16 +68,15 @@ const DEFAULT_FILMS = [
   },
   {
     "id": "film-6",
-    "title": "Transformers: Next Sparks (Indonesian Dub)",
+    "title": "Air Mata Di Ujung Sajadah",
     "year": "2025",
-    "role": "Suara Karakter Sparks & Toby",
-    "genre": "Animasi Sulih Suara",
-    "status": "Official Dubbing",
-    "rating": "5.0 / 5.0",
-    "synopsis": "Adam Xavier dipercaya mengisi suara karakter anak robotik di versi resmi bahasa Indonesia, membawa nuansa ceria dan energik yang dicintai seluruh fans Transformers cilik!",
-    "image": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=800&auto=format&fit=crop&q=80",
-    "badge": "Official Voice Actor",
-    "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    "badge": "Film Layar Lebar",
+    "role": "Fatham Kecil",
+    "genre": "Drama Dan Keluarga",
+    "rating": "6.5 / 10.0",
+    "image": "https://nos.jkt-1.neo.id/media.cinema21.co.id/movie-images/15AMD2.jpg",
+    "trailerUrl": "https://youtu.be/4Jo4me9Osoo?si=0yG0pkHl4JYFOX6d",
+    "synopsis": "Aqilla (Titi Kamal) dilanda kekhawatiran karena tidak lagi dapat menghubungi Yumna (Citra Kirana), ibu angkat Baskara (Faqih Alaydrus). Adapun Baskara adalah anak kandungnya yang ia relakan untuk diadopsi oleh Yumna dan suaminya, Arif (Fedi Nuril). Bertahun-tahun sebelumnya, Aqilla terpaksa mengambil keputusan sulit tersebut karena sejumlah kondisi. Selama itu, ia hanya bisa mengikuti perkembangan anaknya melalui unggahan media sosial Yumna, berharap suatu saat takdir mempertemukan mereka kembali."
   }
 ];
 
