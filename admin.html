@@ -13,17 +13,7 @@
   
   <!-- Custom Cyber-Transformer Styling -->
   <link rel="stylesheet" href="assets/css/style.css">
-  <script>
-    (function() {
-      try {
-        var theme = localStorage.getItem('ax_theme');
-        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (theme === 'dark' || (!theme && prefersDark)) {
-          document.documentElement.classList.add('dark-theme');
-        }
-      } catch(e) {}
-    })();
-  </script>
+  <script src="assets/js/theme.js"></script>
 </head>
 <body>
 
@@ -55,8 +45,9 @@
         <a href="event.html" class="nav-link-btn" title="Jadwal & Pemenang Event">
           <i class="fa-solid fa-calendar-check"></i> Event
         </a>
-        <button id="themeToggleBtn" class="nav-link-btn theme-toggle-btn" onclick="toggleCyberTheme()" title="Ganti Mode Gelap/Terang" aria-label="Toggle Dark Mode">
+        <button id="themeToggleBtn" class="nav-link-btn theme-toggle-btn" onclick="toggleCyberTheme()" title="Beralih Mode Gelap/Terang" aria-label="Toggle Theme Mode">
           <i class="fa-solid fa-moon" id="themeToggleIcon"></i>
+          <span id="themeToggleText" class="theme-toggle-text">Dark</span>
         </button>
         <button id="adminLogoutBtn" class="nav-link-btn" style="display:none; color:#EF4444;" onclick="logoutAdmin()">
           <i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar
@@ -2624,55 +2615,7 @@ const FanbaseStore = {
       }
     }
 
-    /* ============================================================
-       CYBER THEME CONTROLLER (DARK / LIGHT MODE)
-       ============================================================ */
-    function initCyberTheme() {
-      let isDark = document.documentElement.classList.contains('dark-theme');
-      try {
-        const saved = localStorage.getItem('ax_theme');
-        if (saved === 'dark') {
-          document.documentElement.classList.add('dark-theme');
-          isDark = true;
-        } else if (saved === 'light') {
-          document.documentElement.classList.remove('dark-theme');
-          isDark = false;
-        }
-      } catch (e) {}
-      updateThemeToggleUI(isDark);
-    }
-
-    function toggleCyberTheme() {
-      const isDark = document.documentElement.classList.toggle('dark-theme');
-      try {
-        localStorage.setItem('ax_theme', isDark ? 'dark' : 'light');
-      } catch (e) {}
-      updateThemeToggleUI(isDark);
-      showCyberToast('THEME SWITCH', isDark ? 'Mode Gelap (Cyber Dark Mode) diaktifkan.' : 'Mode Terang (Cyber Light Mode) diaktifkan.', 'info');
-    }
-
-    function updateThemeToggleUI(isDark) {
-      if (typeof isDark === 'undefined') {
-        isDark = document.documentElement.classList.contains('dark-theme');
-      }
-      const icons = document.querySelectorAll('#themeToggleIcon, .theme-toggle-icon');
-      icons.forEach(icon => {
-        if (isDark) {
-          icon.className = 'fa-solid fa-sun';
-          icon.style.color = '#FFE500';
-        } else {
-          icon.className = 'fa-solid fa-moon';
-          icon.style.color = '#0F172A';
-        }
-      });
-      const btns = document.querySelectorAll('#themeToggleBtn, .theme-toggle-btn');
-      btns.forEach(btn => {
-        btn.setAttribute('title', isDark ? 'Beralih ke Mode Terang (Light Mode)' : 'Beralih ke Mode Gelap (Dark Mode)');
-      });
-    }
-
     document.addEventListener('DOMContentLoaded', async () => {
-      initCyberTheme();
       checkAuth();
       updatePasswordHintUI();
       loadGitHubConfig();
