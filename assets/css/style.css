@@ -1863,3 +1863,415 @@ body::before {
   .cyber-title-gradient { font-size: 26px !important; }
   .banner-title { font-size: 22px !important; }
 }
+
+/* ==========================================================================
+   CYBER TRANSFORMERS DARK MODE SYSTEM (OFFICIAL)
+   ========================================================================== */
+html.dark-theme,
+body.dark-theme,
+[data-theme="dark"] {
+  --pure-white: #131D33;
+  --off-white: #0B1120;
+  --light-gray: #1E293B;
+  --border-light: #243552;
+  
+  --cyber-dark: #F8FAFC;
+  --cyber-gray: #94A3B8;
+  --text-muted: #94A3B8;
+  --text-dark: #F8FAFC;
+  
+  --yellow-soft: rgba(255, 200, 0, 0.12);
+  
+  --bg-page: #080D1A;
+  --bg-card: #131D33;
+  --bg-card-inner: #0B1120;
+  --bg-nav: rgba(11, 17, 32, 0.95);
+  --bg-input: #0B1120;
+  --border-color: #243552;
+  
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 200, 0, 0.15);
+  --shadow-subtle: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Base Body & Layout */
+html.dark-theme,
+body.dark-theme {
+  background-color: #080D1A !important;
+  color: #F8FAFC !important;
+}
+
+html.dark-theme .app-wrapper,
+body.dark-theme .app-wrapper {
+  background: #080D1A;
+}
+
+/* Top High-Tech Navigation */
+html.dark-theme .cyber-nav,
+body.dark-theme .cyber-nav {
+  background: rgba(11, 17, 32, 0.95) !important;
+  border-bottom: 2px solid var(--yellow-primary) !important;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6) !important;
+}
+
+html.dark-theme .brand-name,
+body.dark-theme .brand-name {
+  color: #FFFFFF !important;
+}
+
+html.dark-theme .nav-link-btn,
+body.dark-theme .nav-link-btn {
+  color: #E2E8F0 !important;
+}
+
+html.dark-theme .nav-link-btn:hover,
+body.dark-theme .nav-link-btn:hover {
+  background: rgba(255, 200, 0, 0.15) !important;
+  border-color: var(--yellow-primary) !important;
+  color: var(--yellow-bright) !important;
+}
+
+html.dark-theme .nav-link-btn.active,
+body.dark-theme .nav-link-btn.active {
+  background: #1E293B !important;
+  color: var(--yellow-bright) !important;
+  border-color: var(--yellow-primary) !important;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  background: var(--light-gray);
+  color: var(--cyber-dark);
+  border: 1.5px solid var(--border-light);
+  border-radius: 20px;
+  padding: 6px 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 13px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.theme-toggle-btn:hover {
+  background: var(--yellow-soft);
+  border-color: var(--yellow-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 200, 0, 0.3);
+}
+html.dark-theme .theme-toggle-btn,
+body.dark-theme .theme-toggle-btn {
+  background: #1E293B !important;
+  color: var(--yellow-bright) !important;
+  border-color: var(--yellow-primary) !important;
+  box-shadow: 0 0 15px rgba(255, 200, 0, 0.25) !important;
+}
+
+/* Slide 1 & Slide 2 (index.html) */
+html.dark-theme .slide-page,
+body.dark-theme .slide-page {
+  background: #080D1A !important;
+  color: #F8FAFC !important;
+}
+
+html.dark-theme .hero-speech-balloon,
+body.dark-theme .hero-speech-balloon {
+  background: rgba(19, 29, 51, 0.95) !important;
+  border: 2px solid var(--yellow-primary) !important;
+  color: #F8FAFC !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+}
+
+html.dark-theme .hero-subline,
+body.dark-theme .hero-subline {
+  color: #94A3B8 !important;
+}
+
+html.dark-theme .hero-subline u,
+body.dark-theme .hero-subline u {
+  color: var(--yellow-bright) !important;
+}
+
+html.dark-theme .hero-scroll-btn,
+body.dark-theme .hero-scroll-btn {
+  background: #131D33 !important;
+  color: var(--yellow-bright) !important;
+  border-color: var(--yellow-primary) !important;
+}
+
+/* Slide 2: Bio & Specs */
+html.dark-theme .spec-box,
+body.dark-theme .spec-box {
+  background: #131D33 !important;
+  border-color: #243552 !important;
+}
+
+html.dark-theme .spec-label,
+body.dark-theme .spec-label {
+  color: var(--yellow-accent) !important;
+}
+
+html.dark-theme .spec-value,
+body.dark-theme .spec-value {
+  color: #F8FAFC !important;
+}
+
+html.dark-theme .scroll-posters-indicator,
+body.dark-theme .scroll-posters-indicator {
+  background: #131D33 !important;
+  color: #F8FAFC !important;
+  border-color: var(--yellow-primary) !important;
+}
+
+/* Cards across film.html, event.html, tentang.html */
+html.dark-theme .film-card,
+body.dark-theme .film-card,
+html.dark-theme .event-card,
+body.dark-theme .event-card,
+html.dark-theme .about-avatar-card,
+body.dark-theme .about-avatar-card,
+html.dark-theme .fact-card,
+body.dark-theme .fact-card,
+html.dark-theme .autobot-quote-card,
+body.dark-theme .autobot-quote-card,
+html.dark-theme .winner-card,
+body.dark-theme .winner-card,
+html.dark-theme .mini-poster-card,
+body.dark-theme .mini-poster-card {
+  background: #131D33 !important;
+  border-color: #243552 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+}
+
+html.dark-theme .film-card:hover,
+body.dark-theme .film-card:hover,
+html.dark-theme .event-card:hover,
+body.dark-theme .event-card:hover,
+html.dark-theme .fact-card:hover,
+body.dark-theme .fact-card:hover {
+  border-color: var(--yellow-primary) !important;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 200, 0, 0.2) !important;
+}
+
+html.dark-theme .film-title,
+body.dark-theme .film-title,
+html.dark-theme .event-title,
+body.dark-theme .event-title,
+html.dark-theme .fact-title,
+body.dark-theme .fact-title {
+  color: #F8FAFC !important;
+}
+
+html.dark-theme .film-desc,
+body.dark-theme .film-desc,
+html.dark-theme .event-desc,
+body.dark-theme .event-desc,
+html.dark-theme .fact-desc,
+body.dark-theme .fact-desc {
+  color: #94A3B8 !important;
+}
+
+html.dark-theme .film-meta-tag,
+body.dark-theme .film-meta-tag,
+html.dark-theme .event-meta-tag,
+body.dark-theme .event-meta-tag {
+  background: #0B1120 !important;
+  color: #CBD5E1 !important;
+  border-color: #243552 !important;
+}
+
+/* Category Filter Pills */
+html.dark-theme .filter-pill,
+body.dark-theme .filter-pill {
+  background: #131D33 !important;
+  color: #E2E8F0 !important;
+  border-color: #243552 !important;
+}
+html.dark-theme .filter-pill:hover,
+body.dark-theme .filter-pill:hover {
+  border-color: var(--yellow-primary) !important;
+  color: var(--yellow-bright) !important;
+}
+html.dark-theme .filter-pill.active,
+body.dark-theme .filter-pill.active {
+  background: var(--yellow-primary) !important;
+  color: #0F172A !important;
+}
+
+/* Search bar & Form Inputs */
+html.dark-theme .search-input,
+body.dark-theme .search-input,
+html.dark-theme .form-control,
+body.dark-theme .form-control {
+  background: #0B1120 !important;
+  color: #F8FAFC !important;
+  border-color: #243552 !important;
+}
+html.dark-theme .search-input:focus,
+body.dark-theme .search-input:focus,
+html.dark-theme .form-control:focus,
+body.dark-theme .form-control:focus {
+  background: #0F172A !important;
+  border-color: var(--yellow-primary) !important;
+  box-shadow: 0 0 0 3px rgba(255, 200, 0, 0.25) !important;
+}
+
+/* Modals */
+html.dark-theme .modal-window,
+body.dark-theme .modal-window {
+  background: #131D33 !important;
+  border-color: var(--yellow-primary) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7) !important;
+}
+html.dark-theme .modal-header,
+body.dark-theme .modal-header {
+  border-bottom-color: #243552 !important;
+}
+html.dark-theme .modal-title,
+body.dark-theme .modal-title {
+  color: #F8FAFC !important;
+}
+html.dark-theme .btn-close-modal,
+body.dark-theme .btn-close-modal {
+  color: #94A3B8 !important;
+}
+
+/* Admin Panel in Dark Mode */
+html.dark-theme .admin-login-card,
+body.dark-theme .admin-login-card {
+  background: #131D33 !important;
+  border-color: var(--yellow-primary) !important;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 200, 0, 0.2) !important;
+}
+html.dark-theme .admin-login-card h2,
+body.dark-theme .admin-login-card h2 {
+  color: #F8FAFC !important;
+}
+html.dark-theme .admin-login-card p,
+body.dark-theme .admin-login-card p {
+  color: #94A3B8 !important;
+}
+html.dark-theme .form-label,
+body.dark-theme .form-label {
+  color: #E2E8F0 !important;
+}
+
+html.dark-theme .admin-tabs,
+body.dark-theme .admin-tabs {
+  background: #0B1120 !important;
+  border-color: #243552 !important;
+}
+html.dark-theme .admin-tab-btn,
+body.dark-theme .admin-tab-btn {
+  color: #94A3B8 !important;
+}
+html.dark-theme .admin-tab-btn:hover,
+body.dark-theme .admin-tab-btn:hover {
+  background: #1A2642 !important;
+  color: #FFFFFF !important;
+}
+html.dark-theme .admin-tab-btn.active,
+body.dark-theme .admin-tab-btn.active {
+  background: linear-gradient(135deg, #1E293B 0%, #334155 100%) !important;
+  color: var(--yellow-bright) !important;
+  border-color: var(--yellow-primary) !important;
+}
+
+/* Admin Tab Panes & Cards */
+html.dark-theme .tab-pane > div,
+body.dark-theme .tab-pane > div {
+  background: #131D33 !important;
+  border-color: #243552 !important;
+  color: #F8FAFC !important;
+}
+html.dark-theme .tab-pane h3,
+body.dark-theme .tab-pane h3,
+html.dark-theme .tab-pane h4,
+body.dark-theme .tab-pane h4,
+html.dark-theme .tab-pane strong,
+body.dark-theme .tab-pane strong {
+  color: #F8FAFC !important;
+}
+html.dark-theme .tab-pane p,
+body.dark-theme .tab-pane p {
+  color: #94A3B8 !important;
+}
+
+/* Preset Song Buttons in Admin */
+html.dark-theme .preset-song-btn,
+body.dark-theme .preset-song-btn {
+  background: #0B1120 !important;
+  border-color: #243552 !important;
+}
+html.dark-theme .preset-song-btn:hover,
+body.dark-theme .preset-song-btn:hover {
+  background: #1A2642 !important;
+  border-color: var(--yellow-primary) !important;
+}
+html.dark-theme .preset-song-btn div:first-child,
+body.dark-theme .preset-song-btn div:first-child {
+  color: #F8FAFC !important;
+}
+html.dark-theme .preset-song-btn div:last-child,
+body.dark-theme .preset-song-btn div:last-child {
+  color: #94A3B8 !important;
+}
+
+/* Inner Admin Cards */
+html.dark-theme #securityStatusCard,
+body.dark-theme #securityStatusCard {
+  background: #0B1120 !important;
+  border-color: #243552 !important;
+}
+
+/* Outline Buttons in Dark Mode */
+html.dark-theme .btn-cyber-outline,
+body.dark-theme .btn-cyber-outline {
+  background: #0B1120 !important;
+  color: #F8FAFC !important;
+  border-color: #243552 !important;
+}
+html.dark-theme .btn-cyber-outline:hover,
+body.dark-theme .btn-cyber-outline:hover {
+  background: rgba(255, 200, 0, 0.15) !important;
+  color: var(--yellow-bright) !important;
+  border-color: var(--yellow-primary) !important;
+}
+
+/* Admin Table in Dark Mode */
+html.dark-theme .table-responsive,
+body.dark-theme .table-responsive {
+  background: #131D33 !important;
+  border-color: #243552 !important;
+}
+html.dark-theme .admin-table thead th,
+body.dark-theme .admin-table thead th {
+  background: #0B1120 !important;
+  color: #E2E8F0 !important;
+  border-bottom: 2px solid #243552 !important;
+}
+html.dark-theme .admin-table tbody td,
+body.dark-theme .admin-table tbody td {
+  background: #131D33 !important;
+  color: #CBD5E1 !important;
+  border-bottom: 1px solid #1E293B !important;
+}
+html.dark-theme .admin-table tbody tr:hover td,
+body.dark-theme .admin-table tbody tr:hover td {
+  background: #1A2642 !important;
+}
+
+/* Stat Cards in Dark Mode */
+html.dark-theme .stat-card,
+body.dark-theme .stat-card {
+  background: #131D33 !important;
+  border-color: #243552 !important;
+}
+html.dark-theme .stat-number,
+body.dark-theme .stat-number {
+  color: var(--yellow-bright) !important;
+}
+html.dark-theme .stat-label,
+body.dark-theme .stat-label {
+  color: #94A3B8 !important;
+}
