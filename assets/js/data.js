@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.51.34
+ * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.51.45
  */
 
 // Hash SHA-256 untuk password admin
@@ -34,12 +34,6 @@ const DEFAULT_FACTS = [
     "icon": "fa-solid fa-robot",
     "title": "Kolektor Transformers Sejati",
     "desc": "Memiliki lebih dari 45 koleksi robot mecha Transformers, dengan koleksi favorit Bumblebee edisi terbatas."
-  },
-  {
-    "id": "fact-2",
-    "icon": "fa-solid fa-medal",
-    "title": "Mahir Bela Diri Wushu",
-    "desc": "Belajar wushu sejak usia 6 tahun, sehingga mampu melakukan gerakan akrobatik dan adegan laga sendiri dengan aman."
   },
   {
     "id": "fact-6",
@@ -107,12 +101,6 @@ const DEFAULT_BIO = {
       "icon": "fa-solid fa-robot",
       "title": "Kolektor Transformers Sejati",
       "desc": "Memiliki lebih dari 45 koleksi robot mecha Transformers, dengan koleksi favorit Bumblebee edisi terbatas."
-    },
-    {
-      "id": "fact-2",
-      "icon": "fa-solid fa-medal",
-      "title": "Mahir Bela Diri Wushu",
-      "desc": "Belajar wushu sejak usia 6 tahun, sehingga mampu melakukan gerakan akrobatik dan adegan laga sendiri dengan aman."
     },
     {
       "id": "fact-6",
