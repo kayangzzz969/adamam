@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.41.23
+ * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.41.27
  */
 
 // Hash SHA-256 untuk password admin
@@ -195,19 +195,6 @@ const DEFAULT_FILMS = [
     "synopsis": "Rafa menemukan komponen robot luar angkasa purba yang jatuh di dekat rumahnya. Bersama sang robot pelindung bernama Zephyr, Rafa harus menyelamatkan kotanya dari ancaman kecerdasan buatan nakal.",
     "image": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&auto=format&fit=crop&q=80",
     "badge": "Film Layar Lebar",
-    "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-  },
-  {
-    "id": "film-5",
-    "title": "Ksatria Surya (Season 1 & 2)",
-    "year": "2024",
-    "role": "Bayu / Mini Solar Knight",
-    "genre": "Serial TV Superhero Anak",
-    "status": "Tayang Tiap Akhir Pekan",
-    "rating": "4.9 / 5.0",
-    "synopsis": "Serial aksi penuh visual efek memukau yang menceritakan Bayu, anak laki-laki yang meminjam kekuatan cahaya matahari untuk melindungi kawan-kawannya dari kegelapan.",
-    "image": "https://images.unsplash.com/photo-1563089145-599997674d42?w=800&auto=format&fit=crop&q=80",
-    "badge": "Serial TV No.1",
     "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
   },
   {
