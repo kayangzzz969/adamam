@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 12.25.34
+ * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 12.26.43
  */
 
 // Hash SHA-256 untuk password admin
@@ -64,7 +64,7 @@ const DEFAULT_FILMS = [
     "rating": "8.9 / 10.0",
     "image": "https://nos.jkt-1.neo.id/media.cinema21.co.id/movie-images/16KUIU.jpg",
     "trailerUrl": "https://youtu.be/fKY3_e8eF50?si=9TdWP86skmQ4SHEJ",
-    "synopsis": ".."
+    "synopsis": "FARIS (Emir Mahira), seorang damkar yang menanti kelahiran anak pertamanya, batal ke RS untuk damping istrinya karena harus membantu ARA (Luisa Adreena) mencari kado ulang tahun untuk ibunya. Perjalanan mereka menjadi petualangan seru yang mengajarkan banyak kebaikan juga memaknai kehilangan tak terduga."
   },
   {
     "id": "film-6",
