@@ -531,9 +531,59 @@ function loadHomeDynamicData() {
   }
 }
 
+/* ==========================================================================
+   CYBER THEME CONTROLLER (DARK / LIGHT MODE)
+   ========================================================================== */
+function initCyberTheme() {
+  let isDark = document.documentElement.classList.contains('dark-theme');
+  try {
+    const saved = localStorage.getItem('ax_theme');
+    if (saved === 'dark') {
+      document.documentElement.classList.add('dark-theme');
+      isDark = true;
+    } else if (saved === 'light') {
+      document.documentElement.classList.remove('dark-theme');
+      isDark = false;
+    }
+  } catch (e) {}
+  updateThemeToggleUI(isDark);
+}
+
+function toggleCyberTheme() {
+  if (typeof CyberAudio !== 'undefined' && CyberAudio.playBeep) {
+    CyberAudio.playBeep();
+  }
+  const isDark = document.documentElement.classList.toggle('dark-theme');
+  try {
+    localStorage.setItem('ax_theme', isDark ? 'dark' : 'light');
+  } catch (e) {}
+  updateThemeToggleUI(isDark);
+}
+
+function updateThemeToggleUI(isDark) {
+  if (typeof isDark === 'undefined') {
+    isDark = document.documentElement.classList.contains('dark-theme');
+  }
+  const icons = document.querySelectorAll('#themeToggleIcon, .theme-toggle-icon');
+  icons.forEach(icon => {
+    if (isDark) {
+      icon.className = 'fa-solid fa-sun';
+      icon.style.color = '#FFE500';
+    } else {
+      icon.className = 'fa-solid fa-moon';
+      icon.style.color = '#0F172A';
+    }
+  });
+  const btns = document.querySelectorAll('#themeToggleBtn, .theme-toggle-btn');
+  btns.forEach(btn => {
+    btn.setAttribute('title', isDark ? 'Beralih ke Mode Terang (Light Mode)' : 'Beralih ke Mode Gelap (Dark Mode)');
+  });
+}
+
 // Global initialization
 document.addEventListener('DOMContentLoaded', () => {
   history.replaceState({ slide: 1 }, '');
+  initCyberTheme();
   initCyberMeteors();
   initMusicPlayer();
   loadHomeDynamicData();
