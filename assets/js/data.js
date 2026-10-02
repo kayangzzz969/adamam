@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.44.15
+ * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.46.03
  */
 
 // Hash SHA-256 untuk password admin
@@ -81,12 +81,12 @@ const DEFAULT_FACTS = [
 
 const DEFAULT_BIO = {
   "name": "Adam Xavier",
-  "nickname": "Adam / Xavi",
-  "birthdate": "15 Mei 2014",
-  "age": 12,
+  "nickname": "Adam",
+  "birthdate": "28 Agustus 2018",
+  "age": 8,
   "domicile": "Jakarta, Indonesia",
   "fanbaseName": "AdamUnited",
-  "tagline": "The Young Cyber Hero",
+  "tagline": "-",
   "profession": "Aktor Cilik • Voice Actor • Robot Enthusiast",
   "favoriteRobot": "Bumblebee & Optimus Prime (Transformers)",
   "hobbies": [
@@ -95,10 +95,10 @@ const DEFAULT_BIO = {
     "Piano & Drum",
     "Coding Game"
   ],
-  "motto": "Transform and Rise Up! Setiap peran adalah petualangan baru.",
-  "about1": "Adam Xavier lahir di Jakarta pada 15 Mei 2014. Sejak balita, Adam memiliki ketertarikan luar biasa terhadap figur robot, animasi sains fiksi, dan seni peran. Memulai langkah pertamanya di industri hiburan pada usia 7 tahun, kepribadian Adam yang santun, ekspresif, dan berjiwa petualang langsung memikat hati para sutradara serta penonton Indonesia.",
-  "about2": "Terinspirasi oleh karakter favoritnya, Bumblebee dan Optimus Prime, Adam selalu memegang teguh prinsip keberanian dan kerja keras. Di lokasi syuting film laga maupun drama anak, Adam dikenal sebagai aktor cilik yang penuh dedikasi, mampu melakukan adegan aksi dengan bimbingan pelatih, namun tetap ceria dan rajin belajar di sela waktu syuting.",
-  "quoteInspiration": "Transform and Rise Up! Di setiap peran baru, kita belajar memahami perasaan orang lain dan bertransformasi menjadi versi terbaik dari diri kita sendiri.",
+  "motto": "-",
+  "about1": "Adam Xavier adalah seorang aktor cilik dan bintang iklan (TVC) asal Indonesia yang tengah naik daun berkat kemampuan aktingnya yang natural.\n\n• Bakat Akting: Ia menuai banyak pujian dari sineas perfilman karena kemampuannya melakukan adegan emosional (seperti menangis) secara spontan dan alami tanpa bantuan alat pemancing air mata.",
+  "about2": "-",
+  "quoteInspiration": "-",
   "avatar": "assets/images/adam_avatar.jpeg",
   "music": {
     "title": "Transformers: Cyber Spark of Courage",
