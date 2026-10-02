@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.48.38
+ * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.49.48
  */
 
 // Hash SHA-256 untuk password admin
@@ -16,9 +16,9 @@ const DEFAULT_TIMELINE = [
   },
   {
     "id": "tl-2",
-    "year": "2022 (Usia 8 Tahun)",
-    "title": "Debut FTV & Serial Drama Keluarga",
-    "desc": "Mendapatkan peran pertamanya dalam serial drama keluarga akhir pekan. Karakter anak bungsu yang cerdik dan humoris membuatnya mulai memiliki basis penggemar setia."
+    "year": "2021 - 2024",
+    "title": "Serial Web",
+    "desc": "• 2021: Namanya kembali melambung di kalangan penonton muda setelah memerankan tokoh Finno dalam serial web hits Antares. Ia juga terlibat dalam film Cinta Bete sebagai Emilio kecil.\n\n• 2024: Aktif membintangi FTV seperti Pak Guru, Huruf 'G'-nya Pasti \"Galak\"."
   },
   {
     "id": "tl-3",
@@ -120,9 +120,9 @@ const DEFAULT_BIO = {
     },
     {
       "id": "tl-2",
-      "year": "2022 (Usia 8 Tahun)",
-      "title": "Debut FTV & Serial Drama Keluarga",
-      "desc": "Mendapatkan peran pertamanya dalam serial drama keluarga akhir pekan. Karakter anak bungsu yang cerdik dan humoris membuatnya mulai memiliki basis penggemar setia."
+      "year": "2021 - 2024",
+      "title": "Serial Web",
+      "desc": "• 2021: Namanya kembali melambung di kalangan penonton muda setelah memerankan tokoh Finno dalam serial web hits Antares. Ia juga terlibat dalam film Cinta Bete sebagai Emilio kecil.\n\n• 2024: Aktif membintangi FTV seperti Pak Guru, Huruf 'G'-nya Pasti \"Galak\"."
     },
     {
       "id": "tl-3",
