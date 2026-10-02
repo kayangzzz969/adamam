@@ -13,6 +13,17 @@
   
   <!-- Custom Cyber-Transformer Styling -->
   <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    (function() {
+      try {
+        var theme = localStorage.getItem('ax_theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (theme === 'dark' || (!theme && prefersDark)) {
+          document.documentElement.classList.add('dark-theme');
+        }
+      } catch(e) {}
+    })();
+  </script>
 </head>
 <body>
 
@@ -44,6 +55,9 @@
         <a href="event.html" class="nav-link-btn" title="Jadwal & Pemenang Event">
           <i class="fa-solid fa-calendar-check"></i> Event
         </a>
+        <button id="themeToggleBtn" class="nav-link-btn theme-toggle-btn" onclick="toggleCyberTheme()" title="Ganti Mode Gelap/Terang" aria-label="Toggle Dark Mode">
+          <i class="fa-solid fa-moon" id="themeToggleIcon"></i>
+        </button>
         <button id="adminLogoutBtn" class="nav-link-btn" style="display:none; color:#EF4444;" onclick="logoutAdmin()">
           <i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar
         </button>
@@ -65,12 +79,11 @@
           <div class="form-group">
             <label class="form-label">Password Admin:</label>
             <div style="position:relative; display:flex; align-items:center;">
-              <input type="password" id="adminPassword" class="form-control" placeholder="Ketik: admin123" required style="padding-right:45px; width:100%;">
+              <input type="password" id="adminPassword" class="form-control" placeholder="Masukkan password admin" required style="padding-right:45px; width:100%;">
               <button type="button" onclick="togglePasswordVisibility('adminPassword', this)" style="position:absolute; right:10px; background:transparent; border:none; color:#64748B; cursor:pointer; font-size:16px; padding:8px; z-index:10; display:flex; align-items:center; justify-content:center;" title="Lihat/Sembunyikan password">
                 <i class="fa-solid fa-eye"></i>
               </button>
             </div>
-            <div id="defaultPasswordHint" style="font-size:11px; color:#94A3B8; margin-top:4px;">Default Password: <strong>admin123</strong></div>
           </div>
 
           <button type="submit" class="btn-cyber btn-cyber-gold" style="width:100%; justify-content:center; margin-top:10px;">
@@ -1008,22 +1021,11 @@
     function updatePasswordHintUI() {
       const hintEl = document.getElementById('defaultPasswordHint');
       const pwInput = document.getElementById('adminPassword');
-      const isDefault = isDefaultPassword();
-
       if (hintEl) {
-        if (isDefault) {
-          hintEl.style.display = 'block';
-        } else {
-          hintEl.style.display = 'none';
-        }
+        hintEl.style.display = 'none';
       }
-
       if (pwInput) {
-        if (isDefault) {
-          pwInput.placeholder = 'Ketik: admin123';
-        } else {
-          pwInput.placeholder = 'Masukkan Password Admin';
-        }
+        pwInput.placeholder = 'Masukkan password admin';
       }
     }
 
@@ -1202,12 +1204,12 @@
 
       // Commit ke GitHub (assets/js/data.js)
       await syncToDisk('Password admin berhasil diubah!');
-      alert('✅ Password admin berhasil diubah dan di-commit langsung ke GitHub!\n\nTeks "Default Password: admin123" pada halaman login kini telah dinonaktifkan.');
+      alert('✅ Password admin berhasil diubah dan di-commit langsung ke GitHub!');
       return false;
     }
 
     async function handleResetAdminPassword() {
-      const confirmReset = confirm('Apakah Anda yakin ingin mengembalikan password admin ke default (admin123)?\n\nTeks "Default Password: admin123" akan ditampilkan kembali saat login.');
+      const confirmReset = confirm('Apakah Anda yakin ingin mengembalikan password admin ke default (admin123)?');
       if (!confirmReset) return;
 
       const defaultHash = (typeof DEFAULT_ADMIN_HASH !== 'undefined' ? DEFAULT_ADMIN_HASH : FALLBACK_DEFAULT_HASH);
@@ -2622,7 +2624,55 @@ const FanbaseStore = {
       }
     }
 
+    /* ============================================================
+       CYBER THEME CONTROLLER (DARK / LIGHT MODE)
+       ============================================================ */
+    function initCyberTheme() {
+      let isDark = document.documentElement.classList.contains('dark-theme');
+      try {
+        const saved = localStorage.getItem('ax_theme');
+        if (saved === 'dark') {
+          document.documentElement.classList.add('dark-theme');
+          isDark = true;
+        } else if (saved === 'light') {
+          document.documentElement.classList.remove('dark-theme');
+          isDark = false;
+        }
+      } catch (e) {}
+      updateThemeToggleUI(isDark);
+    }
+
+    function toggleCyberTheme() {
+      const isDark = document.documentElement.classList.toggle('dark-theme');
+      try {
+        localStorage.setItem('ax_theme', isDark ? 'dark' : 'light');
+      } catch (e) {}
+      updateThemeToggleUI(isDark);
+      showCyberToast('THEME SWITCH', isDark ? 'Mode Gelap (Cyber Dark Mode) diaktifkan.' : 'Mode Terang (Cyber Light Mode) diaktifkan.', 'info');
+    }
+
+    function updateThemeToggleUI(isDark) {
+      if (typeof isDark === 'undefined') {
+        isDark = document.documentElement.classList.contains('dark-theme');
+      }
+      const icons = document.querySelectorAll('#themeToggleIcon, .theme-toggle-icon');
+      icons.forEach(icon => {
+        if (isDark) {
+          icon.className = 'fa-solid fa-sun';
+          icon.style.color = '#FFE500';
+        } else {
+          icon.className = 'fa-solid fa-moon';
+          icon.style.color = '#0F172A';
+        }
+      });
+      const btns = document.querySelectorAll('#themeToggleBtn, .theme-toggle-btn');
+      btns.forEach(btn => {
+        btn.setAttribute('title', isDark ? 'Beralih ke Mode Terang (Light Mode)' : 'Beralih ke Mode Gelap (Dark Mode)');
+      });
+    }
+
     document.addEventListener('DOMContentLoaded', async () => {
+      initCyberTheme();
       checkAuth();
       updatePasswordHintUI();
       loadGitHubConfig();
