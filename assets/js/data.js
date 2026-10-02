@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.50.10
+ * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.51.05
  */
 
 // Hash SHA-256 untuk password admin
@@ -19,6 +19,12 @@ const DEFAULT_TIMELINE = [
     "year": "2021 - 2024",
     "title": "Serial Web",
     "desc": "• 2021: Namanya kembali melambung di kalangan penonton muda setelah memerankan tokoh Finno dalam serial web hits Antares. Ia juga terlibat dalam film Cinta Bete sebagai Emilio kecil.\n\n• 2024: Aktif membintangi FTV seperti Pak Guru, Huruf 'G'-nya Pasti \"Galak\"."
+  },
+  {
+    "id": "tl-1790949065743",
+    "year": "2026 - Sekarang",
+    "title": "Karier Terkini",
+    "desc": "• 2025: Membintangi serial televisi Samuel serta terlibat dalam proyek film layar lebar Air Mata di Ujung Sajadah 2.\n\n• 2026: Menunjukkan produktivitas tinggi dengan membintangi film Paket Santet, drama keluarga Senin Harga Naik (sebagai Alviero), Last Chance to Save, Kado Untuk Ibu, serta serial web Garam Muda."
   }
 ];
 
@@ -105,6 +111,12 @@ const DEFAULT_BIO = {
       "year": "2021 - 2024",
       "title": "Serial Web",
       "desc": "• 2021: Namanya kembali melambung di kalangan penonton muda setelah memerankan tokoh Finno dalam serial web hits Antares. Ia juga terlibat dalam film Cinta Bete sebagai Emilio kecil.\n\n• 2024: Aktif membintangi FTV seperti Pak Guru, Huruf 'G'-nya Pasti \"Galak\"."
+    },
+    {
+      "id": "tl-1790949065743",
+      "year": "2026 - Sekarang",
+      "title": "Karier Terkini",
+      "desc": "• 2025: Membintangi serial televisi Samuel serta terlibat dalam proyek film layar lebar Air Mata di Ujung Sajadah 2.\n\n• 2026: Menunjukkan produktivitas tinggi dengan membintangi film Paket Santet, drama keluarga Senin Harga Naik (sebagai Alviero), Last Chance to Save, Kado Untuk Ibu, serta serial web Garam Muda."
     }
   ],
   "facts": [
