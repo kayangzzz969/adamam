@@ -1,11 +1,11 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 12.30.26
+ * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 16.48.09
  */
 
 // Hash SHA-256 untuk password admin
-const DEFAULT_ADMIN_HASH = "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9";
+const DEFAULT_ADMIN_HASH = "c8aaa7aae95d29c54dc66721deeb9f1479d56443e2cdebe598eecbe94aea55a7";
 
 const DEFAULT_BIO = {
   "name": "Adam Xavier",
@@ -169,6 +169,19 @@ const FanbaseStore = {
     if (options && options.allowLocalStorage === true && typeof localStorage !== 'undefined') {
       localStorage.setItem("ax_bio", JSON.stringify(_currentBio));
     }
+  },
+  getMusic: function() {
+    const bio = this.getBio();
+    return (bio && bio.music) ? bio.music : {
+      title: "Transformers: Cyber Spark of Courage",
+      artist: "Adam Xavier Official Fanbase Anthem",
+      url: "assets/audio/anthem.mp3"
+    };
+  },
+  saveMusic: function(musicObj, options) {
+    const bio = Object.assign({}, this.getBio());
+    bio.music = Object.assign({}, this.getMusic(), musicObj);
+    this.saveBio(bio, options);
   },
   getFilms: function() {
     return _currentFilms || DEFAULT_FILMS;
