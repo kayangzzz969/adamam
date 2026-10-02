@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.52.11
+ * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.52.17
  */
 
 // Hash SHA-256 untuk password admin
@@ -126,40 +126,7 @@ const DEFAULT_FILMS = [
   }
 ];
 
-const DEFAULT_EVENTS = [
-  {
-    "id": "event-4",
-    "title": "Special Gathering Ulang Tahun Adam Xavier",
-    "date": "15 Mei 2026",
-    "time": "15:00 - 19:00 WIB",
-    "location": "Hall Cyber Playland Jakarta",
-    "status": "Completed",
-    "badge": "Selesai",
-    "description": "Perayaan ulang tahun Adam yang ke-12 bersama perwakilan fans dari berbagai kota, kue bertema Cybertron, dan bagi-bagi merchandise.",
-    "registrationOpen": false,
-    "quota": "100 Hadirin",
-    "winners": [
-      {
-        "rank": "Pemenang Doorprize Utama",
-        "name": "Nadia Anggraini",
-        "work": "Tiket Undian No. #042",
-        "prize": "Jaket Transformers Bumblebee Original bertanda tangan Adam"
-      },
-      {
-        "rank": "Pemenang Kuis Trivia",
-        "name": "Rizky Pratama",
-        "work": "Skor 100/100 Trivia Film Adam",
-        "prize": "Action Figure Autobot Edisi Kolektor"
-      },
-      {
-        "rank": "Best Costume",
-        "name": "Clarissa S. (Kostum Cyber Hero)",
-        "work": "Cosplay Mecha",
-        "prize": "Special Giftbox AdamUnited"
-      }
-    ]
-  }
-];
+const DEFAULT_EVENTS = [];
 
 // Bersihkan cache lama di localStorage agar data 100% murni dari GitHub
 if (typeof localStorage !== 'undefined') {
