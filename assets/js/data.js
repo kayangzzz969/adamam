@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.41.27
+ * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.41.31
  */
 
 // Hash SHA-256 untuk password admin
@@ -195,19 +195,6 @@ const DEFAULT_FILMS = [
     "synopsis": "Rafa menemukan komponen robot luar angkasa purba yang jatuh di dekat rumahnya. Bersama sang robot pelindung bernama Zephyr, Rafa harus menyelamatkan kotanya dari ancaman kecerdasan buatan nakal.",
     "image": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&auto=format&fit=crop&q=80",
     "badge": "Film Layar Lebar",
-    "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-  },
-  {
-    "id": "film-6",
-    "title": "Transformers: Next Sparks (Indonesian Dub)",
-    "year": "2025",
-    "role": "Suara Karakter Sparks & Toby",
-    "genre": "Animasi Sulih Suara",
-    "status": "Official Dubbing",
-    "rating": "5.0 / 5.0",
-    "synopsis": "Adam Xavier dipercaya mengisi suara karakter anak robotik di versi resmi bahasa Indonesia, membawa nuansa ceria dan energik yang dicintai seluruh fans Transformers cilik!",
-    "image": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=800&auto=format&fit=crop&q=80",
-    "badge": "Official Voice Actor",
     "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
   }
 ];
