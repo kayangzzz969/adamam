@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.52.06
+ * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.52.11
  */
 
 // Hash SHA-256 untuk password admin
@@ -127,19 +127,6 @@ const DEFAULT_FILMS = [
 ];
 
 const DEFAULT_EVENTS = [
-  {
-    "id": "event-3",
-    "title": "Workshop Voice Acting & Akting Cilik bareng Adam",
-    "date": "12 November 2026",
-    "time": "10:00 - 15:30 WIB",
-    "location": "Studio Creative Sound Jakarta & Hybrid Class",
-    "status": "Upcoming",
-    "badge": "Pendaftaran Dibuka",
-    "description": "Pelatihan khusus bagi teman-teman yang ingin belajar teknik vokal dubbing animasi kartun dan dasar ekspresi panggung bersama Adam Xavier dan instruktur profesional.",
-    "registrationOpen": true,
-    "quota": "50 Peserta",
-    "winners": []
-  },
   {
     "id": "event-4",
     "title": "Special Gathering Ulang Tahun Adam Xavier",
