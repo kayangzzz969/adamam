@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.46.03
+ * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.48.38
  */
 
 // Hash SHA-256 untuk password admin
@@ -10,9 +10,9 @@ const DEFAULT_ADMIN_HASH = "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822
 const DEFAULT_TIMELINE = [
   {
     "id": "tl-1",
-    "year": "2021 (Usia 7 Tahun)",
+    "year": "2012 - 2018",
     "title": "Langkah Pertama di Depan Kamera",
-    "desc": "Memulai karier sebagai model cilik untuk berbagai iklan komersial susu bernutrisi dan produk mainan mecha robotik. Kemampuan berekspresi secara alami membuatnya dilirik agensi akting."
+    "desc": "• 2012: Membintangi film layar lebar bertema anak-anak Jendral Kancil The Movie dengan memerankan tokoh Guntur. Pada tahun yang sama, ia juga membintangi FTV populer Babysitterku Barbie.\n\n• 2015: Terlibat dalam film drama Move On sebagai Sam kecil.\n\n• 2018: Menginjak masa remaja, ia memerankan karakter Iqbal dalam film drama romantis EL."
   },
   {
     "id": "tl-2",
@@ -114,9 +114,9 @@ const DEFAULT_BIO = {
   "timeline": [
     {
       "id": "tl-1",
-      "year": "2021 (Usia 7 Tahun)",
+      "year": "2012 - 2018",
       "title": "Langkah Pertama di Depan Kamera",
-      "desc": "Memulai karier sebagai model cilik untuk berbagai iklan komersial susu bernutrisi dan produk mainan mecha robotik. Kemampuan berekspresi secara alami membuatnya dilirik agensi akting."
+      "desc": "• 2012: Membintangi film layar lebar bertema anak-anak Jendral Kancil The Movie dengan memerankan tokoh Guntur. Pada tahun yang sama, ia juga membintangi FTV populer Babysitterku Barbie.\n\n• 2015: Terlibat dalam film drama Move On sebagai Sam kecil.\n\n• 2018: Menginjak masa remaja, ia memerankan karakter Iqbal dalam film drama romantis EL."
     },
     {
       "id": "tl-2",
