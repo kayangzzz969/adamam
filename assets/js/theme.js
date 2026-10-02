@@ -1,6 +1,7 @@
 /**
  * CYBER TRANSFORMERS THEME CONTROLLER (DARK & LIGHT / PUTIH)
  * Adam Xavier Official Fanbase
+ * Floating FAB pojok kanan bawah, logo/ikon saja
  */
 
 (function () {
@@ -99,14 +100,10 @@ function updateThemeToggleUI(isDark) {
     }
   });
 
-  var texts = document.querySelectorAll('#themeToggleText, .theme-toggle-text');
-  texts.forEach(function (text) {
-    text.textContent = isDark ? 'Light (Putih)' : 'Dark';
-  });
-
-  var btns = document.querySelectorAll('#themeToggleBtn, .theme-toggle-btn');
+  var btns = document.querySelectorAll('#themeToggleBtn, .theme-toggle-fab');
   btns.forEach(function (btn) {
     btn.setAttribute('title', isDark ? 'Beralih ke Mode Terang / Putih (Light Mode)' : 'Beralih ke Mode Gelap (Dark Mode)');
+    btn.setAttribute('aria-label', isDark ? 'Beralih ke Mode Terang / Putih (Light Mode)' : 'Beralih ke Mode Gelap (Dark Mode)');
     if (isDark) {
       btn.classList.add('is-dark');
       btn.classList.remove('is-light');
@@ -117,8 +114,23 @@ function updateThemeToggleUI(isDark) {
   });
 }
 
+function ensureFloatingThemeBtn() {
+  if (document.getElementById('themeToggleBtn')) return;
+  if (!document.body) return;
+  var btn = document.createElement('button');
+  btn.id = 'themeToggleBtn';
+  btn.className = 'theme-toggle-fab';
+  btn.onclick = toggleCyberTheme;
+  btn.setAttribute('title', 'Beralih Mode Gelap/Terang');
+  btn.setAttribute('aria-label', 'Toggle Dark/Light Mode');
+  btn.innerHTML = '<i class="fa-solid fa-moon" id="themeToggleIcon"></i>';
+  document.body.appendChild(btn);
+  updateThemeToggleUI();
+}
+
 function initCyberTheme() {
   var current = getActiveCyberTheme();
+  ensureFloatingThemeBtn();
   applyTheme(current);
 }
 
