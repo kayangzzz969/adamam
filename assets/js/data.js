@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.41.31
+ * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.44.15
  */
 
 // Hash SHA-256 untuk password admin
@@ -186,16 +186,15 @@ const DEFAULT_BIO = {
 const DEFAULT_FILMS = [
   {
     "id": "film-1",
-    "title": "Cyber Guardian: Anak Bintang",
-    "year": "2025",
-    "role": "Rafa (Pemeran Utama)",
-    "genre": "Sci-Fi, Petualangan, Keluarga",
-    "status": "Sedang Tayang",
-    "rating": "4.9 / 5.0",
-    "synopsis": "Rafa menemukan komponen robot luar angkasa purba yang jatuh di dekat rumahnya. Bersama sang robot pelindung bernama Zephyr, Rafa harus menyelamatkan kotanya dari ancaman kecerdasan buatan nakal.",
-    "image": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&auto=format&fit=crop&q=80",
+    "title": "SENIN HARGA NAIK",
+    "year": "2026",
     "badge": "Film Layar Lebar",
-    "trailerUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    "role": "Alviero",
+    "genre": "Drama Dan Keluarga",
+    "rating": "4.9 / 5.0",
+    "image": "https://nos.jkt-1.neo.id/media.cinema21.co.id/movie-images/16SHNK.jpg",
+    "trailerUrl": "https://youtube.com/",
+    "synopsis": "Pertengkaran Mutia (Nadya Arina) dengan Ibunya, Retno (Meriam Bellina) membuatnya pergi dari rumah untuk membuktikan dirinya bisa sukses secara mandiri. Tiga tahun berlalu, promosi karir Mutia di perusahaan property tersandung proyek penggusuran Mercusuar, toko roti legendaris milik Retno. Tidak ada pilihan lain, Mutia kembali ke rumah, dan bekerja sama dengan kakak dan adiknya untuk melunakkan hati ibunya agar mau menjual Mercusuar."
   }
 ];
 
