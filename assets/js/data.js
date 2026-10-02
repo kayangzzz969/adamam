@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.51.27
+ * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.51.34
  */
 
 // Hash SHA-256 untuk password admin
@@ -40,18 +40,6 @@ const DEFAULT_FACTS = [
     "icon": "fa-solid fa-medal",
     "title": "Mahir Bela Diri Wushu",
     "desc": "Belajar wushu sejak usia 6 tahun, sehingga mampu melakukan gerakan akrobatik dan adegan laga sendiri dengan aman."
-  },
-  {
-    "id": "fact-4",
-    "icon": "fa-solid fa-laptop-code",
-    "title": "Hobi Belajar Coding Game",
-    "desc": "Suka membuat mini-game bertema robot menggunakan Scratch dan platform edukasi coding anak."
-  },
-  {
-    "id": "fact-5",
-    "icon": "fa-solid fa-book-open",
-    "title": "Tetap Juara di Sekolah",
-    "desc": "Meski sibuk syuting, Adam selalu menyelesaikan tugas sekolahnya dan berprestasi di mata pelajaran Sains & Bahasa Inggris."
   },
   {
     "id": "fact-6",
@@ -125,18 +113,6 @@ const DEFAULT_BIO = {
       "icon": "fa-solid fa-medal",
       "title": "Mahir Bela Diri Wushu",
       "desc": "Belajar wushu sejak usia 6 tahun, sehingga mampu melakukan gerakan akrobatik dan adegan laga sendiri dengan aman."
-    },
-    {
-      "id": "fact-4",
-      "icon": "fa-solid fa-laptop-code",
-      "title": "Hobi Belajar Coding Game",
-      "desc": "Suka membuat mini-game bertema robot menggunakan Scratch dan platform edukasi coding anak."
-    },
-    {
-      "id": "fact-5",
-      "icon": "fa-solid fa-book-open",
-      "title": "Tetap Juara di Sekolah",
-      "desc": "Meski sibuk syuting, Adam selalu menyelesaikan tugas sekolahnya dan berprestasi di mata pelajaran Sains & Bahasa Inggris."
     },
     {
       "id": "fact-6",
