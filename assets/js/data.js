@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 12.27.36
+ * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 12.30.26
  */
 
 // Hash SHA-256 untuk password admin
@@ -87,11 +87,54 @@ const DEFAULT_EVENTS = [
     "date": "2 October 2026",
     "time": "-",
     "location": "Online",
-    "status": "Upcoming",
+    "status": "Completed",
     "description": "Pemenang Dari Spin Wheel Untuk Google Meet Bersama Adam",
-    "registrationOpen": true,
+    "registrationOpen": false,
     "quota": "Tersedia",
-    "winners": []
+    "winners": [
+      {
+        "rank": "Pemenang 1",
+        "name": "Nimas",
+        "work": "-",
+        "prize": "Online Meet With Adam"
+      },
+      {
+        "rank": "Pemenang 2",
+        "name": "Dinda",
+        "work": "-",
+        "prize": "Online Meet With Adam"
+      },
+      {
+        "rank": "Pemenang 3",
+        "name": "Nadya",
+        "work": "-",
+        "prize": "Online Meet With Adam"
+      },
+      {
+        "rank": "Pemenang 4",
+        "name": "Tirta",
+        "work": "-",
+        "prize": "Online Meet With Adam"
+      },
+      {
+        "rank": "Pemenang 5",
+        "name": "Fakhira",
+        "work": "-",
+        "prize": "Online Meet With Adam"
+      },
+      {
+        "rank": "Pemenang 6",
+        "name": "Vanessa",
+        "work": "-",
+        "prize": "Online Meet With Adam"
+      },
+      {
+        "rank": "Pemenang 7",
+        "name": "Tata",
+        "work": "-",
+        "prize": "Online Meet With Adam"
+      }
+    ]
   }
 ];
 
