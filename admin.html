@@ -110,6 +110,14 @@
             <div style="font-size:11px; font-weight:700; color:#64748B;">TOTAL PEMENANG</div>
             <div style="font-family:'Orbitron',sans-serif; font-size:24px; font-weight:900; color:#0F172A;" id="statTotalWinners">0</div>
           </div>
+          <div style="background:#FFF; padding:16px; border-radius:12px; border-left:4px solid #8B5CF6; box-shadow:var(--shadow-sm);">
+            <div style="font-size:11px; font-weight:700; color:#64748B;">TIMELINE KARIER</div>
+            <div style="font-family:'Orbitron',sans-serif; font-size:24px; font-weight:900; color:#0F172A;" id="statTotalTimeline">0</div>
+          </div>
+          <div style="background:#FFF; padding:16px; border-radius:12px; border-left:4px solid #EC4899; box-shadow:var(--shadow-sm);">
+            <div style="font-size:11px; font-weight:700; color:#64748B;">FAKTA UNIK</div>
+            <div style="font-family:'Orbitron',sans-serif; font-size:24px; font-weight:900; color:#0F172A;" id="statTotalFacts">0</div>
+          </div>
           <div style="background:#FFF; padding:16px; border-radius:12px; border-left:4px solid #F59E0B; box-shadow:var(--shadow-sm);">
             <div style="font-size:11px; font-weight:700; color:#64748B;">HALAMAN TENTANG</div>
             <div style="font-family:'Orbitron',sans-serif; font-size:16px; font-weight:800; color:#10B981; display:flex; align-items:center; gap:6px;">
@@ -150,22 +158,28 @@
 
         <!-- Navigation Tabs -->
         <div class="admin-tabs">
-          <button class="admin-tab-btn active" onclick="switchAdminTab('filmsTab', this)">
+          <button class="admin-tab-btn active" data-tab="filmsTab" onclick="switchAdminTab('filmsTab', this)">
             <i class="fa-solid fa-clapperboard"></i> Kelola Film
           </button>
-          <button class="admin-tab-btn" onclick="switchAdminTab('eventsTab', this)">
+          <button class="admin-tab-btn" data-tab="eventsTab" onclick="switchAdminTab('eventsTab', this)">
             <i class="fa-solid fa-trophy"></i> Kelola Event & Pemenang
           </button>
-          <button class="admin-tab-btn" onclick="switchAdminTab('bioTab', this)">
-            <i class="fa-solid fa-user-astronaut"></i> Kelola Halaman Tentang (tentang.html)
+          <button class="admin-tab-btn" data-tab="bioTab" onclick="switchAdminTab('bioTab', this)">
+            <i class="fa-solid fa-user-astronaut"></i> Profil & Bio
           </button>
-          <button class="admin-tab-btn" onclick="switchAdminTab('musicTab', this)">
+          <button class="admin-tab-btn" data-tab="timelineTab" onclick="switchAdminTab('timelineTab', this)">
+            <i class="fa-solid fa-timeline"></i> Timeline Karier
+          </button>
+          <button class="admin-tab-btn" data-tab="factsTab" onclick="switchAdminTab('factsTab', this)">
+            <i class="fa-solid fa-lightbulb"></i> Fakta Unik
+          </button>
+          <button class="admin-tab-btn" data-tab="musicTab" onclick="switchAdminTab('musicTab', this)">
             <i class="fa-solid fa-music"></i> Kelola Musik Web
           </button>
-          <button class="admin-tab-btn" onclick="switchAdminTab('cloudTab', this)">
+          <button class="admin-tab-btn" data-tab="cloudTab" onclick="switchAdminTab('cloudTab', this)">
             <i class="fa-brands fa-github"></i> GitHub & Cloud Storage
           </button>
-          <button class="admin-tab-btn" onclick="switchAdminTab('securityTab', this)">
+          <button class="admin-tab-btn" data-tab="securityTab" onclick="switchAdminTab('securityTab', this)">
             <i class="fa-solid fa-shield-halved"></i> Keamanan & Password
           </button>
         </div>
@@ -248,6 +262,26 @@
               <a href="tentang.html" target="_blank" class="btn-cyber btn-cyber-outline btn-cyber-sm">
                 <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka tentang.html
               </a>
+            </div>
+
+            <!-- SHORTCUT KE TIMELINE & FAKTA UNIK -->
+            <div style="background:#F0FDF4; border:1.5px solid #22C55E; border-radius:12px; padding:14px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+              <div>
+                <div style="font-size:12px; font-weight:800; color:#15803D; text-transform:uppercase; display:flex; align-items:center; gap:6px;">
+                  <i class="fa-solid fa-list-check"></i> Kelola Bagian Lain Halaman Tentang
+                </div>
+                <div style="font-size:12px; color:#475569; margin-top:2px;">
+                  Edit riwayat perjalanan karier (timeline) dan fakta unik seputar Adam Xavier.
+                </div>
+              </div>
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <button type="button" class="btn-cyber btn-cyber-gold btn-cyber-sm" onclick="switchAdminTab('timelineTab', document.querySelector('.admin-tab-btn[data-tab=\'timelineTab\']'))">
+                  <i class="fa-solid fa-timeline"></i> Buka Timeline Karier
+                </button>
+                <button type="button" class="btn-cyber btn-cyber-dark btn-cyber-sm" onclick="switchAdminTab('factsTab', document.querySelector('.admin-tab-btn[data-tab=\'factsTab\']'))">
+                  <i class="fa-solid fa-lightbulb"></i> Buka Fakta Unik
+                </button>
+              </div>
             </div>
             
             <form onsubmit="handleSaveBio(event)">
@@ -339,6 +373,90 @@
                 <i class="fa-solid fa-floppy-disk"></i> Simpan Perubahan Halaman Tentang & Profil
               </button>
             </form>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             TAB 4: KELOLA TIMELINE PERJALANAN KARIER
+             ========================================== -->
+        <div id="timelineTab" class="tab-pane" style="display:none;">
+          <div style="background:#FFF; padding:24px; border-radius:16px; border:1px solid var(--border-light); margin-bottom:20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; flex-wrap:wrap; gap:12px;">
+              <div>
+                <h3 style="font-family:'Orbitron',sans-serif; font-size:17px; color:var(--cyber-dark); margin:0;">
+                  <i class="fa-solid fa-timeline" style="color:var(--yellow-accent);"></i> Perjalanan Karier & Milestone Prestasi
+                </h3>
+                <p style="font-size:12px; color:#64748B; margin:4px 0 0 0;">
+                  Kelola daftar tahun, usia, dan pencapaian karier Adam Xavier yang tampil di <strong>tentang.html</strong>.
+                </p>
+              </div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button class="btn-cyber btn-cyber-gold btn-cyber-sm" onclick="openAddTimelineModal()">
+                  <i class="fa-solid fa-plus"></i> Tambah Milestone Baru
+                </button>
+                <a href="tentang.html" target="_blank" class="btn-cyber btn-cyber-outline btn-cyber-sm">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Lihat di tentang.html
+                </a>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th style="width:170px;">Tahun / Usia</th>
+                    <th style="width:250px;">Judul Milestone / Prestasi</th>
+                    <th>Deskripsi Perjalanan Karier</th>
+                    <th style="width:110px; text-align:center;">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="adminTimelineTableBody">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             TAB 5: KELOLA FAKTA UNIK
+             ========================================== -->
+        <div id="factsTab" class="tab-pane" style="display:none;">
+          <div style="background:#FFF; padding:24px; border-radius:16px; border:1px solid var(--border-light); margin-bottom:20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; flex-wrap:wrap; gap:12px;">
+              <div>
+                <h3 style="font-family:'Orbitron',sans-serif; font-size:17px; color:var(--cyber-dark); margin:0;">
+                  <i class="fa-solid fa-lightbulb" style="color:var(--yellow-accent);"></i> Fakta Unik Seputar Adam Xavier
+                </h3>
+                <p style="font-size:12px; color:#64748B; margin:4px 0 0 0;">
+                  Kelola kartu fakta menarik, kebiasaan, dan fakta unik yang tampil di <strong>tentang.html</strong>.
+                </p>
+              </div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button class="btn-cyber btn-cyber-gold btn-cyber-sm" onclick="openAddFactModal()">
+                  <i class="fa-solid fa-plus"></i> Tambah Fakta Unik Baru
+                </button>
+                <a href="tentang.html" target="_blank" class="btn-cyber btn-cyber-outline btn-cyber-sm">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Lihat di tentang.html
+                </a>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th style="width:70px; text-align:center;">Ikon</th>
+                    <th style="width:230px;">Judul Fakta</th>
+                    <th>Deskripsi Fakta Unik</th>
+                    <th style="width:110px; text-align:center;">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="adminFactsTableBody">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
@@ -903,6 +1021,97 @@
   </div>
 
   <!-- ============================================================
+       MODAL TAMBAH/EDIT TIMELINE KARIER
+       ============================================================ -->
+  <div class="modal-overlay" id="timelineModal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 class="modal-title" id="timelineModalTitle">Kelola Milestone Karier</h3>
+        <button class="btn-close-modal" onclick="closeTimelineModal()">&times;</button>
+      </div>
+
+      <form onsubmit="handleSaveTimeline(event)">
+        <input type="hidden" id="formTimelineId" value="">
+
+        <div class="form-group">
+          <label class="form-label">Tahun / Periode / Usia:</label>
+          <input type="text" id="formTimelineYear" class="form-control" placeholder="Contoh: 2026 (Usia 12 Tahun) atau 2025 - 2026 (Sekarang)" required>
+          <div style="font-size:11px; color:#64748B; margin-top:3px;">Tampil sebagai badge tahun di sisi kiri timeline.</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Judul Milestone / Prestasi:</label>
+          <input type="text" id="formTimelineTitle" class="form-control" placeholder="Contoh: Bintang Utama 'Cyber Guardian' & Voice Actor Transformers" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Deskripsi Perjalanan Karier:</label>
+          <textarea id="formTimelineDesc" class="form-control" rows="4" placeholder="Jelaskan peran, pengalaman, karya, atau pencapaian Adam pada tahun ini..." required></textarea>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:16px;">
+          <button type="button" class="btn-cyber btn-cyber-outline btn-cyber-sm" onclick="closeTimelineModal()">Batal</button>
+          <button type="submit" class="btn-cyber btn-cyber-gold btn-cyber-sm"><i class="fa-solid fa-check"></i> Simpan Milestone</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL TAMBAH/EDIT FAKTA UNIK
+       ============================================================ -->
+  <div class="modal-overlay" id="factModal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 class="modal-title" id="factModalTitle">Kelola Fakta Unik</h3>
+        <button class="btn-close-modal" onclick="closeFactModal()">&times;</button>
+      </div>
+
+      <form onsubmit="handleSaveFact(event)">
+        <input type="hidden" id="formFactId" value="">
+
+        <div class="form-group">
+          <label class="form-label">Judul Fakta Unik:</label>
+          <input type="text" id="formFactTitle" class="form-control" placeholder="Contoh: Kolektor Transformers Sejati" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Ikon FontAwesome:</label>
+          <div style="display:flex; gap:10px; align-items:center; margin-bottom:8px;">
+            <div id="formFactIconPreview" style="width:40px; height:40px; border-radius:10px; background:#FFF9E6; border:1.5px solid #FFC800; display:flex; align-items:center; justify-content:center; font-size:20px; color:#B45309;">
+              <i class="fa-solid fa-robot"></i>
+            </div>
+            <input type="text" id="formFactIcon" class="form-control" placeholder="fa-solid fa-robot" value="fa-solid fa-robot" required oninput="updateFactIconPreview(this.value)">
+          </div>
+          <!-- Quick icon presets -->
+          <div style="display:flex; flex-wrap:wrap; gap:6px;">
+            <button type="button" class="btn-cyber btn-cyber-sm" style="font-size:11px; padding:3px 8px;" onclick="selectFactIcon('fa-solid fa-robot')"><i class="fa-solid fa-robot"></i> Robot</button>
+            <button type="button" class="btn-cyber btn-cyber-sm" style="font-size:11px; padding:3px 8px;" onclick="selectFactIcon('fa-solid fa-medal')"><i class="fa-solid fa-medal"></i> Medali</button>
+            <button type="button" class="btn-cyber btn-cyber-sm" style="font-size:11px; padding:3px 8px;" onclick="selectFactIcon('fa-solid fa-music')"><i class="fa-solid fa-music"></i> Musik</button>
+            <button type="button" class="btn-cyber btn-cyber-sm" style="font-size:11px; padding:3px 8px;" onclick="selectFactIcon('fa-solid fa-laptop-code')"><i class="fa-solid fa-laptop-code"></i> Coding</button>
+            <button type="button" class="btn-cyber btn-cyber-sm" style="font-size:11px; padding:3px 8px;" onclick="selectFactIcon('fa-solid fa-book-open')"><i class="fa-solid fa-book-open"></i> Sekolah</button>
+            <button type="button" class="btn-cyber btn-cyber-sm" style="font-size:11px; padding:3px 8px;" onclick="selectFactIcon('fa-solid fa-heart')"><i class="fa-solid fa-heart"></i> Kasih</button>
+            <button type="button" class="btn-cyber btn-cyber-sm" style="font-size:11px; padding:3px 8px;" onclick="selectFactIcon('fa-solid fa-bolt')"><i class="fa-solid fa-bolt"></i> Petir</button>
+            <button type="button" class="btn-cyber btn-cyber-sm" style="font-size:11px; padding:3px 8px;" onclick="selectFactIcon('fa-solid fa-star')"><i class="fa-solid fa-star"></i> Bintang</button>
+            <button type="button" class="btn-cyber btn-cyber-sm" style="font-size:11px; padding:3px 8px;" onclick="selectFactIcon('fa-solid fa-clapperboard')"><i class="fa-solid fa-clapperboard"></i> Film</button>
+            <button type="button" class="btn-cyber btn-cyber-sm" style="font-size:11px; padding:3px 8px;" onclick="selectFactIcon('fa-solid fa-trophy')"><i class="fa-solid fa-trophy"></i> Trofi</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Deskripsi Fakta Unik:</label>
+          <textarea id="formFactDesc" class="form-control" rows="3" placeholder="Jelaskan detail fakta unik atau kebiasaan Adam..." required></textarea>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:16px;">
+          <button type="button" class="btn-cyber btn-cyber-outline btn-cyber-sm" onclick="closeFactModal()">Batal</button>
+          <button type="submit" class="btn-cyber btn-cyber-gold btn-cyber-sm"><i class="fa-solid fa-check"></i> Simpan Fakta</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================
        LOADING OVERLAY DIRECT GITHUB SYNC
        ============================================================ -->
   <div id="syncLoadingOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(15,23,42,0.8); z-index:99999; justify-content:center; align-items:center; backdrop-filter:blur(5px);">
@@ -1226,10 +1435,16 @@
        ============================================================ */
     function switchAdminTab(tabId, btn) {
       document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      if (btn) btn.classList.add('active');
       document.querySelectorAll('.tab-pane').forEach(p => p.style.display = 'none');
       const targetPane = document.getElementById(tabId);
       if (targetPane) targetPane.style.display = 'block';
+      if (tabId === 'timelineTab') {
+        renderAdminTimeline();
+      }
+      if (tabId === 'factsTab') {
+        renderAdminFacts();
+      }
       if (tabId === 'securityTab') {
         renderSecurityTabStatus();
       }
@@ -1245,6 +1460,8 @@
       renderAdminFilms();
       renderAdminEvents();
       renderAdminBio();
+      renderAdminTimeline();
+      renderAdminFacts();
       renderAdminMusic();
       renderSecurityTabStatus();
       loadCloudConfig();
@@ -1555,6 +1772,199 @@
       if (statFanbase) statFanbase.textContent = bio.fanbaseName;
 
       await syncToDisk('Konten Halaman Tentang & Profil Aktor berhasil disimpan!');
+    }
+
+    // 3. Timeline Karier CRUD
+    function renderAdminTimeline() {
+      const timeline = FanbaseStore.getTimeline();
+      const statTimelineEl = document.getElementById('statTotalTimeline');
+      if (statTimelineEl) statTimelineEl.textContent = timeline.length;
+
+      const tbody = document.getElementById('adminTimelineTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      timeline.forEach((item, index) => {
+        const itemId = item.id || ('tl-' + (index + 1));
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><span style="background:#FFF9E6; border:1px solid #FFC800; padding:4px 10px; border-radius:6px; font-weight:800; font-size:12px; color:#B45309; display:inline-block;">${item.year || '-'}</span></td>
+          <td><strong>${item.title || '-'}</strong></td>
+          <td style="font-size:12px; color:#64748B; max-width:340px; line-height:1.5;">${item.desc || '-'}</td>
+          <td style="text-align:center;">
+            <button class="btn-action-icon btn-edit" title="Edit Milestone" onclick="openEditTimelineModal('${itemId}')"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button class="btn-action-icon btn-delete" title="Hapus Milestone" onclick="deleteTimeline('${itemId}')"><i class="fa-solid fa-trash"></i></button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function openAddTimelineModal() {
+      document.getElementById('timelineModalTitle').textContent = 'Tambah Milestone Karier';
+      document.getElementById('formTimelineId').value = '';
+      document.getElementById('formTimelineYear').value = '';
+      document.getElementById('formTimelineTitle').value = '';
+      document.getElementById('formTimelineDesc').value = '';
+      document.getElementById('timelineModal').classList.add('open');
+    }
+
+    function openEditTimelineModal(id) {
+      const timeline = FanbaseStore.getTimeline();
+      const item = timeline.find((t, idx) => (t.id === id || ('tl-' + (idx + 1)) === id));
+      if (!item) return;
+
+      document.getElementById('timelineModalTitle').textContent = 'Edit Milestone Karier';
+      document.getElementById('formTimelineId').value = item.id || id;
+      document.getElementById('formTimelineYear').value = item.year || '';
+      document.getElementById('formTimelineTitle').value = item.title || '';
+      document.getElementById('formTimelineDesc').value = item.desc || '';
+      document.getElementById('timelineModal').classList.add('open');
+    }
+
+    function closeTimelineModal() {
+      document.getElementById('timelineModal').classList.remove('open');
+    }
+
+    async function handleSaveTimeline(e) {
+      e.preventDefault();
+      const id = document.getElementById('formTimelineId').value;
+      const timeline = FanbaseStore.getTimeline().slice();
+
+      const itemData = {
+        id: id || ("tl-" + Date.now()),
+        year: document.getElementById('formTimelineYear').value.trim(),
+        title: document.getElementById('formTimelineTitle').value.trim(),
+        desc: document.getElementById('formTimelineDesc').value.trim()
+      };
+
+      if (id) {
+        const idx = timeline.findIndex((t, i) => (t.id === id || ('tl-' + (i + 1)) === id));
+        if (idx !== -1) timeline[idx] = itemData;
+        else timeline.push(itemData);
+      } else {
+        timeline.push(itemData);
+      }
+
+      FanbaseStore.saveTimeline(timeline);
+      closeTimelineModal();
+      renderAdminTimeline();
+      await syncToDisk('Milestone perjalanan karier berhasil disimpan!');
+    }
+
+    async function deleteTimeline(id) {
+      if (!confirm('Yakin ingin menghapus milestone karier ini?')) return;
+      let timeline = FanbaseStore.getTimeline().slice();
+      timeline = timeline.filter((t, idx) => !(t.id === id || ('tl-' + (idx + 1)) === id));
+      FanbaseStore.saveTimeline(timeline);
+      renderAdminTimeline();
+      await syncToDisk('Milestone karier berhasil dihapus!');
+    }
+
+    // 4. Fakta Unik CRUD
+    function renderAdminFacts() {
+      const facts = FanbaseStore.getFacts();
+      const statFactsEl = document.getElementById('statTotalFacts');
+      if (statFactsEl) statFactsEl.textContent = facts.length;
+
+      const tbody = document.getElementById('adminFactsTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      facts.forEach((item, index) => {
+        const itemId = item.id || ('fact-' + (index + 1));
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="text-align:center;">
+            <div style="width:36px; height:36px; border-radius:8px; background:#FFF9E6; border:1px solid #FFC800; display:inline-flex; align-items:center; justify-content:center; color:#B45309; font-size:16px;">
+              <i class="${item.icon || 'fa-solid fa-sparkles'}"></i>
+            </div>
+          </td>
+          <td><strong>${item.title || '-'}</strong></td>
+          <td style="font-size:12px; color:#64748B; max-width:340px; line-height:1.5;">${item.desc || '-'}</td>
+          <td style="text-align:center;">
+            <button class="btn-action-icon btn-edit" title="Edit Fakta" onclick="openEditFactModal('${itemId}')"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button class="btn-action-icon btn-delete" title="Hapus Fakta" onclick="deleteFact('${itemId}')"><i class="fa-solid fa-trash"></i></button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateFactIconPreview(iconClass) {
+      const preview = document.getElementById('formFactIconPreview');
+      if (preview) {
+        preview.innerHTML = `<i class="${iconClass || 'fa-solid fa-sparkles'}"></i>`;
+      }
+    }
+
+    function selectFactIcon(iconClass) {
+      const input = document.getElementById('formFactIcon');
+      if (input) {
+        input.value = iconClass;
+        updateFactIconPreview(iconClass);
+      }
+    }
+
+    function openAddFactModal() {
+      document.getElementById('factModalTitle').textContent = 'Tambah Fakta Unik Baru';
+      document.getElementById('formFactId').value = '';
+      document.getElementById('formFactTitle').value = '';
+      selectFactIcon('fa-solid fa-robot');
+      document.getElementById('formFactDesc').value = '';
+      document.getElementById('factModal').classList.add('open');
+    }
+
+    function openEditFactModal(id) {
+      const facts = FanbaseStore.getFacts();
+      const item = facts.find((f, idx) => (f.id === id || ('fact-' + (idx + 1)) === id));
+      if (!item) return;
+
+      document.getElementById('factModalTitle').textContent = 'Edit Fakta Unik';
+      document.getElementById('formFactId').value = item.id || id;
+      document.getElementById('formFactTitle').value = item.title || '';
+      selectFactIcon(item.icon || 'fa-solid fa-robot');
+      document.getElementById('formFactDesc').value = item.desc || '';
+      document.getElementById('factModal').classList.add('open');
+    }
+
+    function closeFactModal() {
+      document.getElementById('factModal').classList.remove('open');
+    }
+
+    async function handleSaveFact(e) {
+      e.preventDefault();
+      const id = document.getElementById('formFactId').value;
+      const facts = FanbaseStore.getFacts().slice();
+
+      const itemData = {
+        id: id || ("fact-" + Date.now()),
+        title: document.getElementById('formFactTitle').value.trim(),
+        icon: document.getElementById('formFactIcon').value.trim() || 'fa-solid fa-sparkles',
+        desc: document.getElementById('formFactDesc').value.trim()
+      };
+
+      if (id) {
+        const idx = facts.findIndex((f, i) => (f.id === id || ('fact-' + (i + 1)) === id));
+        if (idx !== -1) facts[idx] = itemData;
+        else facts.push(itemData);
+      } else {
+        facts.push(itemData);
+      }
+
+      FanbaseStore.saveFacts(facts);
+      closeFactModal();
+      renderAdminFacts();
+      await syncToDisk('Fakta unik berhasil disimpan!');
+    }
+
+    async function deleteFact(id) {
+      if (!confirm('Yakin ingin menghapus fakta unik ini?')) return;
+      let facts = FanbaseStore.getFacts().slice();
+      facts = facts.filter((f, idx) => !(f.id === id || ('fact-' + (idx + 1)) === id));
+      FanbaseStore.saveFacts(facts);
+      renderAdminFacts();
+      await syncToDisk('Fakta unik berhasil dihapus!');
     }
 
     async function resetAllDemoData() {
@@ -2270,6 +2680,8 @@
             renderAdminFilms();
             renderAdminEvents();
             renderAdminBio();
+            renderAdminTimeline();
+            renderAdminFacts();
             renderAdminMusic();
             renderSecurityTabStatus();
             updatePasswordHintUI();
@@ -2301,6 +2713,10 @@
 
 // Hash SHA-256 untuk password admin
 const DEFAULT_ADMIN_HASH = ${JSON.stringify(adminHash)};
+
+const DEFAULT_TIMELINE = ${JSON.stringify(bio.timeline || (typeof DEFAULT_TIMELINE !== 'undefined' ? DEFAULT_TIMELINE : []), null, 2)};
+
+const DEFAULT_FACTS = ${JSON.stringify(bio.facts || (typeof DEFAULT_FACTS !== 'undefined' ? DEFAULT_FACTS : []), null, 2)};
 
 const DEFAULT_BIO = ${JSON.stringify(bio, null, 2)};
 
@@ -2351,6 +2767,24 @@ const FanbaseStore = {
   saveMusic: function(musicObj, options) {
     const bio = Object.assign({}, this.getBio());
     bio.music = Object.assign({}, this.getMusic(), musicObj);
+    this.saveBio(bio, options);
+  },
+  getTimeline: function() {
+    const bio = this.getBio();
+    return (bio && Array.isArray(bio.timeline) && bio.timeline.length > 0) ? bio.timeline : (typeof DEFAULT_TIMELINE !== 'undefined' ? DEFAULT_TIMELINE : []);
+  },
+  saveTimeline: function(timelineList, options) {
+    const bio = Object.assign({}, this.getBio());
+    bio.timeline = Array.isArray(timelineList) ? timelineList.slice() : [];
+    this.saveBio(bio, options);
+  },
+  getFacts: function() {
+    const bio = this.getBio();
+    return (bio && Array.isArray(bio.facts) && bio.facts.length > 0) ? bio.facts : (typeof DEFAULT_FACTS !== 'undefined' ? DEFAULT_FACTS : []);
+  },
+  saveFacts: function(factsList, options) {
+    const bio = Object.assign({}, this.getBio());
+    bio.facts = Array.isArray(factsList) ? factsList.slice() : [];
     this.saveBio(bio, options);
   },
   getFilms: function() {
