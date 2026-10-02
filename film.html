@@ -13,17 +13,7 @@
   
   <!-- Custom Cyber-Transformer Styling -->
   <link rel="stylesheet" href="assets/css/style.css">
-  <script>
-    (function() {
-      try {
-        var theme = localStorage.getItem('ax_theme');
-        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (theme === 'dark' || (!theme && prefersDark)) {
-          document.documentElement.classList.add('dark-theme');
-        }
-      } catch(e) {}
-    })();
-  </script>
+  <script src="assets/js/theme.js"></script>
 </head>
 <body>
 
@@ -55,8 +45,9 @@
         <a href="event.html" class="nav-link-btn" title="Jadwal & Pemenang Event">
           <i class="fa-solid fa-calendar-check"></i> Event
         </a>
-        <button id="themeToggleBtn" class="nav-link-btn theme-toggle-btn" onclick="toggleCyberTheme()" title="Ganti Mode Gelap/Terang" aria-label="Toggle Dark Mode">
+        <button id="themeToggleBtn" class="nav-link-btn theme-toggle-btn" onclick="toggleCyberTheme()" title="Beralih Mode Gelap/Terang" aria-label="Toggle Theme Mode">
           <i class="fa-solid fa-moon" id="themeToggleIcon"></i>
+          <span id="themeToggleText" class="theme-toggle-text">Dark</span>
         </button>
       </nav>
     </header>
