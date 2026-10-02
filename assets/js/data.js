@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.50.03
+ * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.50.10
  */
 
 // Hash SHA-256 untuk password admin
@@ -19,18 +19,6 @@ const DEFAULT_TIMELINE = [
     "year": "2021 - 2024",
     "title": "Serial Web",
     "desc": "• 2021: Namanya kembali melambung di kalangan penonton muda setelah memerankan tokoh Finno dalam serial web hits Antares. Ia juga terlibat dalam film Cinta Bete sebagai Emilio kecil.\n\n• 2024: Aktif membintangi FTV seperti Pak Guru, Huruf 'G'-nya Pasti \"Galak\"."
-  },
-  {
-    "id": "tl-4",
-    "year": "2024 (Usia 10 Tahun)",
-    "title": "Merajai Genre Mecha & Superhero Anak",
-    "desc": "Membintangi dua karya besar sekaligus: film layar lebar \"Satria Cilik & Mecha Titan\" dan serial laga TV populer \"Ksatria Surya\" (Season 1 & 2). Pada tahun ini fanbase resmi AdamUnited resmi dideklarasikan."
-  },
-  {
-    "id": "tl-5",
-    "year": "2025 - 2026 (Sekarang)",
-    "title": "Bintang Utama \"Cyber Guardian\" & Voice Actor Transformers",
-    "desc": "Dipercaya menjadi pemeran utama Rafa dalam film layar lebar sci-fi berbiaya besar \"Cyber Guardian: Anak Bintang\", serta menjadi pengisi suara resmi dubber karakter anak robotik di serial animasi Transformers Indonesia."
   }
 ];
 
@@ -117,18 +105,6 @@ const DEFAULT_BIO = {
       "year": "2021 - 2024",
       "title": "Serial Web",
       "desc": "• 2021: Namanya kembali melambung di kalangan penonton muda setelah memerankan tokoh Finno dalam serial web hits Antares. Ia juga terlibat dalam film Cinta Bete sebagai Emilio kecil.\n\n• 2024: Aktif membintangi FTV seperti Pak Guru, Huruf 'G'-nya Pasti \"Galak\"."
-    },
-    {
-      "id": "tl-4",
-      "year": "2024 (Usia 10 Tahun)",
-      "title": "Merajai Genre Mecha & Superhero Anak",
-      "desc": "Membintangi dua karya besar sekaligus: film layar lebar \"Satria Cilik & Mecha Titan\" dan serial laga TV populer \"Ksatria Surya\" (Season 1 & 2). Pada tahun ini fanbase resmi AdamUnited resmi dideklarasikan."
-    },
-    {
-      "id": "tl-5",
-      "year": "2025 - 2026 (Sekarang)",
-      "title": "Bintang Utama \"Cyber Guardian\" & Voice Actor Transformers",
-      "desc": "Dipercaya menjadi pemeran utama Rafa dalam film layar lebar sci-fi berbiaya besar \"Cyber Guardian: Anak Bintang\", serta menjadi pengisi suara resmi dubber karakter anak robotik di serial animasi Transformers Indonesia."
     }
   ],
   "facts": [
