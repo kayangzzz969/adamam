@@ -248,7 +248,7 @@
           <h3 style="font-family:'Orbitron',sans-serif; font-size:20px; font-weight:800;">Perjalanan Karier & Prestasi</h3>
         </div>
 
-        <div class="timeline-container">
+        <div class="timeline-container" id="aboutTimelineContainer">
           <div class="timeline-item">
             <span class="timeline-year">2021 (Usia 7 Tahun)</span>
             <div class="timeline-title">Langkah Pertama di Depan Kamera</div>
@@ -298,7 +298,7 @@
           <h3 style="font-family:'Orbitron',sans-serif; font-size:20px; font-weight:800;">Fakta Unik Seputar Adam Xavier</h3>
         </div>
 
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:14px;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:14px;" id="aboutFactsContainer">
           <div class="fact-card">
             <div class="fact-icon"><i class="fa-solid fa-robot"></i></div>
             <div>
@@ -438,6 +438,44 @@
         const imgEl = document.getElementById('aboutAvatarImg');
         if (imgEl) imgEl.src = bio.avatar;
       }
+
+      // Render Dynamic Timeline & Facts
+      if (typeof FanbaseStore !== 'undefined') {
+        renderAboutTimeline(bio.timeline || FanbaseStore.getTimeline());
+        renderAboutFacts(bio.facts || FanbaseStore.getFacts());
+      }
+    }
+
+    function renderAboutTimeline(items) {
+      const container = document.getElementById('aboutTimelineContainer');
+      if (!container) return;
+      const list = Array.isArray(items) && items.length > 0 ? items : (typeof DEFAULT_TIMELINE !== 'undefined' ? DEFAULT_TIMELINE : []);
+      if (!list || list.length === 0) return;
+
+      container.innerHTML = list.map(item => `
+        <div class="timeline-item">
+          <span class="timeline-year">${item.year || ''}</span>
+          <div class="timeline-title">${item.title || ''}</div>
+          <p class="timeline-desc">${item.desc || ''}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderAboutFacts(items) {
+      const container = document.getElementById('aboutFactsContainer');
+      if (!container) return;
+      const list = Array.isArray(items) && items.length > 0 ? items : (typeof DEFAULT_FACTS !== 'undefined' ? DEFAULT_FACTS : []);
+      if (!list || list.length === 0) return;
+
+      container.innerHTML = list.map(item => `
+        <div class="fact-card">
+          <div class="fact-icon"><i class="${item.icon || 'fa-solid fa-sparkles'}"></i></div>
+          <div>
+            <div style="font-weight:800; font-size:13px; color:var(--cyber-dark);">${item.title || ''}</div>
+            <div style="font-size:12px; color:#64748B; margin-top:2px;">${item.desc || ''}</div>
+          </div>
+        </div>
+      `).join('');
     }
 
     document.addEventListener('DOMContentLoaded', () => {
