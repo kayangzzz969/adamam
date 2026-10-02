@@ -45,10 +45,6 @@
         <a href="event.html" class="nav-link-btn" title="Jadwal & Pemenang Event">
           <i class="fa-solid fa-calendar-check"></i> Event
         </a>
-        <button id="themeToggleBtn" class="nav-link-btn theme-toggle-btn" onclick="toggleCyberTheme()" title="Beralih Mode Gelap/Terang" aria-label="Toggle Theme Mode">
-          <i class="fa-solid fa-moon" id="themeToggleIcon"></i>
-          <span id="themeToggleText" class="theme-toggle-text">Dark</span>
-        </button>
         <button id="adminLogoutBtn" class="nav-link-btn" style="display:none; color:#EF4444;" onclick="logoutAdmin()">
           <i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar
         </button>
@@ -2626,5 +2622,10 @@ const FanbaseStore = {
       checkStorageStatus();
     });
   </script>
+
+  <!-- Floating Dark/Light Mode Toggle (Icon Only) -->
+  <button id="themeToggleBtn" class="theme-toggle-fab" onclick="toggleCyberTheme()" title="Beralih Mode Gelap/Terang" aria-label="Toggle Dark/Light Mode">
+    <i class="fa-solid fa-moon" id="themeToggleIcon"></i>
+  </button>
 </body>
 </html>
