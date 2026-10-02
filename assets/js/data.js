@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 1/10/2026, 21.35.39
+ * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 12.25.34
  */
 
 // Hash SHA-256 untuk password admin
@@ -11,7 +11,7 @@ const DEFAULT_BIO = {
   "name": "Adam Xavier",
   "nickname": "Adam",
   "birthdate": "28 Agustus 2018",
-  "age": 7,
+  "age": 8,
   "domicile": "Jakarta, Indonesia",
   "fanbaseName": "AdamUnited",
   "tagline": "The Young Cyber Hero",
@@ -28,16 +28,16 @@ const DEFAULT_BIO = {
   "about2": "-",
   "quoteInspiration": "-",
   "avatar": "assets/images/adam_avatar.jpeg",
-  "music": {
-    "title": "Transformers: Cyber Spark of Courage",
-    "artist": "Adam Xavier Official Fanbase Anthem",
-    "url": "assets/audio/anthem.mp3"
-  },
   "socials": {
     "instagram": "https://instagram.com",
     "tiktok": "https://tiktok.com",
     "youtube": "https://youtube.com",
     "whatsapp": "https://whatsapp.com"
+  },
+  "music": {
+    "title": "Transformers: Cyber Spark of Courage",
+    "artist": "Adam Xavier Official Fanbase Anthem",
+    "url": "assets/audio/anthem.mp3"
   }
 };
 
@@ -126,19 +126,6 @@ const FanbaseStore = {
     if (options && options.allowLocalStorage === true && typeof localStorage !== 'undefined') {
       localStorage.setItem("ax_bio", JSON.stringify(_currentBio));
     }
-  },
-  getMusic: function() {
-    const bio = this.getBio();
-    return (bio && bio.music) ? bio.music : {
-      title: "Transformers: Cyber Spark of Courage",
-      artist: "Adam Xavier Official Fanbase Anthem",
-      url: "assets/audio/anthem.mp3"
-    };
-  },
-  saveMusic: function(musicObj, options) {
-    const bio = Object.assign({}, this.getBio());
-    bio.music = Object.assign({}, this.getMusic(), musicObj);
-    this.saveBio(bio, options);
   },
   getFilms: function() {
     return _currentFilms || DEFAULT_FILMS;
