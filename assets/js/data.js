@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 2/10/2026, 20.52.17
+ * Terakhir diperbarui melalui Panel Admin pada: 4/10/2026, 08.39.30
  */
 
 // Hash SHA-256 untuk password admin
@@ -112,6 +112,18 @@ const DEFAULT_BIO = {
 };
 
 const DEFAULT_FILMS = [
+  {
+    "id": "film-1791077970570",
+    "title": "Kado Untuk Ibu",
+    "year": "2026",
+    "badge": "Film Layar Lebar",
+    "role": "Bumi",
+    "genre": "Drama Dan Keluarga",
+    "rating": "4.9 / 5.0",
+    "image": "https://nos.jkt-1.neo.id/media.cinema21.co.id/movie-images/16KUIU.jpg",
+    "trailerUrl": "https://www.youtube.com",
+    "synopsis": "FARIS (Emir Mahira), seorang damkar yang menanti kelahiran anak pertamanya, batal ke RS untuk damping istrinya karena harus membantu ARA (Luisa Adreena) mencari kado ulang tahun untuk ibunya. Perjalanan mereka menjadi petualangan seru yang mengajarkan banyak kebaikan juga memaknai kehilangan tak terduga."
+  },
   {
     "id": "film-1",
     "title": "SENIN HARGA NAIK",
