@@ -1,7 +1,7 @@
 /**
  * DATA STORE FOR ADAM XAVIER FANBASE
  * Cloud Database GitHub (kayangzzz969/adamam)
- * Terakhir diperbarui melalui Panel Admin pada: 4/10/2026, 08.39.30
+ * Terakhir diperbarui melalui Panel Admin pada: 4/10/2026, 08.41.18
  */
 
 // Hash SHA-256 untuk password admin
@@ -112,6 +112,18 @@ const DEFAULT_BIO = {
 };
 
 const DEFAULT_FILMS = [
+  {
+    "id": "film-1791078078784",
+    "title": "Air Mata Di Ujung Sajadah",
+    "year": "2026",
+    "badge": "Film Layar Lebar",
+    "role": "Fathan Kecil",
+    "genre": "Drama Dan Keluarga",
+    "rating": "4.9 / 5.0",
+    "image": "https://nos.jkt-1.neo.id/media.cinema21.co.id/movie-images/15AMD2.jpg",
+    "trailerUrl": "https://www.youtube.com",
+    "synopsis": "Bertahun-tahun lalu, Aqilla (Titi Kamal) membuat keputusan yang sangat berat: merelakan anak kandungnya, Baskara (Faqih Alaydrus), untuk diadopsi oleh pasangan Arif dan Yumna (Citra Kirana) di Kota Solo. Sejak saat itu, ia hanya bisa memantau tumbuh kembang Baskara melalui unggahan Yumna di media sosial, berharap takdir suatu hari akan mempertemukan mereka kembali. \n\nNamun, harapan itu berubah menjadi kecemasan saat akun media sosial Yumna mendadak mati. Panik, Aqilla memberanikan diri pergi ke Solo. Ia tak menyangka kunjungannya akan membongkar sebuah fakta mengejutkan: Arif telah meninggal dunia setelah sempat mengalami koma. \n\nKini, bukan hanya kecemasan yang ia rasakan, tapi juga sebuah konflik besar. Hak asuh Baskara menjadi rebutan antara Aqilla, ibu kandungnya, dan Yumna, ibu angkat yang selama ini merawatnya. Situasi semakin runyam dengan kehadiran Fathan (Daffa Wardhana), adik mendiang Arif. Ia yang ditugaskan untuk menjaga Baskara justru menaruh simpati pada Aqilla. \n\nDi tengah pertikaian sengit, satu rahasia besar terkuak. Sebuah rahasia yang telah lama disembunyikan akhirnya terbongkar, mengubah hidup mereka selamanya. Lantas, siapakah yang akhirnya berhak atas Baskara? Dan apakah Baskara siap menerima kenyataan bahwa Aqilla adalah ibu kandungnya?"
+  },
   {
     "id": "film-1791077970570",
     "title": "Kado Untuk Ibu",
