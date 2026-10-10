@@ -529,6 +529,280 @@ function loadHomeDynamicData() {
       teaserGrid.appendChild(card);
     });
   }
+  // Populate Socials / Media Hub
+  const socials = (typeof FanbaseStore.getSocials === 'function') ? FanbaseStore.getSocials() : (bio.socials || {});
+  
+  const linkGroup = document.getElementById('mediaLinkGroup');
+  if (linkGroup && (socials.groupLink || socials.whatsapp)) {
+    linkGroup.href = socials.groupLink || socials.whatsapp;
+  }
+  
+  const linkIgFanbase = document.getElementById('mediaLinkIgFanbase');
+  if (linkIgFanbase && (socials.igFanbase || socials.instagram)) {
+    linkIgFanbase.href = socials.igFanbase || socials.instagram;
+  }
+
+  const linkIgAdam = document.getElementById('mediaLinkIgAdam');
+  if (linkIgAdam && socials.igAdam) {
+    linkIgAdam.href = socials.igAdam;
+  }
+
+  const linkTiktok = document.getElementById('mediaLinkTiktok');
+  if (linkTiktok && socials.tiktok) {
+    linkTiktok.href = socials.tiktok;
+  }
+
+  const linkYoutube = document.getElementById('mediaLinkYoutube');
+  if (linkYoutube && socials.youtube) {
+    linkYoutube.href = socials.youtube;
+  }
+
+  const cardBrandTitle = document.getElementById('memberCardBrandTitle');
+  if (cardBrandTitle) {
+    cardBrandTitle.textContent = fbName.toUpperCase();
+  }
+}
+
+/* ==========================================================================
+   DIGITAL MEMBER CARD (CYBER ID) CONTROLLER
+   Kustomisasi Nama, Role, Avatar, ID Acak & Canvas PNG Downloader
+   ========================================================================== */
+function updateMemberCardName(val) {
+  const nameEl = document.getElementById('memberCardNameText');
+  if (nameEl) {
+    const clean = (val && val.trim().length > 0) ? val.trim().toUpperCase() : 'NAMA ANGGOTA';
+    nameEl.textContent = clean;
+  }
+}
+
+function updateMemberCardRole(val) {
+  const roleEl = document.getElementById('memberCardRoleBadge');
+  if (roleEl) {
+    roleEl.textContent = val || 'CYBER TROOPER';
+  }
+}
+
+function updateMemberCardAvatar(val) {
+  const avatarEl = document.getElementById('memberCardAvatarEmoji');
+  if (avatarEl) {
+    avatarEl.textContent = val || '🤖';
+  }
+}
+
+function regenerateMemberCardId() {
+  const randomNum = Math.floor(1000 + Math.random() * 9000);
+  const newId = `AU-2026-${randomNum}`;
+  const idEl = document.getElementById('memberCardIdText');
+  if (idEl) {
+    idEl.textContent = `ID: ${newId}`;
+  }
+  if (typeof CyberAudio !== 'undefined' && CyberAudio.playTransformSound) {
+    CyberAudio.playTransformSound();
+  }
+}
+
+function downloadMemberCardPNG() {
+  const nameInput = document.getElementById('inputMemberName');
+  const nameText = (nameInput && nameInput.value.trim().length > 0) ? nameInput.value.trim().toUpperCase() : 'NAMA ANGGOTA';
+  
+  const roleEl = document.getElementById('memberCardRoleBadge');
+  const roleText = roleEl ? roleEl.textContent.trim() : 'CYBER TROOPER';
+  
+  const idEl = document.getElementById('memberCardIdText');
+  const idText = idEl ? idEl.textContent.trim() : 'ID: AU-2026-7892';
+
+  const avatarEl = document.getElementById('memberCardAvatarEmoji');
+  const avatarEmoji = avatarEl ? avatarEl.textContent.trim() : '🤖';
+
+  const bio = (typeof FanbaseStore !== 'undefined') ? FanbaseStore.getBio() : {};
+  const fanbaseName = (bio.fanbaseName || 'AdamUnited').toUpperCase();
+
+  // Create High-Res Offscreen Canvas (800 x 500 px)
+  const canvas = document.createElement('canvas');
+  canvas.width = 800;
+  canvas.height = 500;
+  const ctx = canvas.getContext('2d');
+
+  // Helper function for rounded rectangles
+  function roundRect(ctx, x, y, w, h, r, fill, stroke) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+    if (fill) ctx.fill();
+    if (stroke) ctx.stroke();
+  }
+
+  // 1. Background Gradient Card
+  const bgGrad = ctx.createLinearGradient(0, 0, 800, 500);
+  bgGrad.addColorStop(0, '#070B14');
+  bgGrad.addColorStop(0.5, '#121B30');
+  bgGrad.addColorStop(1, '#090E1A');
+  ctx.fillStyle = bgGrad;
+  roundRect(ctx, 10, 10, 780, 480, 28, true, false);
+
+  // 2. Cyber Yellow Outer Glowing Border
+  ctx.strokeStyle = '#FFC800';
+  ctx.lineWidth = 4;
+  roundRect(ctx, 10, 10, 780, 480, 28, false, true);
+
+  // 3. Futuristic Grid Pattern / Ambient Lines
+  ctx.save();
+  ctx.strokeStyle = 'rgba(255, 200, 0, 0.06)';
+  ctx.lineWidth = 1;
+  for (let x = 40; x < 760; x += 30) {
+    ctx.beginPath();
+    ctx.moveTo(x, 20);
+    ctx.lineTo(x, 480);
+    ctx.stroke();
+  }
+  for (let y = 30; y < 480; y += 30) {
+    ctx.beginPath();
+    ctx.moveTo(20, y);
+    ctx.lineTo(780, y);
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  // 4. Header Section: Brand & Mini Logo
+  // Logo Box
+  ctx.fillStyle = '#FFC800';
+  roundRect(ctx, 45, 40, 50, 50, 12, true, false);
+  ctx.font = '26px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('🤖', 70, 66);
+
+  // Brand Name & Subtitle
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#FFD700';
+  ctx.font = '900 22px "Orbitron", sans-serif';
+  ctx.fillText(fanbaseName, 110, 58);
+
+  ctx.fillStyle = '#94A3B8';
+  ctx.font = '700 11px sans-serif';
+  ctx.fillText('OFFICIAL CYBER ID CARD • ADAM XAVIER ALLIANCE', 110, 78);
+
+  // Golden Smart Chip
+  const chipGrad = ctx.createLinearGradient(670, 42, 745, 92);
+  chipGrad.addColorStop(0, '#F59E0B');
+  chipGrad.addColorStop(0.5, '#D97706');
+  chipGrad.addColorStop(1, '#B45309');
+  ctx.fillStyle = chipGrad;
+  ctx.strokeStyle = '#FDE68A';
+  ctx.lineWidth = 1.5;
+  roundRect(ctx, 670, 42, 75, 52, 10, true, true);
+  // Chip circuit lines
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(670, 68);
+  ctx.lineTo(745, 68);
+  ctx.moveTo(707, 42);
+  ctx.lineTo(707, 94);
+  ctx.stroke();
+
+  // 5. Middle Section: Avatar & Member Details
+  // Avatar Box
+  ctx.fillStyle = '#1E293B';
+  ctx.strokeStyle = '#FFC800';
+  ctx.lineWidth = 3;
+  roundRect(ctx, 45, 140, 140, 140, 24, true, true);
+
+  // Avatar Emoji
+  ctx.font = '64px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(avatarEmoji, 115, 212);
+
+  // Member Role Badge (Pill)
+  ctx.fillStyle = 'rgba(255, 200, 0, 0.18)';
+  ctx.strokeStyle = '#FFC800';
+  ctx.lineWidth = 1.5;
+  roundRect(ctx, 215, 145, 180, 28, 14, true, true);
+
+  ctx.fillStyle = '#FFD700';
+  ctx.font = '800 12px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(roleText, 305, 163);
+
+  // Member Name
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = '900 32px "Orbitron", sans-serif';
+  ctx.shadowColor = 'rgba(255, 200, 0, 0.5)';
+  ctx.shadowBlur = 12;
+  ctx.fillText(nameText, 215, 218);
+  ctx.shadowBlur = 0; // Reset shadow
+
+  // Member ID
+  ctx.fillStyle = '#38BDF8';
+  ctx.font = '700 20px monospace';
+  ctx.fillText(idText, 215, 258);
+
+  // 6. Dashed Divider Line
+  ctx.save();
+  ctx.setLineDash([6, 6]);
+  ctx.strokeStyle = 'rgba(255, 200, 0, 0.35)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(45, 340);
+  ctx.lineTo(755, 340);
+  ctx.stroke();
+  ctx.restore();
+
+  // 7. Bottom Section: Barcode & Date Stamp
+  // Simulated Barcode
+  const barX = 45;
+  const barY = 370;
+  const barHeights = 38;
+  const pattern = [2, 4, 1, 3, 2, 5, 2, 3, 1, 4, 2, 3, 5, 2, 1, 3, 4, 2, 3, 1, 5, 2, 4, 3, 2, 4, 1, 3, 2, 5, 2, 3];
+  let curX = barX;
+  ctx.fillStyle = '#E2E8F0';
+  for (let i = 0; i < pattern.length; i++) {
+    const w = pattern[i];
+    ctx.fillRect(curX, barY, w, barHeights);
+    curX += w + 2.5;
+  }
+
+  ctx.fillStyle = '#94A3B8';
+  ctx.font = '700 10px monospace';
+  ctx.fillText('AUTOBOT ALLIANCE NETWORK • VERIFIED CYBER IDENTITY', barX, barY + barHeights + 18);
+
+  // Date Stamp
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#94A3B8';
+  ctx.font = '700 11px sans-serif';
+  ctx.fillText('ACTIVE SINCE', 750, 385);
+
+  ctx.fillStyle = '#FFD700';
+  ctx.font = '900 18px "Orbitron", sans-serif';
+  ctx.fillText('2026', 750, 410);
+
+  ctx.fillStyle = 'rgba(255, 200, 0, 0.7)';
+  ctx.font = '800 10px sans-serif';
+  ctx.fillText('OFFICIAL MEMBER', 750, 428);
+
+  // 8. Trigger PNG Download
+  try {
+    const dataUrl = canvas.toDataURL('image/png');
+    const safeName = nameText.replace(/[^a-zA-Z0-9]/g, '_') || 'Anggota';
+    const link = document.createElement('a');
+    link.download = `Kartu-Anggota-AdamUnited-${safeName}.png`;
+    link.href = dataUrl;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    if (typeof CyberAudio !== 'undefined' && CyberAudio.playTransformSound) {
+      CyberAudio.playTransformSound();
+    }
+  } catch (err) {
+    alert('Gagal mengunduh kartu anggota: ' + err.message);
+  }
 }
 
 // Global initialization
