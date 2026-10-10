@@ -369,6 +369,43 @@
                 <textarea id="editBioAbout2" class="form-control" rows="3" required></textarea>
               </div>
 
+              <!-- TAUTAN MEDIA SOSIAL & KOMUNITAS ADAMUNITED -->
+              <div style="background:#FFFDF5; border:1.5px solid var(--yellow-primary); border-radius:12px; padding:16px; margin-bottom:18px;">
+                <div style="font-size:12px; font-weight:800; color:#B45309; text-transform:uppercase; margin-bottom:12px; display:flex; align-items:center; gap:6px;">
+                  <i class="fa-solid fa-share-nodes"></i> Tautan Media & Komunitas AdamUnited
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label"><i class="fa-brands fa-whatsapp" style="color:#22C55E;"></i> Link Group Komunitas AdamUnited (WhatsApp / Telegram):</label>
+                  <input type="url" id="editBioGroupLink" class="form-control" placeholder="Contoh: https://chat.whatsapp.com/...">
+                  <div style="font-size:11px; color:#64748B; margin-top:3px;">Link bergabung ke grup resmi penggemar AdamUnited.</div>
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+                  <div class="form-group" style="margin-bottom:0;">
+                    <label class="form-label"><i class="fa-brands fa-instagram" style="color:#E1306C;"></i> Link IG Fanbase (AdamUnited):</label>
+                    <input type="url" id="editBioIgFanbase" class="form-control" placeholder="Contoh: https://instagram.com/adamunited">
+                    <div style="font-size:11px; color:#64748B; margin-top:3px;">Akun Instagram resmi komunitas fanbase.</div>
+                  </div>
+                  <div class="form-group" style="margin-bottom:0;">
+                    <label class="form-label"><i class="fa-brands fa-instagram" style="color:#E1306C;"></i> Link IG Pribadi Adam Xavier:</label>
+                    <input type="url" id="editBioIgAdam" class="form-control" placeholder="Contoh: https://instagram.com/adamxavier">
+                    <div style="font-size:11px; color:#64748B; margin-top:3px;">Akun Instagram resmi aktor cilik Adam Xavier.</div>
+                  </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px;">
+                  <div class="form-group" style="margin-bottom:0;">
+                    <label class="form-label"><i class="fa-brands fa-tiktok"></i> Link TikTok:</label>
+                    <input type="url" id="editBioTiktok" class="form-control" placeholder="Contoh: https://tiktok.com/@adamxavier">
+                  </div>
+                  <div class="form-group" style="margin-bottom:0;">
+                    <label class="form-label"><i class="fa-brands fa-youtube" style="color:#EF4444;"></i> Link YouTube Channel:</label>
+                    <input type="url" id="editBioYoutube" class="form-control" placeholder="Contoh: https://youtube.com/@adamxavier">
+                  </div>
+                </div>
+              </div>
+
               <button type="submit" class="btn-cyber btn-cyber-gold" style="padding:12px 24px;">
                 <i class="fa-solid fa-floppy-disk"></i> Simpan Perubahan Halaman Tentang & Profil
               </button>
@@ -1745,6 +1782,19 @@
 
       document.getElementById('editBioAbout1').value = bio.about1 || '';
       document.getElementById('editBioAbout2').value = bio.about2 || '';
+
+      // Tautan Media Sosial & Komunitas
+      const socials = bio.socials || {};
+      const grpInput = document.getElementById('editBioGroupLink');
+      if (grpInput) grpInput.value = socials.groupLink || socials.whatsapp || '';
+      const igFbInput = document.getElementById('editBioIgFanbase');
+      if (igFbInput) igFbInput.value = socials.igFanbase || socials.instagram || '';
+      const igAdInput = document.getElementById('editBioIgAdam');
+      if (igAdInput) igAdInput.value = socials.igAdam || '';
+      const ttInput = document.getElementById('editBioTiktok');
+      if (ttInput) ttInput.value = socials.tiktok || '';
+      const ytInput = document.getElementById('editBioYoutube');
+      if (ytInput) ytInput.value = socials.youtube || '';
     }
 
     async function handleSaveBio(e) {
@@ -1766,12 +1816,23 @@
       bio.about1 = document.getElementById('editBioAbout1').value.trim();
       bio.about2 = document.getElementById('editBioAbout2').value.trim();
 
+      // Simpan Tautan Media Sosial & Komunitas
+      bio.socials = Object.assign({}, bio.socials || {}, {
+        groupLink: document.getElementById('editBioGroupLink') ? document.getElementById('editBioGroupLink').value.trim() : '',
+        igFanbase: document.getElementById('editBioIgFanbase') ? document.getElementById('editBioIgFanbase').value.trim() : '',
+        igAdam: document.getElementById('editBioIgAdam') ? document.getElementById('editBioIgAdam').value.trim() : '',
+        tiktok: document.getElementById('editBioTiktok') ? document.getElementById('editBioTiktok').value.trim() : '',
+        youtube: document.getElementById('editBioYoutube') ? document.getElementById('editBioYoutube').value.trim() : '',
+        whatsapp: document.getElementById('editBioGroupLink') ? document.getElementById('editBioGroupLink').value.trim() : '',
+        instagram: document.getElementById('editBioIgFanbase') ? document.getElementById('editBioIgFanbase').value.trim() : ''
+      });
+
       FanbaseStore.saveBio(bio);
       
       const statFanbase = document.getElementById('statFanbaseName');
       if (statFanbase) statFanbase.textContent = bio.fanbaseName;
 
-      await syncToDisk('Konten Halaman Tentang & Profil Aktor berhasil disimpan!');
+      await syncToDisk('Konten Halaman Tentang, Profil & Media Komunitas berhasil disimpan!');
     }
 
     // 3. Timeline Karier CRUD
@@ -2767,6 +2828,15 @@ const FanbaseStore = {
   saveMusic: function(musicObj, options) {
     const bio = Object.assign({}, this.getBio());
     bio.music = Object.assign({}, this.getMusic(), musicObj);
+    this.saveBio(bio, options);
+  },
+  getSocials: function() {
+    const bio = this.getBio();
+    return (bio && bio.socials) ? bio.socials : (DEFAULT_BIO.socials || {});
+  },
+  saveSocials: function(socialsObj, options) {
+    const bio = Object.assign({}, this.getBio());
+    bio.socials = Object.assign({}, this.getSocials(), socialsObj);
     this.saveBio(bio, options);
   },
   getTimeline: function() {
