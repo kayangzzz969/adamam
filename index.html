@@ -196,6 +196,193 @@
           </div>
         </div>
 
+        <!-- ============================================================
+             KARTU ANGGOTA RESMI ADAMUNITED (CYBER ID CARD CREATOR)
+             ============================================================ -->
+        <div class="cyber-member-section" style="margin: 36px 0 28px; text-align: center;">
+          <div class="mecha-badge" style="margin-bottom: 10px;">
+            <i class="fa-solid fa-id-card"></i> KARTU ANGGOTA RESMI • CYBER ID
+          </div>
+          <h2 style="font-family:'Orbitron',sans-serif; font-size:22px; font-weight:900; color:var(--cyber-dark); margin-bottom:8px;">
+            Kartu Anggota <span style="color:#D97706;">AdamUnited</span>
+          </h2>
+          <p style="font-size:13px; color:#64748B; max-width:440px; margin:0 auto 18px; line-height:1.6;">
+            Ketik namamu, pilih pangkat & avatar robot favorit, lalu simpan Kartu Identitas Digital resmi kamu sebagai bukti bagian dari aliansi AdamUnited!
+          </p>
+
+          <!-- Interactive Live Card Preview -->
+          <div class="cyber-card-container">
+            <div class="cyber-member-card" id="digitalMemberCard">
+              <div class="card-top-row">
+                <div class="card-brand-badge">
+                  <div class="card-logo-mini">
+                    <i class="fa-solid fa-robot"></i>
+                  </div>
+                  <div>
+                    <div class="card-brand-text" id="memberCardBrandTitle">ADAMUNITED</div>
+                    <div class="card-brand-sub">OFFICIAL CYBER ID CARD</div>
+                  </div>
+                </div>
+                <div class="card-chip"></div>
+              </div>
+
+              <div class="card-mid-row">
+                <div class="card-avatar-box" id="memberCardAvatarBox">
+                  <span id="memberCardAvatarEmoji" style="font-size:32px;">🤖</span>
+                </div>
+                <div class="card-details">
+                  <div class="card-member-role" id="memberCardRoleBadge">CYBER TROOPER</div>
+                  <div class="card-member-name" id="memberCardNameText">NAMA ANGGOTA</div>
+                  <div class="card-member-id" id="memberCardIdText">ID: AU-2026-7892</div>
+                </div>
+              </div>
+
+              <div class="card-bottom-row">
+                <div class="card-barcode-wrap">
+                  <div class="card-barcode-bars">
+                    <span style="width:2px;"></span><span style="width:4px;"></span><span style="width:1px;"></span>
+                    <span style="width:3px;"></span><span style="width:2px;"></span><span style="width:5px;"></span>
+                    <span style="width:2px;"></span><span style="width:3px;"></span><span style="width:1px;"></span>
+                    <span style="width:4px;"></span><span style="width:2px;"></span><span style="width:3px;"></span>
+                    <span style="width:5px;"></span><span style="width:2px;"></span><span style="width:1px;"></span>
+                    <span style="width:3px;"></span><span style="width:4px;"></span>
+                  </div>
+                  <span style="font-size:8px; color:#94A3B8; letter-spacing:1px; font-family:'Rajdhani', monospace;">AUTOBOT ALLIANCE NETWORK</span>
+                </div>
+                <div class="card-date-stamp">
+                  <span>ACTIVE SINCE</span>
+                  <strong id="memberCardDateYear">2026</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Member Card Controls (Form input live) -->
+          <div class="card-control-panel">
+            <div style="font-weight:800; font-size:13px; margin-bottom:12px; color:var(--cyber-dark); display:flex; align-items:center; gap:8px;">
+              <i class="fa-solid fa-sliders" style="color:var(--yellow-primary)"></i> Kustomisasi Kartu Anggota
+            </div>
+            
+            <div style="margin-bottom:12px;">
+              <label style="font-size:11px; font-weight:700; color:#64748B; text-transform:uppercase; display:block; margin-bottom:4px;">Nama Kamu</label>
+              <input type="text" id="inputMemberName" class="form-control" placeholder="Ketik namamu di sini..." maxlength="22" oninput="updateMemberCardName(this.value)" style="width:100%; padding:10px 14px; border-radius:10px; border:1.5px solid #CBD5E1; font-weight:700; font-size:14px;">
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px;">
+              <div>
+                <label style="font-size:11px; font-weight:700; color:#64748B; text-transform:uppercase; display:block; margin-bottom:4px;">Pangkat / Peran</label>
+                <select id="selectMemberRole" class="form-control" onchange="updateMemberCardRole(this.value)" style="width:100%; padding:9px 10px; border-radius:10px; border:1.5px solid #CBD5E1; font-weight:700; font-size:12px;">
+                  <option value="CYBER TROOPER">Cyber Trooper</option>
+                  <option value="AUTOBOT GUARDIAN">Autobot Guardian</option>
+                  <option value="SAHABAT SETIA">Sahabat Setia</option>
+                  <option value="VIP MEMBER">VIP Member</option>
+                  <option value="CYBER CADET">Cyber Cadet</option>
+                </select>
+              </div>
+
+              <div>
+                <label style="font-size:11px; font-weight:700; color:#64748B; text-transform:uppercase; display:block; margin-bottom:4px;">Avatar Lambang</label>
+                <select id="selectMemberAvatar" class="form-control" onchange="updateMemberCardAvatar(this.value)" style="width:100%; padding:9px 10px; border-radius:10px; border:1.5px solid #CBD5E1; font-weight:700; font-size:12px;">
+                  <option value="🤖">🤖 Bumblebee / Mecha</option>
+                  <option value="⚡">⚡ Cyber Spark</option>
+                  <option value="🛡️">🛡️ Autobot Shield</option>
+                  <option value="⭐">⭐ Star Member</option>
+                  <option value="🚀">🚀 Young Hero</option>
+                  <option value="🌟">🌟 Super Champion</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button type="button" class="btn-cyber btn-cyber-outline" onclick="regenerateMemberCardId()" style="flex:1; padding:10px 14px; font-size:12px; justify-content:center;">
+                <i class="fa-solid fa-dice"></i> Acak Nomor ID
+              </button>
+              <button type="button" class="btn-cyber btn-cyber-gold" onclick="downloadMemberCardPNG()" style="flex:1.2; padding:10px 14px; font-size:12px; justify-content:center;">
+                <i class="fa-solid fa-download"></i> Simpan Kartu (PNG)
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             SEMUA MEDIA & KOMUNITAS ADAMUNITED
+             ============================================================ -->
+        <div class="cyber-media-hub" id="mediaHubSection" style="margin: 36px 0 24px;">
+          <div class="posters-header" style="margin-bottom: 12px;">
+            <h3><i class="fa-solid fa-satellite-dish" style="color:var(--yellow-primary)"></i> SEMUA MEDIA & KOMUNITAS</h3>
+          </div>
+          <p style="font-size:12px; color:#64748B; margin-bottom:16px;">
+            Bergabunglah dengan seluruh kanal resmi Adam Xavier & komunitas AdamUnited untuk info acara, rilis film, dan silaturahmi sesama pendukung!
+          </p>
+
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <!-- 1. WhatsApp Community Group Link -->
+            <a href="https://chat.whatsapp.com/" id="mediaLinkGroup" target="_blank" rel="noopener noreferrer" class="media-hub-card">
+              <div class="media-hub-icon" style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+              <div class="media-hub-info">
+                <span class="media-hub-badge" style="background:#DCFCE7; color:#166534; border-color:#86EFAC;">GRUP RESMI</span>
+                <div class="media-hub-name">Grup Sahabat AdamUnited</div>
+                <div class="media-hub-sub">Ruang ngobrol, jadwal meet & greet, dan diskusi fans</div>
+              </div>
+              <div class="media-hub-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+            </a>
+
+            <!-- 2. Instagram Official Fanbase (@adamunited) -->
+            <a href="https://instagram.com/adamunited" id="mediaLinkIgFanbase" target="_blank" rel="noopener noreferrer" class="media-hub-card">
+              <div class="media-hub-icon" style="background: linear-gradient(135deg, #F58529 0%, #DD2A7B 50%, #8134AF 100%);">
+                <i class="fa-brands fa-instagram"></i>
+              </div>
+              <div class="media-hub-info">
+                <span class="media-hub-badge" style="background:#FEE2E2; color:#991B1B; border-color:#FCA5A5;">OFFICIAL FANBASE</span>
+                <div class="media-hub-name">Instagram @adamunited</div>
+                <div class="media-hub-sub">Kabar terbaru, foto behind the scenes & giveaway</div>
+              </div>
+              <div class="media-hub-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+            </a>
+
+            <!-- 3. Instagram Pribadi Adam Xavier (@adamxavier) -->
+            <a href="https://instagram.com/adamxavier" id="mediaLinkIgAdam" target="_blank" rel="noopener noreferrer" class="media-hub-card">
+              <div class="media-hub-icon" style="background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);">
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <div class="media-hub-info">
+                <span class="media-hub-badge" style="background:#E0E7FF; color:#3730A3; border-color:#A5B4FC;">AKTOR CILIK RESMI</span>
+                <div class="media-hub-name">Instagram @adamxavier</div>
+                <div class="media-hub-sub">Aktivitas shooting, hobi robotika & keseharian Adam</div>
+              </div>
+              <div class="media-hub-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+            </a>
+
+            <!-- 4. TikTok Fanbase / Adam -->
+            <a href="https://tiktok.com" id="mediaLinkTiktok" target="_blank" rel="noopener noreferrer" class="media-hub-card">
+              <div class="media-hub-icon" style="background: linear-gradient(135deg, #000000 0%, #25F4EE 50%, #FE2C55 100%);">
+                <i class="fa-brands fa-tiktok"></i>
+              </div>
+              <div class="media-hub-info">
+                <span class="media-hub-badge" style="background:#F3E8FF; color:#6B21A8; border-color:#D8B4FE;">VIDEO PENDEK</span>
+                <div class="media-hub-name">TikTok Adam Xavier</div>
+                <div class="media-hub-sub">Video seru, cuplikan akting & keseruan di balik layar</div>
+              </div>
+              <div class="media-hub-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+            </a>
+
+            <!-- 5. YouTube Fanbase / Adam -->
+            <a href="https://youtube.com" id="mediaLinkYoutube" target="_blank" rel="noopener noreferrer" class="media-hub-card">
+              <div class="media-hub-icon" style="background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);">
+                <i class="fa-brands fa-youtube"></i>
+              </div>
+              <div class="media-hub-info">
+                <span class="media-hub-badge" style="background:#FFE4E6; color:#9F1239; border-color:#FECDD3;">OFFICIAL CHANNEL</span>
+                <div class="media-hub-name">YouTube Channel</div>
+                <div class="media-hub-sub">Vlog syuting, unboxing robot & wawancara eksklusif</div>
+              </div>
+              <div class="media-hub-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+            </a>
+          </div>
+        </div>
+
         <!-- FOOTER CTA (NAVIGASI KE TENTANG, FILM & EVENT) -->
         <div class="slide-footer-cta">
           <a href="tentang.html" class="btn-cyber btn-cyber-gold" style="justify-content:center; width:100%;">
