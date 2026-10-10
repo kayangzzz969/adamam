@@ -70,10 +70,13 @@ const DEFAULT_BIO = {
     "url": "assets/audio/anthem.mp3"
   },
   "socials": {
-    "instagram": "https://instagram.com",
+    "groupLink": "https://chat.whatsapp.com/",
+    "igFanbase": "https://instagram.com/adamunited",
+    "igAdam": "https://instagram.com/adamxavier",
+    "instagram": "https://instagram.com/adamunited",
     "tiktok": "https://tiktok.com",
     "youtube": "https://youtube.com",
-    "whatsapp": "https://whatsapp.com"
+    "whatsapp": "https://chat.whatsapp.com/"
   },
   "timeline": [
     {
@@ -195,6 +198,15 @@ const FanbaseStore = {
   saveMusic: function(musicObj, options) {
     const bio = Object.assign({}, this.getBio());
     bio.music = Object.assign({}, this.getMusic(), musicObj);
+    this.saveBio(bio, options);
+  },
+  getSocials: function() {
+    const bio = this.getBio();
+    return (bio && bio.socials) ? bio.socials : (DEFAULT_BIO.socials || {});
+  },
+  saveSocials: function(socialsObj, options) {
+    const bio = Object.assign({}, this.getBio());
+    bio.socials = Object.assign({}, this.getSocials(), socialsObj);
     this.saveBio(bio, options);
   },
   getTimeline: function() {
